@@ -1,1229 +1,640 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Youth Drive Solutions</title>
-    <style>
-        /* ---------- RESET & BASE ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>YouthDrive Solutions | Driving School & Vehicle Services</title>
+<!-- Font Awesome 6 (Free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    scroll-behavior: smooth;
+  }
 
-        body {
-            background: #2F4F1A;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
+  body {
+    background: #f4f9f0;
+    color: #1f2a0e;
+    overflow-x: hidden;
+  }
 
-        .app-container {
-            max-width: 420px;
-            width: 100%;
-            background: #FFFFFF;
-            border-radius: 40px 40px 30px 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            padding: 24px 20px 30px;
-            min-height: 650px;
-            position: relative;
-            transition: all 0.3s ease;
-            overflow: visible;
-        }
+  /* top header strip */
+  .top-header {
+    background: #c52828;
+    color: white;
+    text-align: center;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    word-break: break-word;
+  }
 
-        /* ---------- SCREENS ---------- */
-        .screen {
-            display: none;
-            animation: fadeUp 0.4s ease forwards;
-        }
-        .screen.active {
-            display: block;
-        }
+  /* navbar sticky */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 6%;
+    background: #2a3b1a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+  }
 
-        @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #b5ff4b;
+    letter-spacing: -0.5px;
+  }
 
-        /* ---------- LOGO ---------- */
-        .logo-wrapper {
-            text-align: center;
-            padding: 10px 0 15px;
-            overflow: visible;
-        }
+  .logo span {
+    color: #f9f9b2;
+  }
 
-        .logo-main {
-            font-size: clamp(28px, 8vw, 38px);
-            font-weight: 900;
-            letter-spacing: clamp(1px, 0.6vw, 4px);
-            line-height: 1.2;
-            overflow: visible;
-        }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
 
-        .logo-youth {
-            color: #7FBF3F;
-            white-space: nowrap;
-        }
-        .logo-drive {
-            color: #6b7280;
-            white-space: nowrap;
-        }
-        .logo-solutions {
-            display: block;
-            font-size: clamp(18px, 5vw, 24px);
-            font-weight: 300;
-            letter-spacing: clamp(4px, 1.5vw, 8px);
-            color: #d4a02b;
-            margin-top: -4px;
-            white-space: nowrap;
-        }
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: 0.2s;
+    font-size: 1rem;
+  }
 
-        .logo-divider {
-            width: 60px;
-            height: 4px;
-            background: #7FBF3F;
-            margin: 10px auto 15px;
-            border-radius: 4px;
-        }
+  .nav-links a:hover {
+    color: #ccff66;
+    transform: translateY(-2px);
+  }
 
-        /* ---------- BUTTONS ---------- */
-        .btn-lime {
-            width: 100%;
-            padding: 16px;
-            background: #7FBF3F;
-            color: #2F4F1A;
-            border: none;
-            border-radius: 30px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 10px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 20px rgba(127, 191, 63, 0.35);
-        }
-        .btn-lime:active {
-            transform: scale(0.97);
-            background: #6daf33;
-        }
+  /* hero */
+  .hero {
+    height: 88vh;
+    min-height: 520px;
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1400') center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
 
-        .btn-dark {
-            width: 100%;
-            padding: 16px;
-            background: #2F4F1A;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 30px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 10px;
-            letter-spacing: 0.5px;
-        }
-        .btn-dark:active {
-            transform: scale(0.97);
-            background: #1f3a12;
-        }
+  .hero-content {
+    max-width: 920px;
+  }
 
-        .btn-outline {
-            width: 100%;
-            padding: 14px;
-            background: transparent;
-            color: #2F4F1A;
-            border: 2px solid #2F4F1A;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 8px;
-        }
-        .btn-outline:active {
-            transform: scale(0.97);
-        }
+  .hero h1 {
+    font-size: 58px;
+    color: #caff70;
+    margin-bottom: 18px;
+    text-shadow: 2px 2px 6px black;
+  }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 16px;
-            color: #7FBF3F;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            background: none;
-            border: none;
-            padding: 4px 0;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
+  .hero h2 {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
 
-        /* ---------- WELCOME ---------- */
-        .tagline {
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #6b7280;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+  .hero p {
+    color: #f0f0f0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
 
-        .welcome-text {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #2F4F1A;
-            text-align: center;
-            padding: 0 8px;
-            margin-bottom: 30px;
-        }
-        .welcome-text strong {
-            color: #7FBF3F;
-        }
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
 
-        .footer-note {
-            text-align: center;
-            font-size: 12px;
-            color: #a0b0a0;
-            margin-top: 25px;
-            letter-spacing: 0.5px;
-        }
+  .hero-buttons a {
+    padding: 14px 34px;
+    border-radius: 60px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.25s;
+    font-size: 1rem;
+  }
 
-        /* ---------- INFO ---------- */
-        .info-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #2F4F1A;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .info-title span {
-            color: #7FBF3F;
-        }
+  .btn-primary {
+    background: #ccff66;
+    color: #1e2f0c;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
 
-        .qa-item {
-            background: #F8FFF8;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 14px;
-            border-left: 4px solid #7FBF3F;
-        }
-        .qa-item h4 {
-            font-size: 15px;
-            color: #2F4F1A;
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
-        .qa-item p {
-            font-size: 14px;
-            color: #2F4F1A;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
+  .btn-primary:hover {
+    background: white;
+    transform: scale(1.03);
+  }
 
-        /* ---------- ROLE ---------- */
-        .role-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin: 20px 0;
-        }
-        .role-card {
-            background: #FFFFFF;
-            border-radius: 20px;
-            padding: 24px;
-            text-align: center;
-            border: 3px solid #E8EDE8;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-        .role-card:active {
-            transform: scale(0.96);
-        }
-        .role-card .icon {
-            font-size: 48px;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .role-card h3 {
-            font-size: 20px;
-            color: #2F4F1A;
-        }
-        .role-card p {
-            font-size: 14px;
-            color: #2F4F1A;
-            opacity: 0.7;
-        }
+  .btn-secondary {
+    background: #4c6a2f;
+    color: white;
+  }
 
-        /* ---------- PROFILE FORM ---------- */
-        .input-group {
-            margin-bottom: 16px;
-        }
-        .input-group label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #2F4F1A;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #D0D8D0;
-            border-radius: 16px;
-            font-size: 15px;
-            background: #FFFFFF;
-            transition: 0.2s;
-        }
-        .input-group input:focus {
-            border-color: #7FBF3F;
-            outline: none;
-            background: #FFFFFF;
-        }
+  .btn-secondary:hover {
+    background: #ccff66;
+    color: #1e2f0c;
+  }
 
-        /* ---------- DASHBOARD ---------- */
-        .dashboard-header {
-            margin-bottom: 20px;
-        }
-        .dashboard-header h1 {
-            font-size: 22px;
-            color: #7FBF3F;
-        }
-        .dashboard-header h1 span {
-            color: #2F4F1A;
-        }
-        .dashboard-header p {
-            font-size: 14px;
-            color: #2F4F1A;
-            opacity: 0.7;
-        }
+  /* section titles */
+  .section-title {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 48px;
+    color: #2a3b1a;
+    font-weight: 700;
+    position: relative;
+  }
 
-        /* Profile Progress Bar (NEW) */
-        .profile-progress {
-            background: #F8FFF8;
-            padding: 16px 18px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border: 2px solid #E8EDE8;
-        }
-        .profile-progress .row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2F4F1A;
-            margin-bottom: 6px;
-        }
-        .profile-progress .bar-bg {
-            width: 100%;
-            height: 10px;
-            background: #E8EDE8;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .profile-progress .bar-fill {
-            height: 100%;
-            background: #7FBF3F;
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            width: 0%;
-        }
-        .profile-progress .hint {
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 4px;
-            text-align: right;
-        }
+  .section-title:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #b5ff4b;
+    margin: 12px auto 0;
+    border-radius: 4px;
+  }
 
-        /* Module list */
-        .module-item {
-            background: #FFFFFF;
-            border-radius: 20px;
-            padding: 18px 20px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 2px solid #E8EDE8;
-            transition: 0.2s;
-            cursor: default;
-        }
-        .module-item.locked {
-            opacity: 0.5;
-            filter: grayscale(1);
-            pointer-events: none;
-        }
-        .module-item .left h3 {
-            font-size: 16px;
-            color: #2F4F1A;
-        }
-        .module-item .left p {
-            font-size: 13px;
-            color: #2F4F1A;
-            opacity: 0.7;
-        }
-        .module-item .status {
-            font-size: 13px;
-            font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 30px;
-            background: #E8EDE8;
-            color: #2F4F1A;
-        }
-        .module-item .status.ready {
-            background: #7FBF3F;
-            color: #2F4F1A;
-        }
-        .module-item .status.passed {
-            background: #16a34a;
-            color: white;
-        }
-        .module-item .status.locked {
-            background: #e2e2e2;
-            color: #999;
-        }
+  /* option cards grid */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
 
-        /* ---------- QUIZ ---------- */
-        .question-counter {
-            font-size: 14px;
-            color: #2F4F1A;
-            text-align: right;
-            margin-bottom: 6px;
-        }
-        .progress-bar-bg {
-            width: 100%;
-            height: 8px;
-            background: #E8EDE8;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .progress-bar-fill {
-            height: 100%;
-            background: #7FBF3F;
-            border-radius: 10px;
-            transition: width 0.3s;
-            width: 0%;
-        }
+  .option-card {
+    background: #2a3b1a;
+    padding: 28px 20px;
+    border-radius: 28px;
+    color: white;
+    text-align: center;
+    transition: 0.25s ease;
+    border: 2px solid #b5ff4b;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
 
-        .question-text {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2F4F1A;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            min-height: 70px;
-        }
+  .option-card:hover {
+    transform: translateY(-8px);
+    background: #3f5a28;
+    border-color: #eaff9e;
+  }
 
-        .option {
-            background: #FFFFFF;
-            border-radius: 16px;
-            padding: 14px 18px;
-            margin-bottom: 10px;
-            border: 2px solid #D0D8D0;
-            cursor: pointer;
-            transition: 0.15s;
-            font-size: 15px;
-            color: #2F4F1A;
-        }
-        .option.selected {
-            border-color: #7FBF3F;
-            background: #7FBF3F;
-            color: #2F4F1A;
-        }
-        .option.correct {
-            border-color: #16a34a;
-            background: #dcfce7;
-        }
-        .option.wrong {
-            border-color: #dc2626;
-            background: #fee2e2;
-        }
+  .option-card i {
+    font-size: 48px;
+    color: #cdff70;
+    margin-bottom: 20px;
+  }
 
-        /* ---------- RESULTS ---------- */
-        .result-box {
-            text-align: center;
-            padding: 25px 10px;
-        }
-        .result-box .big-score {
-            font-size: 56px;
-            font-weight: 800;
-            color: #2F4F1A;
-        }
-        .result-box .big-score span {
-            color: #7FBF3F;
-        }
-        .result-status {
-            font-size: 24px;
-            font-weight: 700;
-            padding: 10px 0;
-        }
-        .result-status.pass {
-            color: #16a34a;
-        }
-        .result-status.fail {
-            color: #dc2626;
-        }
+  .option-card h3 {
+    margin-bottom: 14px;
+    font-size: 1.5rem;
+  }
 
-        .wrong-list {
-            text-align: left;
-            margin: 15px 0;
-            background: #FFF5F5;
-            padding: 15px;
-            border-radius: 16px;
-            border-left: 4px solid #dc2626;
-        }
-        .wrong-list p {
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #7f1d1d;
-        }
-        .wrong-list li {
-            font-size: 14px;
-            margin-bottom: 4px;
-            color: #2F4F1A;
-            list-style: none;
-            border-bottom: 1px solid #f0e0e0;
-            padding: 4px 0;
-        }
+  .option-card p {
+    font-size: 0.9rem;
+    margin: 10px 0;
+    opacity: 0.9;
+  }
 
-        /* ---------- RECEIPT ---------- */
-        .receipt-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #E8EDE8;
-            font-size: 15px;
-            color: #2F4F1A;
-        }
-        .receipt-item:last-child {
-            border-bottom: none;
-        }
-        .receipt-item .label {
-            opacity: 0.7;
-        }
-        .receipt-item .value {
-            font-weight: 600;
-        }
-        .receipt-total {
-            font-size: 18px;
-            font-weight: 800;
-            text-align: center;
-            padding: 20px 0 10px;
-            color: #2F4F1A;
-        }
-        .receipt-total span {
-            color: #7FBF3F;
-        }
-    </style>
+  .option-card a {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 24px;
+    background: #b5ff4b;
+    color: #1e2b0c;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+
+  .option-card a:hover {
+    background: white;
+    transform: scale(0.97);
+  }
+
+  /* slider (infinite) */
+  .slider {
+    width: 100%;
+    overflow: hidden;
+    margin: 40px 0 20px;
+    position: relative;
+  }
+
+  .slide-track {
+    display: flex;
+    width: calc(300px * 10);
+    animation: scroll 28s linear infinite;
+  }
+
+  .slide {
+    width: 300px;
+    height: 200px;
+    margin: 0 12px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid #ccff66;
+    flex-shrink: 0;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-300px * 5)); }
+  }
+
+  /* booking form row */
+  .booking {
+    padding: 70px 6%;
+    background: #e7f3db;
+  }
+
+  .booking-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .booking-form {
+    background: white;
+    padding: 38px;
+    border-radius: 32px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  }
+
+  .booking-form h2 {
+    margin-bottom: 24px;
+    color: #2a3b1a;
+  }
+
+  .booking-form input, .booking-form select {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+    border-radius: 28px;
+    border: 1px solid #bbb;
+    font-size: 1rem;
+  }
+
+  .booking-form button {
+    width: 100%;
+    padding: 14px;
+    background: #b5ff4b;
+    font-weight: bold;
+    border: none;
+    border-radius: 40px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .booking-form button:hover {
+    background: #2a3b1a;
+    color: white;
+  }
+
+  .booking-image img {
+    width: 100%;
+    border-radius: 32px;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+  }
+
+  /* responsive */
+  @media (max-width: 880px) {
+    .hero h1 { font-size: 42px; }
+    .hero h2 { font-size: 24px; }
+    .booking-container { grid-template-columns: 1fr; }
+    .navbar { flex-direction: column; gap: 12px; }
+    .nav-links { justify-content: center; gap: 18px; }
+    .section-title { font-size: 1.8rem; }
+  }
+
+  @media (max-width: 550px) {
+    .hero-buttons a { padding: 10px 22px; font-size: 0.9rem; }
+    .option-card { padding: 20px; }
+  }
+
+  /* footer contact grid */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+  }
+  hr {
+    margin: 30px 6%;
+    border: 0;
+    height: 2px;
+    background: #cfe6bc;
+  }
+</style>
 </head>
 <body>
 
-    <div class="app-container">
+<div class="top-header">
+  🚨 24/7 Roadside Assistance: 083 654 009 | 123 AbC Street, Auckland Park, Johannesburg
+</div>
 
-        <!-- ===== SCREEN 1: WELCOME ===== -->
-        <div id="welcomeScreen" class="screen active">
-            <div class="logo-wrapper">
-                <div class="logo-main">
-                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
-                    <span class="logo-solutions">SOLUTIONS</span>
-                </div>
-                <div class="logo-divider"></div>
-            </div>
-            <div class="tagline">FIND YOUR WAY FORWARD</div>
-            <p class="welcome-text">Welcome to <strong>YouthDrive Solutions</strong><br /></p>
-            <button class="btn-lime" onclick="showScreen('infoScreen')"> Get Started</button>
-            <div class="footer-note">© 2026 YouthDrive Solutions</div>
-        </div>
+<nav class="navbar">
+  <div class="logo">Youth<span>Drive</span> Solutions</div>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#services">Services</a>
+    <a href="#vehicles">Vehicles</a>
+    <a href="#tyres">Tyres</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-        <!-- ===== SCREEN 2: LEARNER'S INFO ===== -->
-        <div id="infoScreen" class="screen">
-            <div class="logo-wrapper" style="padding-bottom:5px;">
-                <div class="logo-main" style="font-size:clamp(22px,6vw,28px);">
-                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
-                    <span class="logo-solutions" style="font-size:clamp(14px,4vw,18px);">SOLUTIONS</span>
-                </div>
-                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
-            </div>
-            <div class="info-title">📘 Things to <span>Know</span></div>
-            <div class="qa-item"><h4>1. What is a learner's licence and why do I need it in South Africa?</h4><p>A learner's licence is a permit that allows you to drive on public roads <strong>only</strong> under the supervision of a licensed driver. It proves that you have basic theoretical knowledge of road signs, rules, and vehicle controls. It is a mandatory prerequisite before you can take the practical driving test for a full driver's licence.</p></div>
-            <div class="qa-item"><h4>2. What age should I be to get a learners license?</h4><p>You must be at least <strong>17 years old</strong> to apply for a Code B (light motor vehicle) learner's licence.</p></div>
-            <div class="qa-item"><h4>3. What documents do I need to get a learners license?</h4><p>You need to bring your original <strong>Identity Document (ID)</strong> or valid passport, <strong>proof of residential address</strong> (e.g., utility bill), and <strong>two identical ID-sized photographs</strong>. If you are under 18, you must also bring a parent or guardian to provide consent.</p></div>
-            <div class="qa-item"><h4>4. How long is a learners license valid for in South Africa?</h4><p>The learner's licence is valid for exactly <strong>24 months (2 years)</strong> from the date of issue. If you don't obtain a driver's licence within this period, you will need to re-apply for the learner's test.</p></div>
-            <div class="qa-item"><h4>5. What are the categories of a learners license?</h4><p>The main categories are: <strong>Code A1</strong> (light motorcycles), <strong>Code A</strong> (motorcycles), <strong>Code B</strong> (light motor vehicles – cars, bakkies up to 3500kg), <strong>Code C1</strong> (heavy vehicles up to 16,000kg), and <strong>Code EC</strong> (heavy articulated vehicles).</p></div>
-            <div class="qa-item"><h4>6. What is the difference between a learners license and a driver's licence?</h4><p>A <strong>learner's licence</strong> is a temporary permit that allows you to drive <em>only</em> with a licensed supervisor beside you. A <strong>driver's licence</strong> is the full, permanent licence that allows you to drive <em>unaccompanied</em> on any public road.</p></div>
-            <div class="qa-item"><h4>7. How long should I wait to get my learner's licence?</h4><p>There is <strong>no mandatory waiting period</strong> to apply. You can apply as soon as you turn 17. However, you are advised to study the K53 official driving manual thoroughly before attempting the test.</p></div>
-            <button class="btn-lime" onclick="showScreen('roleScreen')">Continue →</button>
-        </div>
-
-        <!-- ===== SCREEN 3: ROLE SELECTION ===== -->
-        <div id="roleScreen" class="screen">
-            <div class="logo-wrapper" style="padding-bottom:5px;">
-                <div class="logo-main" style="font-size:clamp(22px,6vw,28px);">
-                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
-                    <span class="logo-solutions" style="font-size:clamp(14px,4vw,18px);">SOLUTIONS</span>
-                </div>
-                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
-            </div>
-            <h2 style="text-align:center;color:#2F4F1A;margin-bottom:8px;">Choose your role</h2>
-            <p style="text-align:center;color:#2F4F1A;opacity:0.7;margin-bottom:20px;">This helps us personalise your learning.</p>
-            <div class="role-grid">
-                <div class="role-card" onclick="selectRole('Learner')"><span class="icon">📘</span><h3>Learner</h3><p>I am preparing for my learner's licence test.</p></div>
-                <div class="role-card" onclick="selectRole('Driver')"><span class="icon">🚗</span><h3>Driver</h3><p>I am preparing for my driver's licence test.</p></div>
-            </div>
-        </div>
-
-        <!-- ===== SCREEN 4: PROFILE ===== -->
-        <div id="profileScreen" class="screen">
-            <div class="logo-wrapper" style="padding-bottom:5px;">
-                <div class="logo-main" style="font-size:clamp(22px,6vw,28px);">
-                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
-                    <span class="logo-solutions" style="font-size:clamp(14px,4vw,18px);">SOLUTIONS</span>
-                </div>
-                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
-            </div>
-            <h2 style="text-align:center;color:#2F4F1A;margin-bottom:16px;">Your Details</h2>
-            <div class="input-group">
-                <label>Full Name</label>
-                <input type="text" id="userName" placeholder="e.g., Thabo Mokoena" />
-            </div>
-            <div class="input-group">
-                <label>ID Number</label>
-                <input type="text" id="userId" placeholder="e.g., 900101 1234 080" />
-            </div>
-            <div class="input-group">
-                <label>Physical Address</label>
-                <input type="text" id="userAddress" placeholder="e.g., 12 Elm Street, Johannesburg" />
-            </div>
-            <div class="input-group">
-                <label>Contact Number</label>
-                <input type="text" id="userContact" placeholder="e.g., 082 123 4567" />
-            </div>
-            <button type="button" class="btn-lime" onclick="saveProfile()">Submit →</button>
-        </div>
-
-        <!-- ===== SCREEN 5: DASHBOARD ===== -->
-        <div id="dashboardScreen" class="screen">
-            <div class="dashboard-header">
-                <h1>Welcome, <span id="displayName">Driver</span> 👋</h1>
-                <p>Complete sections in order. You must pass (80%) to unlock the next.</p>
-            </div>
-
-            <!-- NEW: Profile Progress Bar -->
-            <div class="profile-progress" id="profileProgressContainer">
-                <div class="row">
-                    <span>📊 Profile Progress</span>
-                    <span id="profileProgressText">0 / 15</span>
-                </div>
-                <div class="bar-bg">
-                    <div class="bar-fill" id="profileProgressFill" style="width:0%;"></div>
-                </div>
-                <div class="hint" id="profileProgressHint">Pass 15 tests in a row to complete. Fail = -5</div>
-            </div>
-
-            <div id="moduleList"></div>
-            <button class="btn-outline" onclick="viewFullReceipt()" style="margin-top:16px;">📋 View Full Summary</button>
-        </div>
-           <!-- ===== SCREEN 6: QUIZ ===== -->
-        <div id="quizScreen" class="screen">
-            <button class="back-link" onclick="confirmExitQuiz()">← Back to menu</button>
-            <div class="question-counter" id="questionCounter">1 / 30</div>
-            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-            <div class="question-text" id="questionText">Loading question...</div>
-            <div id="optionsContainer"></div>
-            <button id="nextBtn" class="btn-lime" style="display:none;margin-top:16px;" onclick="nextQuestion()">Next</button>
-        </div>
-
-        <!-- ===== SCREEN 7: RESULTS ===== -->
-        <div id="resultScreen" class="screen">
-            <button class="back-link" onclick="goToDashboard()">← Back to dashboard</button>
-            <div class="result-box">
-                <div class="big-score"><span id="resultScore">0</span>%</div>
-                <div class="result-status" id="resultStatus">Pass</div>
-                <p id="resultMessage">You answered correctly</p>
-                <div id="wrongListContainer"></div>
-                <button id="resultContinueBtn" class="btn-lime" onclick="continueAfterResult()">Continue</button>
-            </div>
-        </div>
-
-        <!-- ===== SCREEN 8: RECEIPT ===== -->
-        <div id="receiptScreen" class="screen">
-            <div class="logo-wrapper" style="padding-bottom:5px;">
-                <div class="logo-main" style="font-size:clamp(22px,6vw,28px);">
-                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
-                    <span class="logo-solutions" style="font-size:clamp(14px,4vw,18px);">SOLUTIONS</span>
-                </div>
-                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
-            </div>
-            <h2 style="text-align:center;color:#2F4F1A;margin-bottom:20px;">📋 Learner Progress Report</h2>
-            <div id="receiptContent"></div>
-            <button class="btn-lime" onclick="showScreen('dashboardScreen')">Back to Dashboard</button>
-            <button class="btn-outline" onclick="window.print()">🖨️ Print / Save PDF</button>
-        </div>
-
+<section class="hero">
+  <div class="hero-content">
+    <h2>Finding a way forward</h2>
+    <p>From learner's licences to professional driver's permits, change of ownership, Q4U registrations, roadworthy assistance and 24/7 roadside support.</p>
+    <div class="hero-buttons">
+      <a href="#get-started" class="btn-primary">Get Started →</a>
+      <a href="tel:+27110000000" class="btn-secondary">Call Now</a>
     </div>
+  </div>
+</section>
 
-    <script>
-        // ================================================================
-        //  DATA – 90 QUESTIONS (3 MODULES × 30)
-        //  (No K53 copy – original YouthDrive content)
-        // ================================================================
-        const modulesData = [{
-            id: 'rules',
-            title: 'Road Rules',
-            desc: 'Traffic laws & signals',
-            icon: '🚦',
-            unlocked: true,
-            passed: false,
-            score: null,
-            questions: [
-                { question: "What does a red traffic light mean?", options: ["Stop", "Go", "Slow down", "Prepare to stop"], correct: 0 },
-                { question: "What is the legal blood alcohol limit for a driver in South Africa?", options: ["0.00%", "0.05%", "0.10%", "0.15%"], correct: 1 },
-            { question: "What is the legal blood alcohol limit for a driver in South Africa?", options: ["0.00%", "0.05%", "0.10%", "0.15%"], correct: 1 },
-                { question: "When may you overtake on the left?", options: ["Never", "When the vehicle ahead is turning right", "On a one-way street", "Both B and C"], correct: 3 },
-                { question: "What is the maximum speed limit in an urban area?", options: ["40 km/h", "50 km/h", "60 km/h", "80 km/h"], correct: 2 },
-                { question: "What does a yellow traffic light mean?", options: ["Stop immediately", "Slow down and prepare to stop", "Speed up to pass", "Proceed with caution"], correct: 1 },
-                { question: "When should you use your hazard lights?", options: ["When parked illegally", "When your vehicle is stationary and a hazard", "When driving in fog", "When changing lanes"], correct: 1 },
-                { question: "What is the following distance you should keep in dry conditions?", options: ["1 second", "2 seconds", "3 seconds", "4 seconds"], correct: 1 },
-                { question: "In wet conditions, what following distance should you keep?", options: ["2 seconds", "3 seconds", "4 seconds", "5 seconds"], correct: 2 },
-                { question: "When may a driver use a cellphone while driving?", options: ["Never", "When using a hands-free kit", "When stopped at a traffic light", "When driving slowly"], correct: 1 },
-                { question: "What is the speed limit on a freeway in South Africa?", options: ["100 km/h", "120 km/h", "140 km/h", "60 km/h"], correct: 1 },
-                { question: "When must you stop at a four-way stop?", options: ["Always", "Only when other vehicles are present", "Only when a traffic officer is present", "Never"], correct: 0 },
-                { question: "What does a flashing red traffic light mean?", options: ["Stop and proceed when safe", "Go", "Slow down", "Turn around"], correct: 0 },
-                { question: "Who has right of way at an uncontrolled intersection?", options: ["Vehicle on the right", "Vehicle on the left", "Vehicle going straight", "The first vehicle to arrive"], correct: 0 },
-                { question: "What is the minimum following distance in ideal conditions?", options: ["1 second", "2 seconds", "3 seconds", "4 seconds"], correct: 1 },
-                { question: "When may a driver overtake on a solid line?", options: ["Never", "When safe", "Only during the day", "When the vehicle ahead is slow"], correct: 0 },
-                { question: "What does a yellow line on the side of the road mean?", options: ["No parking", "No stopping", "Parking allowed", "Loading zone"], correct: 0 },
-                { question: "What should you do at a yield sign?", options: ["Stop and wait", "Slow down and give way", "Speed up", "Continue driving"], correct: 1 },
-                { question: "When is it illegal to use a cellphone while driving?", options: ["Always", "When not using a hands-free kit", "When driving in a school zone", "Never"], correct: 1 },
-                { question: "What is the safe following distance in bad weather?", options: ["2 seconds", "3 seconds", "4 seconds", "5 seconds"], correct: 2 },
-                { question: "When may you drive with parking lights only?", options: ["Never", "When parked", "In fog", "At night"], correct: 0 },
-                { question: "What is the meaning of a flashing amber traffic light?", options: ["Stop", "Proceed with caution", "Speed up", "Turn around"], correct: 1 },
-                { question: "When entering a roundabout, who has right of way?", options: ["Vehicles already in the roundabout", "The vehicle on your right", "The vehicle on your left", "The first to arrive"], correct: 0 },
-                { question: "What is the minimum age for a learner's license in South Africa?", options: ["16", "17", "18", "19"], correct: 1 },
-                { question: "How long is a learner's license valid for?", options: ["6 months", "12 months", "18 months", "24 months"], correct: 3 },
-                { question: "When may you drive in a bus lane?", options: ["Never", "When turning", "When overtaking", "When no buses are present"], correct: 0 },
-                { question: "What is the meaning of a broken white line?", options: ["Do not cross", "You may cross with care", "Stop", "Slow down"], correct: 1 },
-                { question: "When should you use your indicators?", options: ["Before turning or changing lanes", "When parking", "When stopping", "All of the above"], correct: 3 },
-                { question: "What is the meaning of a stop sign?", options: ["Stop and proceed when safe", "Slow down", "Yield to traffic", "Stop only if traffic is present"], correct: 0 },
-                { question: "When is a vehicle considered roadworthy?", options: ["When it has a current license disc", "When it passes a roadworthy test", "When it has insurance", "When it is clean"], correct: 1 },
-                { question: "What documents must a driver carry?", options: ["Driver's license, ID, proof of address", "Driver's license and license disc", "ID and insurance", "License disc only"], correct: 1 }
-            ]
-              }, {
-            id: 'signs',
-            title: 'Road Signs',
-            desc: 'Warning, prohibition & guidance',
-            icon: '🛑',
-            unlocked: false,
-            passed: false,
-            score: null,
-            questions: [
-                { question: "What does this sign mean? (Stop sign)", options: ["Stop", "Yield", "No entry", "Speed limit"], correct: 0 },
-                { question: "What does this sign mean? (Yield sign)", options: ["Yield to traffic", "Stop", "No entry", "Slow down"], correct: 0 },
-                { question: "What does this sign mean? (No entry)", options: ["No entry", "No parking", "No stopping", "No U-turn"], correct: 0 },
-                { question: "What does this sign mean? (Speed limit 60)", options: ["Speed limit 60", "Speed limit 80", "Speed limit 100", "Speed limit 120"], correct: 0 },
-                { question: "What does this sign mean? (No parking)", options: ["No parking", "No stopping", "No loading", "No U-turn"], correct: 0 },
-                { question: "What does this sign mean? (No U-turn)", options: ["No U-turn", "No entry", "No parking", "No stopping"], correct: 0 },
-                { question: "What does this sign mean? (No overtaking)", options: ["No overtaking", "No entry", "Speed limit", "Yield"], correct: 0 },
-                { question: "What does this sign mean? (Pedestrian crossing)", options: ["Pedestrian crossing", "No crossing", "School zone", "Slow down"], correct: 0 },
-                { question: "What does this sign mean? (Speed limit 80)", options: ["Speed limit 60", "Speed limit 80", "Speed limit 100", "Speed limit 120"], correct: 1 },
-                { question: "What does this sign mean? (Speed limit 100)", options: ["Speed limit 100", "Speed limit 80", "Speed limit 60", "Speed limit 120"], correct: 0 },
-                { question: "What does this sign mean? (Children crossing)", options: ["Children crossing", "Pedestrian crossing", "School zone", "Playground ahead"], correct: 0 },
-                { question: "What does this sign mean? (Traffic light ahead)", options: ["Traffic light ahead", "Stop ahead", "Yield ahead", "Slow down"], correct: 0 },
-                { question: "What does this sign mean? (One-way street)", options: ["One-way street", "No entry", "No U-turn", "Do not enter"], correct: 0 },
-                { question: "What does this sign mean? (No stopping)", options: ["No stopping", "No parking", "No loading", "No U-turn"], correct: 1 },
-                { question: "What does this sign mean? (No right turn)", options: ["No right turn", "No left turn", "No U-turn", "No entry"], correct: 0 },
-                { question: "What does this sign mean? (No left turn)", options: ["No left turn", "No right turn", "No U-turn", "No entry"], correct: 0 },
-                { question: "What does this sign mean? (Road narrows)", options: ["Road narrows", "Sharp turn ahead", "Winding road", "Steep descent"], correct: 0 },
-                { question: "What does this sign mean? (Sharp curve ahead)", options: ["Sharp curve ahead", "Winding road", "Road narrows", "Steep hill"], correct: 0 },
-                { question: "What does this sign mean? (Steep descent)", options: ["Steep descent", "Steep ascent", "Winding road", "Road narrows"], correct: 0 },
-                { question: "What does this sign mean? (Steep ascent)", options: ["Steep ascent", "Steep descent", "Winding road", "Road narrows"], correct: 0 },
-                { question: "What does this sign mean? (Yield)", options: ["Stop", "Stop and go", "Yield", "No entry"], correct: 2 },
-                { question: "What does this sign mean? (No left turn 2)", options: ["No right turn", "No left turn", "No U-turn", "No entry"], correct: 1 },
-                { question: "What does this sign mean? (No U-turn 2)", options: ["No U-turn", "No right turn", "No left turn", "No entry"], correct: 2 },
-                { question: "What does this sign mean? (No loading)", options: ["No parking", "No stopping", "No loading", "No U-turn"], correct: 2 },
-                { question: "What does this sign mean? (School zone)", options: ["School zone", "Pedestrian crossing", "Children crossing", "Slow down"], correct: 0 },
-                { question: "What does this sign mean? (Beware of animals)", options: ["Beware of animals", "Pet crossing", "Wild animals ahead", "Farm animals"], correct: 0 },
-                { question: "What does this sign mean? (Road works ahead)", options: ["Road works ahead", "Road narrows", "Construction zone", "Stop ahead"], correct: 0 },
-                { question: "What does this sign mean? (No through road)", options: ["No through road", "Dead end", "One-way", "No entry"], correct: 0 },
-                { question: "What does this sign mean? (Restaurant ahead)", options: ["Restaurant ahead", "Fuel station ahead", "Hotel ahead", "Shopping centre"], correct: 0 },
-                { question: "What does this sign mean? (Fuel station ahead)", options: ["Fuel station ahead", "Restaurant ahead", "Hotel ahead", "Repair shop"], correct: 0 }
-            ]
-        }, {
-            id: 'controls',
-            title: 'Vehicle Control',
-            desc: 'Vehicle mechanics & handling',
-            icon: '⚙️',
-            unlocked: false,
-            passed: false,
-            score: null,
-            questions: [
-                { question: "What is the primary purpose of the clutch?", options: ["Engage and disengage the engine from the transmission", "Control the steering", "Apply the brakes", "Control the throttle"], correct: 0 },
-                { question: "When should you change to a lower gear?", options: ["When going uphill or needing more power", "When going downhill", "When braking", "When stopped"], correct: 0 },
-                 { question: "What should you check before starting the engine?", options: ["Seat position, mirrors, and handbrake", "The radio", "The air conditioning", "The windows"], correct: 0 },
-                { question: "What does the brake pedal control?", options: ["The braking system to slow down or stop", "The accelerator", "The clutch", "The steering"], correct: 0 },
-                { question: "What is the purpose of the accelerator?", options: ["To increase or decrease engine speed", "To brake", "To change gears", "To steer"], correct: 0 },
-                { question: "What should you do when the engine stalls?", options: ["Put the car in neutral and restart", "Push the car", "Call for help", "Leave the car"], correct: 0 },
-                { question: "What is the correct hand position on the steering wheel?", options: ["10 and 2", "9 and 3", "8 and 4", "12 and 6"], correct: 1 },
-                { question: "When should you use the handbrake?", options: ["When parked on a slope", "When driving", "When turning", "When reversing"], correct: 0 },
-                { question: "What is the purpose of the rearview mirror?", options: ["To see behind the vehicle", "To check side traffic", "To see the speedometer", "To check engine temperature"], correct: 0 },
-                { question: "What is the purpose of side mirrors?", options: ["To check traffic on the sides and blind spots", "To see behind", "To check the engine", "To see the dashboard"], correct: 0 },
-                { question: "What should you do when driving on a slippery road?", options: ["Reduce speed and increase following distance", "Drive faster", "Brake hard", "Turn sharply"], correct: 0 },
-                { question: "When should you use your headlights?", options: ["At night, in poor visibility, and when raining", "Only at night", "Only in fog", "Only when driving on a highway"], correct: 0 },
-                { question: "What is engine braking?", options: ["Using the engine to slow down by shifting to a lower gear", "Using the brakes", "Using the clutch", "Using the accelerator"], correct: 0 },
-                { question: "What should you do if your vehicle starts to skid?", options: ["Take your foot off the accelerator and steer in the direction of the skid", "Brake hard", "Turn the wheel sharply", "Accelerate"], correct: 0 },
-                { question: "What does the gear stick control?", options: ["The transmission to change gears", "The steering", "The brakes", "The accelerator"], correct: 0 },
-                { question: "When should you change to a higher gear?", options: ["When you need more speed or the engine is revving high", "When going uphill", "When braking", "When turning"], correct: 0 },
-                { question: "What should you check before reversing?", options: ["All around the vehicle for obstacles", "Only the rearview mirror", "Only the side mirrors", "The speedometer"], correct: 0 },
-                { question: "What is the purpose of the dashboard?", options: ["To display important vehicle information like speed and fuel level", "To control the radio", "To adjust the seats", "To turn on the air conditioning"], correct: 0 },
-                { question: "What does the oil pressure warning light mean?", options: ["Low oil pressure", "High engine temperature", "Fuel is low", "Battery is low"], correct: 0 },
-                { question: "What should you do if the battery warning light comes on?", options: ["Have the charging system checked", "Check the oil", "Check the fuel", "Check the tyres"], correct: 0 },
-                { question: "What is the purpose of the windscreen wipers?", options: ["To clear rain and debris from the windscreen", "To clean the headlights", "To cool the engine", "To clean the mirrors"], correct: 0 },
-                { question: "When should you use the demister?", options: ["When the windscreen is fogged up", "When it is raining", "When it is hot", "When driving at night"], correct: 0 },
-                { question: "What should you do if your vehicle overheats?", options: ["Pull over safely and turn off the engine", "Continue driving", "Add more water while the engine is running", "Call for help immediately"], correct: 0 },
-                { question: "What is the purpose of the fuel gauge?", options: ["To display the amount of fuel in the tank", "To display engine temperature", "To display speed", "To display battery charge"], correct: 0 },
-                { question: "What should you do when your tyres are worn?", options: ["Replace them", "Pump them up", "Ignore them", "Rotate them"], correct: 0 },
-                { question: "What is the purpose of the speedometer?", options: ["To display the vehicle's speed", "To display engine speed", "To display fuel level", "To display distance travelled"], correct: 0 },
-                { question: "What should you do if the engine warning light comes on?", options: ["Have the vehicle checked by a mechanic", "Ignore it", "Check the oil", "Check the tyres"], correct: 0 },
-                { question: "How often should you check your tyre pressure?", options: ["Weekly", "Monthly", "Yearly", "Only before long trips"], correct: 0 },
-                { question: "What is the purpose of the handbrake in an emergency?", options: ["To stop the vehicle if the main brakes fail", "To park", "To turn", "To reverse"], correct: 0 },
-                { question: "What should you do when parking on a hill?", options: ["Use the handbrake and turn the wheels towards the curb", "Park normally", "Leave the car in gear", "Turn off the engine"], correct: 0 }
-            ]
-        }];
-           // ================================================================
-        //  STATE
-        // ================================================================
-        let userData = { name: '', idNumber: '', address: '', contact: '', role: '' };
+<!-- OPTIONS SECTION (cards) -->
+<section class="options-section" id="services" style="padding: 70px 6%; background: white;">
+  <h2 class="section-title">Our Core Services</h2>
+  <div class="options-grid">
+    <div class="option-card"><i class="fa-solid fa-car"></i><h3>Learners / Driver Training</h3><a href="#get-started">Book Now</a></div>
+    <div class="option-card"><i class="fa-solid fa-id-card"></i><h3>PrDP Assistance</h3><a href="#get-started">Apply</a></div>
+    <div class="option-card"><i class="fa-solid fa-file"></i><h3>Queue For You Registration</h3><a href="#get-started">Register</a></div>
+    <div class="option-card"><i class="fa-solid fa-road"></i><h3>Licence Renewal</h3><a href="#get-started">Renew</a></div>
+    <div class="option-card"><i class="fa-solid fa-wrench"></i><h3>Engine Clearance</h3><a href="#get-started">Book</a></div>
+    <div class="option-card"><i class="fa-solid fa-car-burst"></i><h3>Roadworthy Assistance</h3><a href="#get-started">Request</a></div>
+    <div class="option-card"><i class="fa-solid fa-car-side"></i><h3>Buy A Car</h3><a href="#vehicles">Shop</a></div>
+    <div class="option-card"><i class="fa-solid fa-truck"></i><h3>Buy Trucks</h3><a href="#vehicles">View</a></div>
+    <div class="option-card"><i class="fa-solid fa-gear"></i><h3>Auto Parts</h3><a href="#vehicles">Order</a></div>
+    <div class="option-card"><i class="fa-solid fa-circle"></i><h3>Buy Tyres</h3><a href="#vehicles">Browse</a></div>
+  </div>
 
-        // Profile progress – 15 consecutive passes to complete
-        let consecutivePasses = 0;
-        // Weak questions per module: store question objects that were answered incorrectly
-        let weakQuestions = { rules: [], signs: [], controls: [] };
+  <!-- SLIDER -->
+  <div class="slider">
+    <div class="slide-track">
+      <div class="slide"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1200" alt="car"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200" alt="driving"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1549924231-f129b911e442?q=80&w=1200" alt="sports car"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1200" alt="police"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200" alt="luxury"></div>
+      <!-- duplicate for seamless loop -->
+      <div class="slide"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1200" alt="car"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200" alt="driving"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1549924231-f129b911e442?q=80&w=1200" alt="sports car"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1200" alt="police"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200" alt="luxury"></div>
+    </div>
+  </div>
+</section>
 
-        // Quiz state
-        let currentModuleIndex = 0;
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let wrongAnswers = [];
-        let selectedOption = null;
-        let quizCompleted = false;
-        // Holds the shuffled question list for the current attempt
-        let currentQuestions = [];
+<!-- ========== GET STARTED + BOOKING FORM (Integrated with prices & WhatsApp) ========== -->
+<section id="get-started" style="padding: 70px 6%; background: #f4fcf0;">
+  <h2 class="section-title">Get Started – Book & Pay Online</h2>
+  <div style="max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 32px; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+    <form id="startForm" onsubmit="handleSubmit(event)">
+      <h3 style="color:#2a3b1a; font-size: 1.6rem; margin-bottom: 20px;">1. Select Service</h3>
+      <select id="serviceType" required style="width:100%; padding: 14px; border-radius: 48px; border: 2px solid #cbdba7; margin-bottom: 20px; font-size: 1rem;" onchange="updatePrice()">
+        <option value="">-- Choose Service --</option>
+        <option value="learner-booking">Learner's Licence Booking & Test - R75 to R150</option>
+        <option value="learner-issue">Learner's Licence Issue Fee - R60 to R90</option>
+        <option value="code8">Driving Licence Test Code B (Code 8) - R156 to R180</option>
+        <option value="card-issue">Driving Licence Card Issue - R228 to R300</option>
+        <option value="renewal">Driving Licence Renewal - R140 to R300</option>
+        <option value="temp-licence">Temporary Driving Licence - R80 to R100</option>
+        <option value="prdp">Professional Driving Permit (PrDP) - R100 to R220</option>
+        <option value="duplicate">Duplicate Licence Card (Lost/Stolen) - R250 to R300</option>
+        <option value="code-a1">Code A1 - Light Motorcycle - Enquire</option>
+        <option value="code-a">Code A - Heavy Motorcycle - Enquire</option>
+        <option value="code-c1">Code C1 - Medium Heavy Vehicle - Enquire</option>
+        <option value="code-c">Code C - Heavy Motor Vehicle - Enquire</option>
+        <option value="code-ec1">Code EC1 - Heavy Vehicle + Trailer - Enquire</option>
+      </select>
 
-        // ================================================================
-        //  HELPERS
-        // ================================================================
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
+      <div id="priceBox" style="display:none; background:#eef3e3; padding: 18px; border-radius: 24px; margin-bottom: 28px; border-left: 7px solid #b5ff4b;">
+        <h4 style="color:#2a3b1a;">Estimated Fee: <span id="priceDisplay" style="color:#3d9e0e; font-size: 28px; font-weight:bold;"></span></h4>
+        <p id="requirements" style="font-size: 0.85rem; color: #2c4b1a;"></p>
+      </div>
 
-        // Build a shuffled question list for a module.
-        // Weak questions are forced to the front.
-        function buildQuestionList(moduleId) {
-            const module = modulesData.find(m => m.id === moduleId);
-            if (!module) return [];
-            let all = [...module.questions];
-            // Shuffle all
-            shuffleArray(all);
-            // Separate weak and non-weak
-            const weak = weakQuestions[moduleId] || [];
-            const weakSet = new Set(weak.map(q => q.question)); // compare by question text
-            const weakList = [];
-            const rest = [];
-            all.forEach(q => {
-                if (weakSet.has(q.question)) {
-                    weakList.push(q);
-                } else {
-                    rest.push(q);
-                }
-            });
-            // Remove duplicates from weakList
-            const uniqueWeak = [];
-            const seen = new Set();
-            weakList.forEach(q => {
-                if (!seen.has(q.question)) {
-                    seen.add(q.question);
-                    uniqueWeak.push(q);
-                }
-            });
-            // Combine: weak first, then rest, then fill if needed (always exactly 30)
-            let combined = [...uniqueWeak, ...rest];
-            // If combined length < 30, fill with random from all (should not happen)
-            while (combined.length < module.questions.length) {
-                const extra = module.questions[Math.floor(Math.random() * module.questions.length)];
-                if (!combined.find(q => q.question === extra.question)) {
-                    combined.push(extra);
-                }
-            }
-            // Shuffle the rest part only, keep weak at front
-            const weakPart = combined.slice(0, uniqueWeak.length);
-            const restPart = combined.slice(uniqueWeak.length);
-            shuffleArray(restPart);
-            return [...weakPart, ...restPart];
-        }
+      <h3 style="color:#2a3b1a; margin: 28px 0 16px; font-size: 1.6rem;">2. Your Details</h3>
+      <input type="text" id="fullName" placeholder="Full Name as per ID" required style="width:100%; padding: 14px; margin-bottom: 16px; border-radius: 40px; border:1px solid #ccc;">
+      <input type="text" id="idNumber" placeholder="ID Number" required style="width:100%; padding: 14px; margin-bottom: 16px; border-radius: 40px; border:1px solid #ccc;">
+      <input type="tel" id="phone" placeholder="Cell Number" required style="width:100%; padding: 14px; margin-bottom: 16px; border-radius: 40px; border:1px solid #ccc;">
+      <input type="email" id="email" placeholder="Email Address" required style="width:100%; padding: 14px; margin-bottom: 16px; border-radius: 40px; border:1px solid #ccc;">
+      <select id="age" required style="width:100%; padding: 14px; margin-bottom: 16px; border-radius: 40px; border:1px solid #ccc;">
+        <option value="">Select Age</option><option value="16">16 years</option><option value="17">17 years</option><option value="18">18+ years</option><option value="21">21+ years</option>
+      </select>
+      <input type="text" id="address" placeholder="Physical Address" required style="width:100%; padding: 14px; margin-bottom: 16px; border-radius: 40px; border:1px solid #ccc;">
 
-        // ================================================================
-        //  NAVIGATION
-        // ================================================================
-        function showScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelector('.app-container').scrollTop = 0;
-        }
+      <h3 style="color:#2a3b1a; margin: 28px 0 16px;">3. Preferred Booking Date</h3>
+      <input type="date" id="bookDate" required style="width:100%; padding: 14px; margin-bottom: 20px; border-radius: 40px; border:1px solid #ccc;">
+      <textarea id="notes" placeholder="Any special notes or questions?" rows="3" style="width:100%; padding: 14px; border-radius: 28px; margin-bottom: 20px; border:1px solid #ccc;"></textarea>
 
-        function goToDashboard() {
-            showScreen('dashboardScreen');
-            renderModules();
-            updateProfileProgress();
-            resetQuizState();
-        }
+      <h3 style="color:#2a3b1a; margin: 20px 0 16px;">4. Payment Option</h3>
+      <div style="margin-bottom: 28px;">
+        <label style="display:block; margin-bottom: 12px;"><input type="radio" name="payment" value="Pay Online Now (PayFast/Yoco)" required> <strong>Pay Online Now</strong> - Secure payment via PayFast/Yoco</label>
+        <label style="display:block; margin-bottom: 12px;"><input type="radio" name="payment" value="Pay at DLTC"> <strong>Pay at DLTC</strong> - We'll book for you, you pay at testing centre</label>
+        <label style="display:block;"><input type="radio" name="payment" value="E-Wallet / EFT"> <strong>E-Wallet / EFT</strong> - We'll send banking details</label>
+      </div>
 
-        function confirmExitQuiz() {
-            if (confirm('Are you sure you want to leave the quiz? Your progress will be lost.')) {
-                goToDashboard();
-            }
-        }
- // ================================================================
-        //  ROLE & PROFILE
-        // ================================================================
-        function selectRole(role) {
-            userData.role = role;
-            showScreen('profileScreen');
-        }
+      <button type="submit" style="width:100%; padding: 16px; background: #b5ff4b; font-weight: bold; border-radius: 60px; font-size: 1.2rem; cursor: pointer; border: none;">Submit Booking Request</button>
+      <p style="text-align:center; margin-top: 18px; font-size: 12px; color:#3e5a25;">By submitting, you agree we may contact you to confirm booking. Final fees confirmed at DLTC. We assist with booking only.</p>
+    </form>
+  </div>
+</section>
 
-        function saveProfile() {
-            const name = document.getElementById('userName').value.trim();
-            const idNumber = document.getElementById('userId').value.trim();
-            const address = document.getElementById('userAddress').value.trim();
-            const contact = document.getElementById('userContact').value.trim();
+<!-- DRIVING LESSON BOOKING section (second booking) -->
+<section class="booking" id="driving-lesson">
+  <div class="booking-container">
+    <div class="booking-form">
+      <h2>📘 Book Your Driving Lesson</h2>
+      <input type="text" placeholder="Your Name" id="lessonName">
+      <input type="email" placeholder="Your Email" id="lessonEmail">
+      <input type="text" placeholder="Phone Number" id="lessonPhone">
+      <select id="lessonExp">
+        <option>Your Experience</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option>
+      </select>
+      <select id="lessonVehicle">
+        <option>Vehicle Type</option><option>Code 8</option><option>Code 10</option><option>Code 14</option>
+      </select>
+      <input type="date" id="lessonDate">
+      <input type="time" id="lessonTime">
+      <button onclick="sendLessonWhatsApp()">Book Now</button>
+    </div>
+    <div class="booking-image">
+      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200" alt="driving lesson">
+    </div>
+  </div>
+</section>
 
-            if (!name || !idNumber || !address || !contact) {
-                alert('Please fill in all fields.');
-                return;
-            }
+<!-- Trusted section with slider -->
+<section style="padding: 70px 6%; background: white;">
+  <h2 class="section-title">Trusted By Students In Johannesburg</h2>
+  <div class="slider">
+    <div class="slide-track">
+      <div class="slide"><img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?q=80&w=1200" alt="students"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200" alt="car"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1200" alt="driving school"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1200" alt="city"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=1200" alt="road"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?q=80&w=1200" alt="students"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200" alt="car"></div>
+    </div>
+  </div>
+</section>
 
-            userData.name = name;
-            userData.idNumber = idNumber;
-            userData.address = address;
-            userData.contact = contact;
+<!-- WHAT WE OFFER (extra details) -->
+<section style="padding: 70px 6%; background: #ecf8e2;">
+  <h2 class="section-title">What We Offer</h2>
+  <div class="options-grid">
+    <div class="option-card"><i class="fa-solid fa-book"></i><h3>Learner's Licence</h3><a href="#get-started">Book Now</a></div>
+    <div class="option-card"><i class="fa-solid fa-car"></i><h3>Driver Training</h3><a href="#get-started">Get Started</a></div>
+    <div class="option-card"><i class="fa-solid fa-id-badge"></i><h3>Professional Driver's Permit</h3><a href="#get-started">Apply</a></div>
+    <div class="option-card"><i class="fa-solid fa-file-signature"></i><h3>Queue For You Registrations</h3><a href="#get-started">Get Registered</a></div>
+    <div class="option-card"><i class="fa-solid fa-right-left"></i><h3>Change Of Ownership</h3><p>We handle all paperwork.</p><a href="#get-started">Start Transfer</a></div>
+    <div class="option-card"><i class="fa-solid fa-repeat"></i><h3>Licence Renewal Assistance</h3><p>No queues. Fast service.</p><a href="#get-started">Renew Now</a></div>
+    <div class="option-card"><i class="fa-solid fa-engine-warning"></i><h3>Engine Clearance</h3><p>Legal certification assistance.</p><a href="#get-started">Book Clearance</a></div>
+    <div class="option-card"><i class="fa-solid fa-shield"></i><h3>Traffic Registration Clearance</h3><p>Cross-border and permit clearance.</p><a href="#get-started">Get Clearance</a></div>
+    <div class="option-card"><i class="fa-solid fa-circle-check"></i><h3>Roadworthy Assistance</h3><p>Fast & reliable support.</p><a href="#get-started">Request</a></div>
+    <div class="option-card"><i class="fa-solid fa-screwdriver-wrench"></i><h3>Vehicles, Tyres & Auto Parts</h3><p>Order online.</p><a href="#vehicles">Shop Now</a></div>
+  </div>
+</section>
 
-            document.getElementById('displayName').textContent = name;
-            goToDashboard();
-        }
+<!-- PRACTICE K53 Questions -->
+<section style="padding: 70px 6%; background: white;">
+  <h2 class="section-title">Practice K53 Questions</h2>
+  <div class="options-grid">
+    <div class="option-card"><i class="fa-solid fa-triangle-exclamation"></i><h3>Road Signs Test</h3><a href="#">Start Test</a></div>
+    <div class="option-card"><i class="fa-solid fa-road"></i><h3>Rules Of The Road</h3><a href="#">Practice</a></div>
+    <div class="option-card"><i class="fa-solid fa-car-side"></i><h3>Vehicle Controls</h3><a href="#">Begin</a></div>
+    <div class="option-card"><i class="fa-solid fa-clock"></i><h3>Timed Mock Exam</h3><a href="#">Start Exam</a></div>
+  </div>
+</section>
 
-        // ================================================================
-        //  DASHBOARD
-        // ================================================================
-        function renderModules() {
-            const container = document.getElementById('moduleList');
-            if (!container) return;
-            container.innerHTML = '';
+<!-- CARS ON SALE + TRUCKS (vehicles section) -->
+<section id="vehicles" style="padding: 70px 6%; background: #ecf8e2;">
+  <h2 class="section-title">Cars On Sale</h2>
+  <div class="options-grid">
+    <div class="option-card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1200" style="width:100%; border-radius: 20px;"><h3>Toyota Corolla Quest</h3><p>Starting From</p><h2 style="color:#b5ff4b;">R89 999</h2><a href="#">Buy Now</a></div>
+    <div class="option-card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1200" style="width:100%; border-radius: 20px;"><h3>VW Polo Vivo</h3><p>Student Friendly</p><h2 style="color:#b5ff4b;">R74 999</h2><a href="#">View Vehicle</a></div>
+    <div class="option-card"><img src="https://images.unsplash.com/photo-1549924231-f129b911e442?q=80&w=1200" style="width:100%; border-radius: 20px;"><h3>Hyundai i10</h3><p>Affordable & Reliable</p><h2 style="color:#b5ff4b;">R69 999</h2><a href="#">Buy Now</a></div>
+  </div>
+  <h2 class="section-title" style="margin-top: 60px;">Urban Business Trucks</h2>
+  <div class="options-grid">
+    <div class="option-card"><img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=1200" style="width:100%; border-radius: 20px;"><h3>Isuzu NPR Truck</h3><h2 style="color:#b5ff4b;">R189 999</h2><a href="#">View Truck</a></div>
+    <div class="option-card"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200" style="width:100%; border-radius: 20px;"><h3>Tata Ultra Truck</h3><h2 style="color:#b5ff4b;">R229 999</h2><a href="#">Get Quote</a></div>
+    <div class="option-card"><img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1200" style="width:100%; border-radius: 20px;"><h3>Hino Dutro</h3><h2 style="color:#b5ff4b;">R249 999</h2><a href="#">Buy Truck</a></div>
+  </div>
+</section>
 
-            modulesData.forEach((mod, index) => {
-                const div = document.createElement('div');
-                div.className = 'module-item';
-                if (!mod.unlocked) div.classList.add('locked');
+<!-- FOOTER section -->
+<section id="contact" style="padding: 60px 6%; background: #2a3b1a; color: white;">
+  <div class="footer-grid">
+    <div><h2 style="color:#b5ff4b;">YouthDrive Solutions</h2><p style="line-height:1.4; margin-top: 12px;">South Africa's most innovative driving partner. Helping students and businesses move ahead confidently.</p></div>
+    <div><h3 style="margin-bottom: 18px;">Contact</h3><p><i class="fa-solid fa-location-dot"></i> Abc Street, Auckland, Johannesburg, South Africa</p><br><p><i class="fa-solid fa-phone"></i> +27 11 000 0000</p><br><p><i class="fa-solid fa-envelope"></i> info@youthdrivesolutions.co.za</p></div>
+    <div><h3 style="margin-bottom: 18px;">Quick Links</h3><p><a href="#get-started" style="color:white;">Learner's Licence</a></p><br><p><a href="#get-started" style="color:white;">Driver Training</a></p><br><p><a href="#vehicles" style="color:white;">Buy Vehicles</a></p><br><p><a href="#services" style="color:white;">Roadworthy Assistance</a></p></div>
+  </div>
+</section>
+<footer style="background: black; color: white; text-align: center; padding: 22px;">© 2026 YouthDrive Solutions. All Rights Reserved.</footer>
 
-                let statusText = '',
-                    statusClass = '';
-                if (mod.passed) {
-                    statusText = '✅ Passed';
-                    statusClass = 'passed';
-                } else if (mod.unlocked) {
-                    statusText = '▶ Ready';
-                    statusClass = 'ready';
-                } else {
-                    statusText = '🔒 Locked';
-                    statusClass = 'locked';
-                }
+<!-- WhatsApp fixed button -->
+<a href="https://wa.me/27110000000" target="_blank" style="position:fixed; bottom:20px; right:20px; width:62px; height:62px; background:#25D366; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:35px; color:white; text-decoration:none; z-index:9999; box-shadow:0 6px 16px rgba(0,0,0,0.3);"><i class="fab fa-whatsapp"></i></a>
 
-                div.innerHTML = `
-                    <div class="left">
-                        <h3>${mod.icon} ${mod.title}</h3>
-                        <p>${mod.desc}</p>
-                    </div>
-                    <span class="status ${statusClass}">${statusText}</span>
-                `;
+<!-- MR LIME CHATBOT -->
+<div id="chatIcon" onclick="openChat()" style="position:fixed; bottom:100px; right:20px; background: #b5ff4b; color:#1f2f0a; padding:12px 20px; border-radius:50px; display:flex; gap:8px; font-weight:bold; cursor:pointer; z-index:9999; box-shadow:0 5px 14px rgba(0,0,0,0.25); align-items:center;">💬 Ask Mr Lime</div>
+<div id="chatBox" style="display:none; position:fixed; bottom:180px; right:20px; width:330px; max-width:90%; background:white; border-radius:28px; overflow:hidden; box-shadow:0 20px 30px rgba(0,0,0,0.3); z-index:9999;">
+  <div style="background:#b5ff4b; padding:15px; display:flex; justify-content:space-between; font-weight:bold;"><span>🍋 Mr Lime Assistant</span><span onclick="closeChat()" style="cursor:pointer; font-size:22px;">✕</span></div>
+  <div style="padding:20px; height:240px; overflow-y:auto; background:#fefcea;"><p>👋 Hello! I'm Mr Lime. How can I help today?</p><p>• Learner's Licence • Driver Training • Roadworthy • Buy Vehicles • Book Lessons</p><p>💬 Chat with us on WhatsApp for quick reply!</p></div>
+  <div style="display:flex; border-top:1px solid #ccc;"><input type="text" id="chatInput" placeholder="Type message..." style="flex:1; padding:12px; border:none;"><button onclick="alert('✅ Thanks! Please use WhatsApp for instant response. +27 11 000 0000')" style="background:#b5ff4b; border:none; padding:12px 16px;">Send</button></div>
+</div>
 
-                if (mod.unlocked && !mod.passed) {
-                    div.style.cursor = 'pointer';
-                    div.onclick = () => startQuiz(index);
-                }
-                container.appendChild(div);
-            });
-      }
-      function updateProfileProgress() {
-            const fill = document.getElementById('profileProgressFill');
-            const text = document.getElementById('profileProgressText');
-            const hint = document.getElementById('profileProgressHint');
-            if (!fill) return;
-            const pct = Math.min(100, (consecutivePasses / 15) * 100);
-            fill.style.width = pct + '%';
-            text.textContent = `${Math.min(consecutivePasses, 15)} / 15`;
-            if (consecutivePasses >= 15) {
-                hint.textContent = '🎉 Congratulations! Your profile is complete!';
-            } else {
-                hint.textContent = `Pass 15 tests in a row to complete. Fail = -5 (${15 - consecutivePasses} to go)`;
-            }
-        }
-
-        // ================================================================
-        //  QUIZ ENGINE
-        // ================================================================
-        function startQuiz(index) {
-            currentModuleIndex = index;
-            currentQuestionIndex = 0;
-            score = 0;
-            wrongAnswers = [];
-            selectedOption = null;
-            quizCompleted = false;
-
-            const moduleId = modulesData[index].id;
-            // Build shuffled list with weak questions prioritised
-            currentQuestions = buildQuestionList(moduleId);
-
-            showScreen('quizScreen');
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            const module = modulesData[currentModuleIndex];
-            if (!currentQuestions || currentQuestions.length === 0) {
-                alert('No questions available.');
-                return;
-            }
-            const q = currentQuestions[currentQuestionIndex];
-            if (!q) {
-                alert('Question not found.');
-                return;
-            }
-
-            document.getElementById('questionCounter').textContent =
-                `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
-            document.getElementById('progressFill').style.width =
-                `${(currentQuestionIndex / currentQuestions.length) * 100}%`;
-            document.getElementById('questionText').textContent = q.question;
-
-            const container = document.getElementById('optionsContainer');
-            container.innerHTML = '';
-            const letters = ['A', 'B', 'C', 'D'];
-            q.options.forEach((opt, idx) => {
-                const div = document.createElement('div');
-                div.className = 'option';
-                div.textContent = `${letters[idx]}. ${opt}`;
-                div.dataset.index = idx;
-                div.onclick = () => selectOption(idx);
-                container.appendChild(div);
-            });
-          document.getElementById('nextBtn').style.display = 'none';
-            selectedOption = null;
-            document.querySelectorAll('.option').forEach(el => el.classList.remove('selected', 'correct', 'wrong'));
-        }
-
-        function selectOption(index) {
-            if (selectedOption !== null) return;
-
-            const module = modulesData[currentModuleIndex];
-            const q = currentQuestions[currentQuestionIndex];
-            const options = document.querySelectorAll('.option');
-
-            selectedOption = index;
-            options.forEach((el, i) => {
-                if (i === q.correct) el.classList.add('correct');
-                else if (i === index && i !== q.correct) el.classList.add('wrong');
-                if (i === index) el.classList.add('selected');
-            });
-
-            if (index === q.correct) {
-                score++;
-                // If this question was weak, remove it from weak list (mastered!)
-                const moduleId = module.id;
-                const weak = weakQuestions[moduleId] || [];
-                const newWeak = weak.filter(w => w.question !== q.question);
-                weakQuestions[moduleId] = newWeak;
-            } else {
-                // Add to weak questions (if not already there)
-                const moduleId = module.id;
-                if (!weakQuestions[moduleId]) weakQuestions[moduleId] = [];
-                if (!weakQuestions[moduleId].find(w => w.question === q.question)) {
-                    weakQuestions[moduleId].push(q);
-                }
-                wrongAnswers.push({
-                    question: q.question,
-                    yourAnswer: q.options[index],
-                    correctAnswer: q.options[q.correct]
-                });
-            }
-
-            const nextBtn = document.getElementById('nextBtn');
-            nextBtn.style.display = 'block';
-            if (currentQuestionIndex === currentQuestions.length - 1) {
-                nextBtn.textContent = 'See Results';
-            } else {
-                nextBtn.textContent = 'Next →';
-            }
-        }
-
-        function nextQuestion() {
-            if (currentQuestionIndex < currentQuestions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            } else {
-                showQuizResults();
-            }
-        }
-
-        function showQuizResults() {
-            const module = modulesData[currentModuleIndex];
-            const total = currentQuestions.length;
-            const percent = Math.round((score / total) * 100);
-            module.score = percent;
-
-            const passed = percent >= 80;
-            module.passed = passed;
-
-            // --- Update Profile Progress ---
-            if (passed) {
-                consecutivePasses = Math.min(consecutivePasses + 1, 15);
-            } else {
-                consecutivePasses = Math.max(0, consecutivePasses - 5);
-            }
-            updateProfileProgress();
-
-            // Unlock next module if passed
-            if (passed && currentModuleIndex < modulesData.length - 1) {
-                modulesData[currentModuleIndex + 1].unlocked = true;
-            }
-
-            showScreen('resultScreen');
-            document.getElementById('resultScore').textContent = percent;
-
-            const status = document.getElementById('resultStatus');
-            const msg = document.getElementById('resultMessage');
-            if (passed) {
-                status.className = 'result-status pass';
-                status.textContent = '✅ Passed!';
-                msg.textContent = 'Great job! You unlocked the next section.';
-            } else {
-                status.className = 'result-status fail';
-                status.textContent = '❌ Failed';
-                msg.textContent = `You need 80% to pass. You got ${percent}%. Review your weak questions below.`;
-            }
-
-            const container = document.getElementById('wrongListContainer');
-            container.innerHTML = '';
-            if (wrongAnswers.length > 0) {
-                const div = document.createElement('div');
-                div.className = 'wrong-list';
-                let html = `<p>⚠️ You got ${wrongAnswers.length} wrong (these will appear again):</p><ul>`;
-                wrongAnswers.forEach(w => {
-                    html += `<li><strong>Q:</strong> ${w.question}<br><strong>Your answer:</strong> ${w.yourAnswer} &nbsp;|&nbsp; <strong>Correct:</strong> ${w.correctAnswer}</li>`;
-                });
-                html += '</ul>';
-                div.innerHTML = html;
-                container.appendChild(div);
-            } else {
-                container.innerHTML = '<p style="color:#16a34a; font-weight:600;">🌟 Perfect score! No mistakes.</p>';
-      }
-          const continueBtn = document.getElementById('resultContinueBtn');
-            if (passed) {
-                continueBtn.textContent = 'Continue to Dashboard →';
-            } else {
-                continueBtn.textContent = '🔄 Retry Quiz';
-            }
-            quizCompleted = true;
-        }
-
-        function continueAfterResult() {
-            if (quizCompleted) {
-                const module = modulesData[currentModuleIndex];
-                if (module.passed) {
-                    goToDashboard();
-                } else {
-                    // Retry – re‑shuffle and include weak questions again
-                    startQuiz(currentModuleIndex);
-                }
-            }
-        }
-
-        function resetQuizState() {
-            currentModuleIndex = 0;
-            currentQuestionIndex = 0;
-            score = 0;
-            wrongAnswers = [];
-            selectedOption = null;
-            quizCompleted = false;
-            currentQuestions = [];
-            document.getElementById('progressFill').style.width = '0%';
-        }
-
-        // ================================================================
-        //  RECEIPT
-        // ================================================================
-        function viewFullReceipt() {
-            const container = document.getElementById('receiptContent');
-            let html = `
-                <div class="receipt-item"><span class="label">Name</span><span class="value">${userData.name}</span></div>
-                <div class="receipt-item"><span class="label">ID Number</span><span class="value">${userData.idNumber}</span></div>
-                <div class="receipt-item"><span class="label">Role</span><span class="value">${userData.role}</span></div>
-                <div class="receipt-item" style="border-bottom:2px solid #2F4F1A;margin-bottom:8px;"><span class="label">Contact</span><span class="value">${userData.contact}</span></div>
-            `;
-
-            let allPassed = true;
-            modulesData.forEach(mod => {
-                const scoreText = mod.score !== null ? `${mod.score}%` : 'Not attempted';
-                const statusText = mod.passed ? '✅ Passed' : (mod.unlocked ? '⏳ In progress' : '🔒 Locked');
-                if (!mod.passed) allPassed = false;
-                html += `
-                    <div class="receipt-item">
-                        <span class="label">${mod.icon} ${mod.title}</span>
-                        <span class="value">${scoreText} ${statusText}</span>
-                    </div>
-                `;
-            });
-
-            const overall = allPassed ? '🎉 Congratulations! You are ready for the road!' : '📖 Keep practicing, you\'ll get there!';
-            html += `
-                <div class="receipt-total">Overall: <span>${allPassed ? 'PASSED' : 'IN PROGRESS'}</span></div>
-                <p style="text-align:center;color:#2F4F1A;font-size:14px;margin-top:4px;">${overall}</p>
-                <div style="margin-top:12px;border-top:1px solid #E8EDE8;padding-top:12px;text-align:center;">
-                    <span style="font-size:13px;color:#6b7280;">🔥 Consecutive passes: ${Math.min(consecutivePasses, 15)} / 15</span>
-                </div>
-            `;
-          container.innerHTML = html;
-            showScreen('receiptScreen');
-        }
-
-        // ================================================================
-        //  INIT – Expose all functions globally
-        // ================================================================
-        window.showScreen = showScreen;
-        window.goToDashboard = goToDashboard;
-        window.confirmExitQuiz = confirmExitQuiz;
-        window.startQuiz = startQuiz;
-        window.nextQuestion = nextQuestion;
-        window.continueAfterResult = continueAfterResult;
-        window.viewFullReceipt = viewFullReceipt;
-        window.selectRole = selectRole;
-        window.saveProfile = saveProfile;
-        window.renderModules = renderModules;
-
-        // Start
-        showScreen('welcomeScreen');
-    </script>
-
+<script>
+  const serviceData = {
+    'learner-booking': { price: 'R75 - R150', req: 'Required: ID book/card, 2 ID photos, proof of address, booking fee.' },
+    'learner-issue': { price: 'R60 - R90', req: 'Required: Booking receipt + ID. Paid after passing test.' },
+    'code8': { price: 'R156 - R180', req: 'Required: Learner\'s licence, ID, photos, proof of address.' },
+    'card-issue': { price: 'R228 - R300', req: 'Required: Passed test confirmation, fingerprints.' },
+    'renewal': { price: 'R140 - R300', req: 'Required: ID, old licence, photos, proof of address.' },
+    'temp-licence': { price: 'R80 - R100', req: 'Required: Certified ID copy, proof of address.' },
+    'prdp': { price: 'R100 - R220', req: 'Required: ID, licence, medical & police clearance.' },
+    'duplicate': { price: 'R250 - R300', req: 'Required: Affidavit, ID, photos, proof of address.' },
+    'code-a1': { price: 'Enquire for Quote', req: 'Motorcycle up to 125cc, age 16+, learner\'s licence.' },
+    'code-a': { price: 'Enquire for Quote', req: 'Motorcycle over 125cc, age 18+, learner\'s licence.' },
+    'code-c1': { price: 'Enquire for Quote', req: 'Vehicle 3,500–16,000 kg GVM, age 21+.' },
+    'code-c': { price: 'Enquire for Quote', req: 'Over 16,000 kg GVM, PrDP needed.' },
+    'code-ec1': { price: 'Enquire for Quote', req: 'Code C1 + trailer, age 21+.' }
+  };
+  function updatePrice() {
+    const select = document.getElementById('serviceType');
+    const priceBox = document.getElementById('priceBox');
+    if (select.value && serviceData[select.value]) {
+      priceBox.style.display = 'block';
+      document.getElementById('priceDisplay').innerText = serviceData[select.value].price;
+      document.getElementById('requirements').innerText = serviceData[select.value].req;
+    } else { priceBox.style.display = 'none'; }
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    const serviceSelect = document.getElementById('serviceType');
+    const serviceText = serviceSelect.options[serviceSelect.selectedIndex]?.text || 'Not specified';
+    const name = document.getElementById('fullName').value;
+    const idNum = document.getElementById('idNumber').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const date = document.getElementById('bookDate').value;
+    const paymentRad = document.querySelector('input[name="payment"]:checked');
+    const payment = paymentRad ? paymentRad.value : 'Not selected';
+    const notes = document.getElementById('notes').value;
+    const msg = `*NEW YouthDrive Booking*%0A%0AService: ${serviceText}%0AName: ${name}%0AID: ${idNum}%0APhone: ${phone}%0AEmail: ${email}%0APreferred Date: ${date}%0APayment: ${payment}%0ANotes: ${notes}%0A--- Please confirm availability.`;
+    window.open(`https://wa.me/27110000000?text=${msg}`, '_blank');
+    alert('✅ Booking request sent! We will WhatsApp you to confirm.');
+    document.getElementById('startForm').reset();
+    document.getElementById('priceBox').style.display = 'none';
+  }
+  function sendLessonWhatsApp() {
+    const name = document.getElementById('lessonName').value || 'Client';
+    const email = document.getElementById('lessonEmail').value;
+    const phone = document.getElementById('lessonPhone').value;
+    const exp = document.getElementById('lessonExp').value;
+    const vehicle = document.getElementById('lessonVehicle').value;
+    const date = document.getElementById('lessonDate').value;
+    const time = document.getElementById('lessonTime').value;
+    const msg = `Driving Lesson Request%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0AExperience: ${exp}%0AVehicle: ${vehicle}%0ADate: ${date} %0ATime: ${time}`;
+    window.open(`https://wa.me/27110000000?text=${msg}`, '_blank');
+    alert('Lesson request sent! We will contact you.');
+  }
+  function openChat() { document.getElementById("chatBox").style.display = "block"; document.getElementById("chatIcon").style.display = "none"; }
+  function closeChat() { document.getElementById("chatBox").style.display = "none"; document.getElementById("chatIcon").style.display = "flex"; }
+  window.updatePrice = updatePrice;
+  window.handleSubmit = handleSubmit;
+  window.sendLessonWhatsApp = sendLessonWhatsApp;
+  window.openChat = openChat;
+  window.closeChat = closeChat;
+</script>
 </body>
 </html>
