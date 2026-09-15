@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>YouthDrive Solutions</title>
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #2F4F1A;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 960px;
+            background: #FFFFFF;
+            border-radius: 40px 40px 30px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            padding: 24px 20px 30px;
+            min-height: 650px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: visible;
+        }
+
+        @media (max-width: 480px) {
+            .app-container {
+                padding: 16px 14px;
+                border-radius: 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .app-container {
+                padding: 40px 50px;
+            }
+        }
+
+        /* ---------- SCREENS ---------- */
+        .screen {
+            display: none;
+            animation: fadeUp 0.4s ease forwards;
+        }
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- LOGO ---------- */
+        .logo-wrapper {
+            text-align: center;
+            padding: 10px 0 15px;
+            overflow: visible;
+        }
+
+        .logo-main {
+            font-size: clamp(28px, 6vw, 48px);
+            font-weight: 900;
+            letter-spacing: clamp(1px, 0.6vw, 4px);
+            line-height: 1.2;
+            overflow: visible;
+        }
+
+        .logo-youth {
+            color: #7FBF3F;
+            white-space: nowrap;
+        }
+        .logo-drive {
+            color: #6b7280;
+            white-space: nowrap;
+        }
+        .logo-solutions {
+            display: block;
+            font-size: clamp(18px, 4vw, 30px);
+            font-weight: 300;
+            letter-spacing: clamp(4px, 1.5vw, 10px);
+            color: #d4a02b;
+            margin-top: -4px;
+            white-space: nowrap;
+        }
+
+        .logo-divider {
+            width: 60px;
+            height: 4px;
+            background: #7FBF3F;
+            margin: 10px auto 15px;
+            border-radius: 4px;
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn-lime {
+            width: 100%;
+            padding: 16px;
+            background: #7FBF3F;
+            color: #2F4F1A;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 20px rgba(127, 191, 63, 0.35);
+        }
+        .btn-lime:active {
+            transform: scale(0.97);
+            background: #6daf33;
+        }
+
+        .btn-dark {
+            width: 100%;
+            padding: 16px;
+            background: #2F4F1A;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+        .btn-dark:active {
+            transform: scale(0.97);
+            background: #1f3a12;
+        }
+
+        .btn-outline {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: #2F4F1A;
+            border: 2px solid #2F4F1A;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+        }
+        .btn-outline:active {
+            transform: scale(0.97);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: #7FBF3F;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            background: none;
+            border: none;
+            padding: 4px 0;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- WELCOME SCREEN ---------- */
+        .tagline {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #2F4F1A;
+            text-align: center;
+            padding: 0 8px;
+            margin-bottom: 30px;
+        }
+        .welcome-text strong {
+            color: #7FBF3F;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #a0b0a0;
+            margin-top: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ---------- THINGS TO KNOW ---------- */
+        .info-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2F4F1A;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .info-title span {
+            color: #7FBF3F;
+        }
+
+        .qa-item {
+            background: #F8FFF8;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border-left: 4px solid #7FBF3F;
+        }
+        .qa-item h4 {
+            font-size: 15px;
+            color: #2F4F1A;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        .qa-item p {
+            font-size: 14px;
+            color: #2F4F1A;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* ---------- ROLE ---------- */
+        .role-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .role-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            border: 3px solid #E8EDE8;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .role-card:active {
+            transform: scale(0.96);
+        }
+        .role-card .icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .role-card h3 {
+            font-size: 20px;
+            color: #2F4F1A;
+        }
+        .role-card p {
+            font-size: 14px;
+            color: #2F4F1A;
+            opacity: 0.7;
+        }
+
+        /* ---------- PROFILE ---------- */
+        .input-group {
+            margin-bottom: 16px;
+        }
+        .input-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2F4F1A;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #D0D8D0;
+            border-radius: 16px;
+            font-size: 15px;
+            background: #FFFFFF;
+            transition: 0.2s;
+        }
+        .input-group input:focus {
+            border-color: #7FBF3F;
+            outline: none;
+        }
+
+        .profile-photo-upload {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-photo-upload .photo-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #7FBF3F;
+            background: #E8EDE8;
+            margin: 0 auto 10px;
+            display: block;
+        }
+        .profile-photo-upload .upload-btn {
+            display: inline-block;
+            padding: 8px 24px;
+            background: #7FBF3F;
+            color: #2F4F1A;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* ---------- DASHBOARD ---------- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .dashboard-header .home-link {
+            color: #7FBF3F;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            background: none;
+            border: none;
+            padding: 4px 0;
+        }
+        .dashboard-header .home-link:hover {
+            text-decoration: underline;
+        }
+        .dashboard-header h1 {
+            font-size: clamp(20px, 2.5vw, 30px);
+            color: #7FBF3F;
+            flex: 1;
+        }
+        .dashboard-header h1 span {
+            color: #2F4F1A;
+        }
+        .dashboard-header p {
+            font-size: 14px;
+            color: #2F4F1A;
+            opacity: 0.7;
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .module-item {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #E8EDE8;
+            transition: 0.2s;
+            cursor: default;
+        }
+        .module-item.locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+            pointer-events: none;
+        }
+        .module-item .left h3 {
+            font-size: 16px;
+            color: #2F4F1A;
+        }
+        .module-item .left p {
+            font-size: 13px;
+            color: #2F4F1A;
+            opacity: 0.7;
+        }
+        .module-item .status {
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 30px;
+            background: #E8EDE8;
+            color: #2F4F1A;
+        }
+        .module-item .status.ready {
+            background: #7FBF3F;
+            color: #2F4F1A;
+        }
+        .module-item .status.passed {
+            background: #16a34a;
+            color: white;
+        }
+        .module-item .status.locked {
+            background: #e2e2e2;
+            color: #999;
+        }
+
+        /* ---------- QUIZ ---------- */
+        .question-counter {
+            font-size: 14px;
+            color: #2F4F1A;
+            text-align: right;
+            margin-bottom: 6px;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: #E8EDE8;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: #7FBF3F;
+            border-radius: 10px;
+            transition: width 0.3s;
+            width: 0%;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2F4F1A;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            min-height: 70px;
+        }
+
+        .option {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            border: 2px solid #D0D8D0;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 15px;
+            color: #2F4F1A;
+        }
+        .option.selected {
+            border-color: #7FBF3F;
+            background: #7FBF3F;
+            color: #2F4F1A;
+        }
+        .option.correct {
+            border-color: #16a34a;
+            background: #dcfce7;
+        }
+        .option.wrong {
+            border-color: #dc2626;
+            background: #fee2e2;
+        }
+
+        /* ---------- RESULTS ---------- */
+        .result-box {
+            text-align: center;
+            padding: 25px 10px;
+        }
+        .result-box .big-score {
+            font-size: 56px;
+            font-weight: 800;
+            color: #2F4F1A;
+        }
+        .result-box .big-score span {
+            color: #7FBF3F;
+        }
+        .result-status {
+            font-size: 24px;
+            font-weight: 700;
+            padding: 10px 0;
+        }
+        .result-status.pass {
+            color: #16a34a;
+        }
+        .result-status.fail {
+            color: #dc2626;
+        }
+
+        .wrong-list {
+            text-align: left;
+            margin: 15px 0;
+            background: #FFF5F5;
+            padding: 15px;
+            border-radius: 16px;
+            border-left: 4px solid #dc2626;
+        }
+        .wrong-list p {
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #7f1d1d;
+        }
+        .wrong-list li {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #2F4F1A;
+            list-style: none;
+            border-bottom: 1px solid #f0e0e0;
+            padding: 4px 0;
+        }
+
+        /* ---------- CERTIFICATE / RECEIPT ---------- */
+        .certificate-box {
+            background: #F8FFF8;
+            border-radius: 20px;
+            padding: 30px 24px;
+            border: 2px solid #7FBF3F;
+            text-align: center;
+            margin: 16px 0;
+        }
+        .certificate-box .logo-small {
+            font-size: 28px;
+            font-weight: 900;
+            color: #2F4F1A;
+            margin-bottom: 4px;
+        }
+        .certificate-box .logo-small .lime {
+            color: #7FBF3F;
+        }
+        .certificate-box .logo-small .grey {
+            color: #6b7280;
+        }
+        .certificate-box .logo-small .brown {
+            color: #d4a02b;
+            font-weight: 300;
+        }
+        .certificate-box .cert-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2F4F1A;
+            margin: 12px 0 6px;
+        }
+        .certificate-box .cert-title .badge {
+            display: inline-block;
+            background: #7FBF3F;
+            color: #2F4F1A;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+        .certificate-box .cert-student {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2F4F1A;
+            margin: 12px 0;
+        }
+        .certificate-box .cert-details {
+            text-align: left;
+            padding: 12px 0;
+            border-top: 1px solid #E8EDE8;
+            border-bottom: 1px solid #E8EDE8;
+            margin: 12px 0;
+        }
+        .certificate-box .cert-details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #2F4F1A;
+        }
+        .certificate-box .cert-details .row .label {
+            opacity: 0.7;
+        }
+        .certificate-box .cert-details .row .value {
+            font-weight: 600;
+        }
+        .certificate-box .cert-modules {
+            text-align: left;
+            margin: 12px 0;
+        }
+        .certificate-box .cert-modules .mod-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #2F4F1A;
+            border-bottom: 1px solid #f0f4f0;
+        }
+        .certificate-box .cert-modules .mod-row .pass {
+            color: #16a34a;
+            font-weight: 700;
+        }
+        .certificate-box .cert-modules .mod-row .fail {
+            color: #dc2626;
+            font-weight: 700;
+        }
+        .certificate-box .cert-footer {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #E8EDE8;
+        }
+        .certificate-box .cert-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #7FBF3F;
+            margin: 0 auto 12px;
+            display: block;
+            background: #E8EDE8;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #E8EDE8;
+            font-size: 15px;
+            color: #2F4F1A;
+        }
+        .receipt-item:last-child {
+            border-bottom: none;
+        }
+        .receipt-item .label {
+            opacity: 0.7;
+        }
+        .receipt-item .value {
+            font-weight: 600;
+        }
+        .receipt-total {
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            padding: 20px 0 10px;
+            color: #2F4F1A;
+        }
+        .receipt-total span {
+            color: #7FBF3F;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (min-width: 768px) {
+            .certificate-box .cert-details .row {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ========================================================== -->
+        <!-- SCREEN 1: WELCOME                                         -->
+        <!-- ========================================================== -->
+        <div id="welcomeScreen" class="screen active">
+            <div class="logo-wrapper">
+                <div class="logo-main">
+                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
+                    <span class="logo-solutions">SOLUTIONS</span>
+                </div>
+                <div class="logo-divider"></div>
+            </div>
+            <div class="tagline">FIND YOUR WAY FORWARD</div>
+            <p class="welcome-text">Welcome to <strong>YouthDrive Solutions</strong><br /></p>
+            <button class="btn-lime" onclick="showScreen('infoScreen')">🚗 Get Started</button>
+            <div class="footer-note">© 2026 YouthDrive Solutions</div>
+        </div>
+
+        <!-- ========================================================== -->
+         <!-- SCREEN 2: THINGS TO KNOW                                  -->
+        <!-- ========================================================== -->
+        <div id="infoScreen" class="screen">
+            <button class="back-link" onclick="showScreen('welcomeScreen')">← Back</button>
+            <div class="logo-wrapper" style="padding-bottom:5px;">
+                <div class="logo-main" style="font-size:clamp(22px,4vw,32px);">
+                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
+                    <span class="logo-solutions" style="font-size:clamp(14px,3vw,22px);">SOLUTIONS</span>
+                </div>
+                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
+            </div>
+            <div class="info-title">📘 Things to <span>Know</span></div>
+            <div class="qa-item"><h4>1. What is a learner's licence and why do I need it in South Africa?</h4><p>A learner's licence is a permit that allows you to drive on public roads <strong>only</strong> under the supervision of a licensed driver. It proves that you have basic theoretical knowledge of road signs, rules, and vehicle controls. It is a mandatory prerequisite before you can take the practical driving test for a full driver's licence.</p></div>
+            <div class="qa-item"><h4>2. What age should I be to get a learners license?</h4><p>You must be at least <strong>17 years old</strong> to apply for a Code B (light motor vehicle) learner's licence.</p></div>
+            <div class="qa-item"><h4>3. What documents do I need to get a learners license?</h4><p>You need to bring your original <strong>Identity Document (ID)</strong> or valid passport, <strong>proof of residential address</strong> (e.g., utility bill), and <strong>two identical ID-sized photographs</strong>. If you are under 18, you must also bring a parent or guardian to provide consent.</p></div>
+            <div class="qa-item"><h4>4. How long is a learners license valid for in South Africa?</h4><p>The learner's licence is valid for exactly <strong>24 months (2 years)</strong> from the date of issue. If you don't obtain a driver's licence within this period, you will need to re-apply for the learner's test.</p></div>
+            <div class="qa-item"><h4>5. What are the categories of a learners license?</h4><p>The main categories are: <strong>Code A1</strong> (light motorcycles), <strong>Code A</strong> (motorcycles), <strong>Code B</strong> (light motor vehicles – cars, bakkies up to 3500kg), <strong>Code C1</strong> (heavy vehicles up to 16,000kg), and <strong>Code EC</strong> (heavy articulated vehicles).</p></div>
+            <div class="qa-item"><h4>6. What is the difference between a learners license and a driver's licence?</h4><p>A <strong>learner's licence</strong> is a temporary permit that allows you to drive <em>only</em> with a licensed supervisor beside you. A <strong>driver's licence</strong> is the full, permanent licence that allows you to drive <em>unaccompanied</em> on any public road.</p></div>
+            <div class="qa-item"><h4>7. How long should I wait to get my learner's licence?</h4><p>There is <strong>no mandatory waiting period</strong> to apply. You can apply as soon as you turn 17. However, you are advised to study the K53 official driving manual thoroughly before attempting the test.</p></div>
+            <button class="btn-lime" onclick="showScreen('roleScreen')">Continue →</button>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- SCREEN 3: CHOOSE ROLE                                     -->
+        <!-- ========================================================== -->
+        <div id="roleScreen" class="screen">
+            <button class="back-link" onclick="showScreen('infoScreen')">← Back</button>
+            <div class="logo-wrapper" style="padding-bottom:5px;">
+                <div class="logo-main" style="font-size:clamp(22px,4vw,32px);">
+                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
+                    <span class="logo-solutions" style="font-size:clamp(14px,3vw,22px);">SOLUTIONS</span>
+                </div>
+                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
+            </div>
+            <h2 style="text-align:center;color:#2F4F1A;margin-bottom:8px;">Choose your role</h2>
+            <p style="text-align:center;color:#2F4F1A;opacity:0.7;margin-bottom:20px;">This helps us personalise your learning.</p>
+            <div class="role-grid">
+                <div class="role-card" onclick="selectRole('Learner')">
+                    <span class="icon">📘</span>
+                    <h3>Learner</h3>
+                    <p>I am preparing for my learner's licence test.</p>
+                </div>
+                <div class="role-card" onclick="selectRole('Driver')">
+                    <span class="icon">🚗</span>
+                    <h3>Driver</h3>
+                    <p>I am preparing for my driver's licence test.</p>
+                </div>
+            </div>
+        </div>
+     <!-- ========================================================== -->
+        <!-- SCREEN 4: YOUR DETAILS                                    -->
+        <!-- ========================================================== -->
+        <div id="profileScreen" class="screen">
+            <button class="back-link" onclick="showScreen('roleScreen')">← Back</button>
+            <div class="logo-wrapper" style="padding-bottom:5px;">
+                <div class="logo-main" style="font-size:clamp(22px,4vw,32px);">
+                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
+                    <span class="logo-solutions" style="font-size:clamp(14px,3vw,22px);">SOLUTIONS</span>
+                </div>
+                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
+            </div>
+            <h2 style="text-align:center;color:#2F4F1A;margin-bottom:16px;">Your Details</h2>
+
+            <!-- Photo Upload -->
+            <div class="profile-photo-upload">
+                <img id="profilePhotoPreview" class="photo-preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23E8EDE8'/%3E%3Ctext x='60' y='65' font-size='40' text-anchor='middle' fill='%236b7280'%3E📷%3C/text%3E%3C/svg%3E" alt="Profile Photo" />
+                <label class="upload-btn">📷 Upload Photo
+                    <input type="file" accept="image/*" onchange="uploadProfilePhoto(event)" style="display:none;" />
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="profileName" placeholder="e.g., Thabo Mokoena" />
+            </div>
+            <div class="input-group">
+                <label>ID Number</label>
+                <input type="text" id="profileId" placeholder="e.g., 900101 1234 080" />
+            </div>
+            <div class="input-group">
+                <label>Physical Address</label>
+                <input type="text" id="profileAddress" placeholder="e.g., 12 Elm Street, Johannesburg" />
+            </div>
+            <div class="input-group">
+                <label>Contact Number</label>
+                <input type="text" id="profilePhone" placeholder="e.g., 082 123 4567" />
+            </div>
+
+            <button class="btn-lime" onclick="saveProfile()">Submit →</button>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- SCREEN 5: DASHBOARD                                       -->
+        <!-- ========================================================== -->
+        <div id="dashboardScreen" class="screen">
+            <div class="logo-wrapper" style="padding-bottom:5px;">
+                <div class="logo-main" style="font-size:clamp(22px,4vw,32px);">
+                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
+                    <span class="logo-solutions" style="font-size:clamp(14px,3vw,22px);">SOLUTIONS</span>
+                </div>
+                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
+            </div>
+
+            <div class="dashboard-header">
+                <h1>Welcome, <span id="dashUserName">Driver</span> 👋</h1>
+                <button class="home-link" onclick="showScreen('welcomeScreen')">← Home</button>
+            </div>
+            <p style="font-size:14px;color:#2F4F1A;opacity:0.7;margin-bottom:16px;">Complete sections in order. You must pass (80%) to unlock the next.</p>
+
+            <div id="moduleList"></div>
+
+            <button class="btn-outline" onclick="viewFullSummary()" style="margin-top:8px;">📋 View Full Summary</button>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- SCREEN 6: QUIZ MENU                                       -->
+        <!-- ========================================================== -->
+        <div id="quizMenuScreen" class="screen">
+            <button class="back-link" onclick="showScreen('dashboardScreen')">← Back to Dashboard</button>
+            <div class="logo-wrapper" style="padding-bottom:5px;">
+                <div class="logo-main" style="font-size:clamp(22px,4vw,32px);">
+                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
+                    <span class="logo-solutions" style="font-size:clamp(14px,3vw,22px);">SOLUTIONS</span>
+                </div>
+                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
+            </div>
+            <h1 style="color:#7FBF3F;font-size:clamp(22px,3vw,32px);">Choose a section</h1>
+            <p class="subhead">Complete in order. Pass (80%) to unlock next.</p>
+            <div id="moduleListQuiz"></div>
+        </div>
+     <!-- ========================================================== -->
+        <!-- SCREEN 7: QUIZ                                             -->
+        <!-- ========================================================== -->
+        <div id="quizScreen" class="screen">
+            <button class="back-link" onclick="confirmExitQuiz()">← Exit Quiz</button>
+            <div class="question-counter" id="questionCounter">1 / 30</div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+            <div class="question-text" id="questionText">Loading question...</div>
+            <div id="optionsContainer"></div>
+            <button id="nextBtn" class="btn-lime" style="display:none;margin-top:16px;" onclick="nextQuestion()">Next</button>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- SCREEN 8: RESULTS                                          -->
+        <!-- ========================================================== -->
+        <div id="resultScreen" class="screen">
+            <button class="back-link" onclick="goToQuizMenu()">← Back to sections</button>
+            <div class="result-box">
+                <div class="big-score"><span id="resultScore">0</span>%</div>
+                <div class="result-status" id="resultStatus">Pass</div>
+                <p id="resultMessage">You answered correctly</p>
+                <div id="wrongListContainer"></div>
+                <button id="resultContinueBtn" class="btn-lime" onclick="continueAfterResult()">Continue</button>
+            </div>
+        </div>
+
+        <!-- ========================================================== -->
+        <!-- SCREEN 9: CERTIFICATE / SUMMARY                            -->
+        <!-- ========================================================== -->
+        <div id="receiptScreen" class="screen">
+            <button class="back-link" onclick="showScreen('dashboardScreen')">← Back to Dashboard</button>
+            <div class="logo-wrapper" style="padding-bottom:5px;">
+                <div class="logo-main" style="font-size:clamp(22px,4vw,32px);">
+                    <span class="logo-youth">YOUTH</span><span class="logo-drive">DRIVE</span>
+                    <span class="logo-solutions" style="font-size:clamp(14px,3vw,22px);">SOLUTIONS</span>
+                </div>
+                <div class="logo-divider" style="width:40px;margin:6px auto 10px;"></div>
+            </div>
+            <div id="receiptContent"></div>
+            <button class="btn-lime" onclick="window.print()" style="margin-top:12px;">🖨️ Print / Save PDF</button>
+        </div>
+
+    </div>
+
+    <script>
+        // ================================================================
+        //  90 QUESTIONS (3 MODULES × 30)
+        // ================================================================
+        const modulesData = [{
+            id: 'rules',
+            title: 'Road Rules',
+            desc: 'Traffic laws & signals',
+            icon: '🚦',
+            unlocked: true,
+            passed: false,
+            score: null,
+            questions: [
+                { question: "What does a red traffic light mean?", options: ["Stop", "Go", "Slow down", "Prepare to stop"],
+                correct: 0 },
+                { question: "What is the legal blood alcohol limit for a driver in South Africa?", options: ["0.00%",
+                        "0.05%", "0.10%", "0.15%"
+                    ], correct: 1 },
+                { question: "When may you overtake on the left?", options: ["Never", "When the vehicle ahead is turning right",
+                        "On a one-way street", "Both B and C"
+                    ], correct: 3 },
+                { question: "What is the maximum speed limit in an urban area?", options: ["40 km/h", "50 km/h",
+                        "60 km/h", "80 km/h"
+                    ], correct: 2 },
+                { question: "What does a yellow traffic light mean?", options: ["Stop immediately",
+                        "Slow down and prepare to stop", "Speed up to pass", "Proceed with caution"
+                    ], correct: 1 },
+                { question: "When should you use your hazard lights?", options: ["When parked illegally",
+                        "When your vehicle is stationary and a hazard", "When driving in fog", "When changing lanes"
+                    ], correct: 1 },
+                { question: "What is the following distance you should keep in dry conditions?", options: ["1 second",
+                        "2 seconds", "3 seconds", "4 seconds"
+                    ], correct: 1 },
+                { question: "In wet conditions, what following distance should you keep?", options: ["2 seconds",
+                        "3 seconds", "4 seconds", "5 seconds"
+                    ], correct: 2 },
+                { question: "When may a driver use a cellphone while driving?", options: ["Never",
+                        "When using a hands-free kit", "When stopped at a traffic light", "When driving slowly"
+                    ], correct: 1 },
+                { question: "What is the speed limit on a freeway in South Africa?", options: ["100 km/h", "120 km/h",
+                        "140 km/h", "60 km/h"
+                    ], correct: 1 },
+                { question: "When must you stop at a four-way stop?", options: ["Always",
+                        "Only when other vehicles are present", "Only when a traffic officer is present", "Never"
+                    ], correct: 0 },
+                { question: "What does a flashing red traffic light mean?", options: ["Stop and proceed when safe",
+                        "Go", "Slow down", "Turn around"
+                    ], correct: 0 },
+                { question: "Who has right of way at an uncontrolled intersection?", options: ["Vehicle on the right",
+                        "Vehicle on the left", "Vehicle going straight", "The first vehicle to arrive"
+                    ], correct: 0 },
+                { question: "What is the minimum following distance in ideal conditions?", options: ["1 second",
+                        "2 seconds", "3 seconds", "4 seconds"
+                    ], correct: 1 },
+                { question: "When may a driver overtake on a solid line?", options: ["Never", "When safe",
+                        "Only during the day", "When the vehicle ahead is slow"
+                    ], correct: 0 },
+                { question: "What does a yellow line on the side of the road mean?", options: ["No parking",
+                        "No stopping", "Parking allowed", "Loading zone"
+                    ], correct: 0 },
+                { question: "What should you do at a yield sign?", options: ["Stop and wait", "Slow down and give way",
+                        "Speed up", "Continue driving"
+                    ], correct: 1 },
+                { question: "When is it illegal to use a cellphone while driving?", options: ["Always",
+                        "When not using a hands-free kit", "When driving in a school zone", "Never"
+                    ], correct: 1 },
+                { question: "What is the safe following distance in bad weather?", options: ["2 seconds", "3 seconds",
+                        "4 seconds", "5 seconds"
+                    ], correct: 2 },
+                { question: "When may you drive with parking lights only?", options: ["Never", "When parked", "In fog",
+                        "At night"
+                    ], correct: 0 },
+                { question: "What is the meaning of a flashing amber traffic light?", options: ["Stop",
+                        "Proceed with caution", "Speed up", "Turn around"
+                    ], correct: 1 },
+                { question: "When entering a roundabout, who has right of way?", options: [
+                        "Vehicles already in the roundabout", "The vehicle on your right", "The vehicle on your left",
+                        "The first to arrive"
+                    ], correct: 0 },
+                { question: "What is the minimum age for a learner's license in South Africa?", options: ["16", "17",
+                        "18", "19"
+                    ], correct: 1 },
+                { question: "How long is a learner's license valid for?", options: ["6 months", "12 months",
+                        "18 months", "24 months"
+                    ], correct: 3 },
+                { question: "When may you drive in a bus lane?", options: ["Never", "When turning", "When overtaking",
+                        "When no buses are present"
+                    ], correct: 0 },
+                { question: "What is the meaning of a broken white line?", options: ["Do not cross",
+                        "You may cross with care", "Stop", "Slow down"
+                    ], correct: 1 },
+                { question: "When should you use your indicators?", options: ["Before turning or changing lanes",
+                        "When parking", "When stopping", "All of the above"
+                    ], correct: 3 },
+                { question: "What is the meaning of a stop sign?", options: ["Stop and proceed when safe",
+                        "Slow down", "Yield to traffic", "Stop only if traffic is present"
+                    ], correct: 0 },
+                { question: "When is a vehicle considered roadworthy?", options: ["When it has a current license disc",
+                        "When it passes a roadworthy test", "When it has insurance", "When it is clean"
+                    ], correct: 1 },
+                { question: "What documents must a driver carry?", options: ["Driver's license, ID, proof of address",
+                        "Driver's license and license disc", "ID and insurance", "License disc only"
+                    ], correct: 1 }
+            ]
+        }, {
+            id: 'signs',
+            title: 'Road Signs',
+            desc: 'Warning, prohibition & guidance',
+            icon: '🛑',
+            unlocked: false,
+            passed: false,
+            score: null,
+            questions: [
+                { question: "What does this sign mean? (Stop sign)", options: ["Stop", "Yield", "No entry",
+                        "Speed limit"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Yield sign)", options: ["Yield to traffic", "Stop",
+                        "No entry", "Slow down"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (No entry)", options: ["No entry", "No parking", "No stopping",
+                        "No U-turn"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Speed limit 60)", options: ["Speed limit 60",
+                        "Speed limit 80", "Speed limit 100", "Speed limit 120"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (No parking)", options: ["No parking", "No stopping",
+                        "No loading", "No U-turn"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (No U-turn)", options: ["No U-turn", "No entry", "No parking",
+                        "No stopping"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (No overtaking)", options: ["No overtaking", "No entry",
+                        "Speed limit", "Yield"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Pedestrian crossing)", options: ["Pedestrian crossing",
+                        "No crossing", "School zone", "Slow down"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Speed limit 80)", options: ["Speed limit 60",
+                        "Speed limit 80", "Speed limit 100", "Speed limit 120"
+                    ], correct: 1 },
+                { question: "What does this sign mean? (Speed limit 100)", options: ["Speed limit 100",
+                        "Speed limit 80", "Speed limit 60", "Speed limit 120"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Children crossing)", options: ["Children crossing",
+                        "Pedestrian crossing", "School zone", "Playground ahead"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Traffic light ahead)", options: ["Traffic light ahead",
+                        "Stop ahead", "Yield ahead", "Slow down"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (One-way street)", options: ["One-way street", "No entry",
+                        "No U-turn", "Do not enter"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (No stopping)", options: ["No stopping", "No parking",
+                        "No loading", "No U-turn"
+                    ], correct: 1 },
+                { question: "What does this sign mean? (No right turn)", options: ["No right turn", "No left turn",
+                        "No U-turn", "No entry"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (No left turn)", options: ["No left turn", "No right turn",
+                        "No U-turn", "No entry"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Road narrows)", options: ["Road narrows", "Sharp turn ahead",
+                        "Winding road", "Steep descent"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Sharp curve ahead)", options: ["Sharp curve ahead",
+                        "Winding road", "Road narrows", "Steep hill"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Steep descent)", options: ["Steep descent", "Steep ascent",
+                        "Winding road", "Road narrows"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Steep ascent)", options: ["Steep ascent", "Steep descent",
+                        "Winding road", "Road narrows"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Yield)", options: ["Stop", "Stop and go", "Yield",
+                        "No entry"
+                    ], correct: 2 },
+                { question: "What does this sign mean? (No left turn 2)", options: ["No right turn", "No left turn",
+                        "No U-turn", "No entry"
+                    ], correct: 1 },
+                { question: "What does this sign mean? (No U-turn 2)", options: ["No U-turn", "No right turn",
+                        "No left turn", "No entry"
+                    ], correct: 2 },
+                { question: "What does this sign mean? (No loading)", options: ["No parking", "No stopping",
+                        "No loading", "No U-turn"
+                    ], correct: 2 },
+                { question: "What does this sign mean? (School zone)", options: ["School zone", "Pedestrian crossing",
+                        "Children crossing", "Slow down"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Beware of animals)", options: ["Beware of animals",
+                        "Pet crossing", "Wild animals ahead", "Farm animals"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Road works ahead)", options: ["Road works ahead",
+                        "Road narrows", "Construction zone", "Stop ahead"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (No through road)", options: ["No through road", "Dead end",
+                        "One-way", "No entry"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Restaurant ahead)", options: ["Restaurant ahead",
+                        "Fuel station ahead", "Hotel ahead", "Shopping centre"
+                    ], correct: 0 },
+                { question: "What does this sign mean? (Fuel station ahead)", options: ["Fuel station ahead",
+                        "Restaurant ahead", "Hotel ahead", "Repair shop"
+                    ], correct: 0 }
+            ]
+        }, {
+            id: 'controls',
+            title: 'Vehicle Control',
+            desc: 'Vehicle mechanics & handling',
+            icon: '⚙️',
+            unlocked: false,
+            passed: false,
+            score: null,
+            questions: [
+                { question: "What is the primary purpose of the clutch?", options: [
+                        "Engage and disengage the engine from the transmission", "Control the steering",
+                        "Apply the brakes", "Control the throttle"
+                    ], correct: 0 },
+                { question: "When should you change to a lower gear?", options: [
+                        "When going uphill or needing more power", "When going downhill", "When braking",
+                        "When stopped"
+                    ], correct: 0 },
+                { question: "What should you check before starting the engine?", options: [
+                        "Seat position, mirrors, and handbrake", "The radio", "The air conditioning", "The windows"
+                    ], correct: 0 },
+                { question: "What does the brake pedal control?", options: ["The braking system to slow down or stop",
+                        "The accelerator", "The clutch", "The steering"
+                    ], correct: 0 },
+                { question: "What is the purpose of the accelerator?", options: [
+                        "To increase or decrease engine speed", "To brake", "To change gears", "To steer"
+                    ], correct: 0 },
+                { question: "What should you do when the engine stalls?", options: ["Put the car in neutral and restart",
+                        "Push the car", "Call for help", "Leave the car"
+                    ], correct: 0 },
+                { question: "What is the correct hand position on the steering wheel?", options: ["10 and 2",
+                        "9 and 3", "8 and 4", "12 and 6"
+                    ], correct: 1 },
+                { question: "When should you use the handbrake?", options: ["When parked on a slope", "When driving",
+                        "When turning", "When reversing"
+                    ], correct: 0 },
+                { question: "What is the purpose of the rearview mirror?", options: ["To see behind the vehicle",
+                        "To check side traffic", "To see the speedometer", "To check engine temperature"
+                    ], correct: 0 },
+                { question: "What is the purpose of side mirrors?", options: [
+                        "To check traffic on the sides and blind spots", "To see behind", "To check the engine",
+                        "To see the dashboard"
+                    ], correct: 0 },
+                { question: "What should you do when driving on a slippery road?", options: [
+                        "Reduce speed and increase following distance", "Drive faster", "Brake hard",
+                        "Turn sharply"
+                    ], correct: 0 },
+                { question: "When should you use your headlights?", options: [
+                        "At night, in poor visibility, and when raining", "Only at night", "Only in fog",
+                        "Only when driving on a highway"
+                    ], correct: 0 },
+                { question: "What is engine braking?", options: [
+                        "Using the engine to slow down by shifting to a lower gear", "Using the brakes",
+                        "Using the clutch", "Using the accelerator"
+                    ], correct: 0 },
+                { question: "What should you do if your vehicle starts to skid?", options: [
+                        "Take your foot off the accelerator"
+                    ], correct: 0 },
+                { question: "What should you do if your vehicle starts to skid?", options: [
+                        "Take your foot off the accelerator and steer in the direction of the skid",
+                        "Brake hard", "Turn the wheel sharply", "Accelerate"
+                    ], correct: 0 },
+                { question: "What does the gear stick control?", options: ["The transmission to change gears",
+                        "The steering", "The brakes", "The accelerator"
+                    ], correct: 0 },
+                { question: "When should you change to a higher gear?", options: [
+                        "When you need more speed or the engine is revving high", "When going uphill",
+                        "When braking", "When turning"
+                    ], correct: 0 },
+                { question: "What should you check before reversing?", options: [
+                        "All around the vehicle for obstacles", "Only the rearview mirror", "Only the side mirrors",
+                        "The speedometer"
+                    ], correct: 0 },
+                { question: "What is the purpose of the dashboard?", options: [
+                        "To display important vehicle information like speed and fuel level",
+                        "To control the radio", "To adjust the seats", "To turn on the air conditioning"
+                    ], correct: 0 },
+                { question: "What does the oil pressure warning light mean?", options: ["Low oil pressure",
+                        "High engine temperature", "Fuel is low", "Battery is low"
+                    ], correct: 0 },
+                { question: "What should you do if the battery warning light comes on?", options: [
+                        "Have the charging system checked", "Check the oil", "Check the fuel", "Check the tyres"
+                    ], correct: 0 },
+                { question: "What is the purpose of the windscreen wipers?", options: [
+                        "To clear rain and debris from the windscreen", "To clean the headlights",
+                        "To cool the engine", "To clean the mirrors"
+                    ], correct: 0 },
+                { question: "When should you use the demister?", options: ["When the windscreen is fogged up",
+                        "When it is raining", "When it is hot", "When driving at night"
+                    ], correct: 0 },
+                { question: "What should you do if your vehicle overheats?", options: [
+                        "Pull over safely and turn off the engine", "Continue driving",
+                        "Add more water while the engine is running", "Call for help immediately"
+                    ], correct: 0 },
+                { question: "What is the purpose of the fuel gauge?", options: [
+                        "To display the amount of fuel in the tank", "To display engine temperature",
+                        "To display speed", "To display battery charge"
+                    ], correct: 0 },
+                { question: "What should you do when your tyres are worn?", options: ["Replace them",
+                        "Pump them up", "Ignore them", "Rotate them"
+                    ], correct: 0 },
+                { question: "What is the purpose of the speedometer?", options: ["To display the vehicle's speed",
+                        "To display engine speed", "To display fuel level", "To display distance travelled"
+                    ], correct: 0 },
+                { question: "What should you do if the engine warning light comes on?", options: [
+                        "Have the vehicle checked by a mechanic", "Ignore it", "Check the oil", "Check the tyres"
+                    ], correct: 0 },
+                { question: "How often should you check your tyre pressure?", options: ["Weekly", "Monthly",
+                        "Yearly", "Only before long trips"
+                    ], correct: 0 },
+                { question: "What is the purpose of the handbrake in an emergency?", options: [
+                        "To stop the vehicle if the main brakes fail", "To park", "To turn", "To reverse"
+                    ], correct: 0 },
+                { question: "What should you do when parking on a hill?", options: [
+                        "Use the handbrake and turn the wheels towards the curb", "Park normally",
+                        "Leave the car in gear", "Turn off the engine"
+                    ], correct: 0 }
+            ]
+        }];
+
+        // ================================================================
+        //  STATE
+        // ================================================================
+        const STORAGE_KEY = 'youthdrive_final_data';
+
+        let student = {
+            name: '',
+            idNumber: '',
+            address: '',
+            phone: '',
+            role: '',
+            photo: ''
+        };
+
+        let progress = {
+            modules: modulesData.map(m => ({ id: m.id, passed: false, score: null, unlocked: m.unlocked })),
+            weakQuestions: { rules: [], signs: [], controls: [] },
+            documents: []
+        };
+
+        let currentModuleIndex = 0;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let wrongAnswers = [];
+        let selectedOption = null;
+        let quizCompleted = false;
+        let currentQuestions = [];
+        let weakQuestions = { rules: [], signs: [], controls: [] }; 
+      // ================================================================
+        //  SAVE / LOAD
+        // ================================================================
+        function saveAll() {
+            progress.modules = modulesData.map(m => ({ id: m.id, passed: m.passed, score: m.score, unlocked: m.unlocked }));
+            progress.weakQuestions = weakQuestions;
+            const data = { student, progress };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function loadAll() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    const data = JSON.parse(stored);
+                    student = data.student || student;
+                    progress = data.progress || progress;
+                    weakQuestions = progress.weakQuestions || { rules: [], signs: [], controls: [] };
+                    if (progress.modules) {
+                        modulesData.forEach((mod, idx) => {
+                            const p = progress.modules.find(m => m.id === mod.id);
+                            if (p) {
+                                mod.passed = p.passed || false;
+                                mod.score = p.score || null;
+                                mod.unlocked = p.unlocked || (idx === 0 ? true : false);
+                            }
+                        });
+                    }
+                } catch (e) { /* ignore */ }
+            }
+        }
+
+        // ================================================================
+        //  HELPERS
+        // ================================================================
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function buildQuestionList(moduleId) {
+            const module = modulesData.find(m => m.id === moduleId);
+            if (!module) return [];
+            let all = [...module.questions];
+            shuffleArray(all);
+            const weak = weakQuestions[moduleId] || [];
+            const weakSet = new Set(weak.map(q => q.question));
+            const weakList = [];
+            const rest = [];
+            all.forEach(q => {
+                if (weakSet.has(q.question)) {
+                    weakList.push(q);
+                } else {
+                    rest.push(q);
+                }
+            });
+            const uniqueWeak = [];
+            const seen = new Set();
+            weakList.forEach(q => {
+                if (!seen.has(q.question)) {
+                    seen.add(q.question);
+                    uniqueWeak.push(q);
+                }
+            });
+            let combined = [...uniqueWeak, ...rest];
+            while (combined.length < module.questions.length) {
+                const extra = module.questions[Math.floor(Math.random() * module.questions.length)];
+                if (!combined.find(q => q.question === extra.question)) {
+                    combined.push(extra);
+                }
+            }
+            const weakPart = combined.slice(0, uniqueWeak.length);
+            const restPart = combined.slice(uniqueWeak.length);
+            shuffleArray(restPart);
+            return [...weakPart, ...restPart];
+        }
+
+        // ================================================================
+        //  NAVIGATION
+        // ================================================================
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelector('.app-container').scrollTop = 0;
+        }
+
+        // ================================================================
+        //  ROLE & PROFILE
+        // ================================================================
+        function selectRole(role) {
+            student.role = role;
+            showScreen('profileScreen');
+        }
+
+        function uploadProfilePhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                student.photo = e.target.result;
+                document.getElementById('profilePhotoPreview').src = student.photo;
+                saveAll();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('profileName').value.trim();
+            const id = document.getElementById('profileId').value.trim();
+            const address = document.getElementById('profileAddress').value.trim();
+            const phone = document.getElementById('profilePhone').value.trim();
+
+            if (!name || !id || !address || !phone) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            student.name = name;
+            student.idNumber = id;
+            student.address = address;
+            student.phone = phone;
+
+            saveAll();
+            showDashboard();
+        }
+
+        function loadProfileData() {
+            document.getElementById('profileName').value = student.name || '';
+            document.getElementById('profileId').value = student.idNumber || '';
+            document.getElementById('profileAddress').value = student.address || '';
+            document.getElementById('profilePhone').value = student.phone || '';
+            if (student.photo) {
+                document.getElementById('profilePhotoPreview').src = student.photo;
+            }
+        }
+
+        // ================================================================
+        //  DASHBOARD
+        // ================================================================
+        function showDashboard() {
+            document.getElementById('dashUserName').textContent = student.name || 'Driver';
+            renderModules('moduleList');
+            showScreen('dashboardScreen');
+        }
+
+        function renderModules(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            modulesData.forEach((mod, index) => {
+                const div = document.createElement('div');
+                div.className = 'module-item';
+                if (!mod.unlocked) div.classList.add('locked');
+
+                let statusText = '',
+                    statusClass = '';
+                if (mod.passed) {
+                    statusText = '✅ Passed';
+                    statusClass = 'passed';
+                } else if (mod.unlocked) {
+                    statusText = '▶ Ready';
+                    statusClass = 'ready';
+                } else {
+                    statusText = '🔒 Locked';
+                    statusClass = 'locked';
+                }
+
+                div.innerHTML = `
+                    <div class="left">
+                        <h3>${mod.icon} ${mod.title}</h3>
+                        <p>${mod.desc}</p>
+                    </div>
+                    <span class="status ${statusClass}">${statusText}</span>
+                `;
+
+                if (mod.unlocked && !mod.passed) {
+                    div.style.cursor = 'pointer';
+                    div.onclick = () => {
+                        goToQuizMenu(index);
+                    };
+                }
+                container.appendChild(div);
+            });
+        }
+
+        function goToQuizMenu(startIndex) {
+            const container = document.getElementById('moduleListQuiz');
+            if (!container) return;
+            container.innerHTML = '';
+            modulesData.forEach((mod, index) => {
+                const div = document.createElement('div');
+                div.className = 'module-item';
+                if (!mod.unlocked) div.classList.add('locked');
+
+                let statusText = '',
+                    statusClass = '';
+                if (mod.passed) {
+                    statusText = '✅ Passed';
+                    statusClass = 'passed';
+                } else if (mod.unlocked) {
+                    statusText = '▶ Ready';
+                    statusClass = 'ready';
+                } else {
+                    statusText = '🔒 Locked';
+                    statusClass = 'locked';
+                }
+
+                div.innerHTML = `
+                    <div class="left">
+                        <h3>${mod.icon} ${mod.title}</h3>
+                        <p>${mod.desc}</p>
+                    </div>
+                    <span class="status ${statusClass}">${statusText}</span>
+                `;
+
+                if (mod.unlocked && !mod.passed) {
+                    div.style.cursor = 'pointer';
+                    div.onclick = () => startQuiz(index);
+                }
+                container.appendChild(div);
+            });
+            showScreen('quizMenuScreen');
+        }
+            // ================================================================
+        //  QUIZ ENGINE
+        // ================================================================
+        function startQuiz(index) {
+            currentModuleIndex = index;
+            currentQuestionIndex = 0;
+            score = 0;
+            wrongAnswers = [];
+            selectedOption = null;
+            quizCompleted = false;
+
+            const moduleId = modulesData[index].id;
+            currentQuestions = buildQuestionList(moduleId);
+
+            showScreen('quizScreen');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const module = modulesData[currentModuleIndex];
+            if (!currentQuestions || currentQuestions.length === 0) {
+                alert('No questions available.');
+                return;
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            if (!q) {
+                alert('Question not found.');
+                return;
+            }
+
+            document.getElementById('questionCounter').textContent =
+                `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+            document.getElementById('progressFill').style.width =
+                `${(currentQuestionIndex / currentQuestions.length) * 100}%`;
+            document.getElementById('questionText').textContent = q.question;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = `${letters[idx]}. ${opt}`;
+                div.dataset.index = idx;
+                div.onclick = () => selectOption(idx);
+                container.appendChild(div);
+            });
+
+            document.getElementById('nextBtn').style.display = 'none';
+            selectedOption = null;
+            document.querySelectorAll('.option').forEach(el => el.classList.remove('selected', 'correct', 'wrong'));
+        }
+
+        function selectOption(index) {
+            if (selectedOption !== null) return;
+
+            const module = modulesData[currentModuleIndex];
+            const q = currentQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+
+            selectedOption = index;
+            options.forEach((el, i) => {
+                if (i === q.correct) el.classList.add('correct');
+                else if (i === index && i !== q.correct) el.classList.add('wrong');
+                if (i === index) el.classList.add('selected');
+            });
+
+            if (index === q.correct) {
+                score++;
+                const moduleId = module.id;
+                const weak = weakQuestions[moduleId] || [];
+                const newWeak = weak.filter(w => w.question !== q.question);
+                weakQuestions[moduleId] = newWeak;
+            } else {
+                const moduleId = module.id;
+                if (!weakQuestions[moduleId]) weakQuestions[moduleId] = [];
+                if (!weakQuestions[moduleId].find(w => w.question === q.question)) {
+                    weakQuestions[moduleId].push(q);
+                }
+                wrongAnswers.push({
+                    question: q.question,
+                    yourAnswer: q.options[index],
+                    correctAnswer: q.options[q.correct]
+                });
+            }
+
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.style.display = 'block';
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                nextBtn.textContent = 'See Results';
+            } else {
+                nextBtn.textContent = 'Next →';
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            const module = modulesData[currentModuleIndex];
+            const total = currentQuestions.length;
+            const percent = Math.round((score / total) * 100);
+            module.score = percent;
+
+            const passed = percent >= 80;
+            module.passed = passed;
+
+            if (passed && currentModuleIndex < modulesData.length - 1) {
+                modulesData[currentModuleIndex + 1].unlocked = true;
+            }
+
+            saveAll();
+
+            showScreen('resultScreen');
+            document.getElementById('resultScore').textContent = percent;
+
+            const status = document.getElementById('resultStatus');
+            const msg = document.getElementById('resultMessage');
+            if (passed) {
+                status.className = 'result-status pass';
+                status.textContent = '✅ Passed!';
+                msg.textContent = 'Great job! You unlocked the next section.';
+            } else {
+                status.className = 'result-status fail';
+                status.textContent = '❌ Failed';
+                msg.textContent = `You need 80% to pass. You got ${percent}%. Review your weak questions below.`;
+            }
+
+            const container = document.getElementById('wrongListContainer');
+            container.innerHTML = '';
+            if (wrongAnswers.length > 0) {
+                const div = document.createElement('div');
+                div.className = 'wrong-list';
+                let html = `<p>⚠️ You got ${wrongAnswers.length} wrong (these will appear again):</p><ul>`;
+                wrongAnswers.forEach(w => {
+                    html +=
+                        `<li><strong>Q:</strong> ${w.question}<br><strong>Your answer:</strong> ${w.yourAnswer} &nbsp;|&nbsp; <strong>Correct:</strong> ${w.correctAnswer}</li>`;
+                });
+                html += '</ul>';
+                div.innerHTML = html;
+                container.appendChild(div);
+            } else {
+                container.innerHTML = '<p style="color:#16a34a; font-weight:600;">🌟 Perfect score! No mistakes.</p>';
+            }
+
+            const continueBtn = document.getElementById('resultContinueBtn');
+            if (passed) {
+                continueBtn.textContent = 'Continue to Dashboard →';
+            } else {
+                continueBtn.textContent = '🔄 Retry Quiz';
+            }
+            quizCompleted = true;
+        }
+
+        function continueAfterResult() {
+            if (quizCompleted) {
+                const module = modulesData[currentModuleIndex];
+                if (module.passed) {
+                    showDashboard();
+                } else {
+                    startQuiz(currentModuleIndex);
+                }
+            }
+        }
+
+        function confirmExitQuiz() {
+            if (confirm('Are you sure you want to leave the quiz? Your progress will be lost.')) {
+                showDashboard();
+            }
+      }
+           // ================================================================
+        //  FULL SUMMARY / CERTIFICATE
+        // ================================================================
+        function viewFullSummary() {
+            const container = document.getElementById('receiptContent');
+
+            const allPassed = modulesData.every(m => m.passed);
+
+            let html = '';
+
+            if (allPassed) {
+                const today = new Date();
+                const dateStr = today.toLocaleDateString('en-ZA', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                });
+
+                html = `
+                    <div class="certificate-box">
+                        <div class="logo-small">
+                            <span class="lime">YOUTH</span><span class="grey">DRIVE</span>
+                            <span class="brown">SOLUTIONS</span>
+                        </div>
+                        <div class="logo-divider" style="width:60px;margin:8px auto;"></div>
+
+                        <img class="cert-photo" src="${student.photo || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23E8EDE8%22/%3E%3Ctext x=%2250%22 y=%2258%22 font-size=%2236%22 text-anchor=%22middle%22 fill=%22%236b7280%22%3E📷%3C/text%3E%3C/svg%3E'}" alt="Student Photo" />
+
+                        <div class="cert-title">
+                            🎓 CERTIFICATE OF COMPLETION
+                        </div>
+
+                        <div class="cert-student">${student.name || 'Student'}</div>
+
+                        <div class="cert-details">
+                            <div class="row"><span class="label">ID Number</span><span class="value">${student.idNumber || 'N/A'}</span></div>
+                            <div class="row"><span class="label">Phone</span><span class="value">${student.phone || 'N/A'}</span></div>
+                            <div class="row"><span class="label">Role</span><span class="value">${student.role || 'Learner'}</span></div>
+                            <div class="row"><span class="label">Date Completed</span><span class="value">${dateStr}</span></div>
+                        </div>
+
+                        <div class="cert-modules">
+                            <div style="font-weight:700;color:#2F4F1A;margin-bottom:6px;">Module Scores:</div>
+                            ${modulesData.map(m => `
+                                <div class="mod-row">
+                                    <span>${m.icon} ${m.title}</span>
+                                    <span>${m.score !== null ? m.score + '%' : 'Not attempted'} <span class="${m.passed ? 'pass' : 'fail'}">${m.passed ? '✅ Passed' : '❌ Failed'}</span></span>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div style="margin:16px 0;">
+                            <span style="display:inline-block;background:#16a34a;color:white;padding:8px 24px;border-radius:30px;font-weight:700;font-size:16px;">
+                                ✅ QUALIFIED TO TAKE PRACTICAL TEST
+                            </span>
+                        </div>
+
+                        <div class="cert-footer">
+                            <div style="font-weight:600;color:#2F4F1A;">Issued by: YouthDrive Solutions</div>
+                            <div>www.youthdrivesolutions.co.za</div>
+                            <div style="margin-top:6px;">This certifies that the above-named student has successfully completed the YouthDrive theory course and is recommended to book their practical driving test.</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div style="padding:10px 0;">
+                        <div style="text-align:center;margin-bottom:16px;">
+                            <img src="${student.photo || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Crect width=%2280%22 height=%2280%22 fill=%22%23E8EDE8%22/%3E%3Ctext x=%2240%22 y=%2250%22 font-size=%2230%22 text-anchor=%22middle%22 fill=%22%236b7280%22%3E📷%3C/text%3E%3C/svg%3E'}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #7FBF3F;" />
+                            <div style="font-weight:700;font-size:20px;color:#2F4F1A;margin-top:8px;">${student.name || 'Student'}</div>
+                            <div style="font-size:14px;color:#6b7280;">${student.role || 'Learner'}</div>
+                        </div>
+                        <div style="border-top:1px solid #E8EDE8;padding-top:12px;">
+                            ${modulesData.map(m => `
+                                <div class="receipt-item">
+                                    <span class="label">${m.icon} ${m.title}</span>
+                                    <span class="value">${m.score !== null ? m.score + '%' : 'Not attempted'} ${m.passed ? '✅' : ''}</span>
+                                </div>
+                            `).join('')}
+                            <div style="text-align:center;padding:16px 0;font-size:14px;color:#6b7280;">
+                                ${allPassed ? '🎉 All modules passed! View your certificate above.' : '📖 Complete all modules to unlock your certificate.'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+            showScreen('receiptScreen');
+        }
+
+        // ================================================================
+        //  INIT
+        // ================================================================
+        loadAll();
+        loadProfileData();
+
+        if (student.name) {
+            showDashboard();
+        } else {
+            showScreen('welcomeScreen');
+        }
+
+        // Expose globals
+        window.showScreen = showScreen;
+        window.selectRole = selectRole;
+        window.uploadProfilePhoto = uploadProfilePhoto;
+        window.saveProfile = saveProfile;
+        window.goToQuizMenu = goToQuizMenu;
+        window.startQuiz = startQuiz;
+        window.nextQuestion = nextQuestion;
+        window.continueAfterResult = continueAfterResult;
+        window.confirmExitQuiz = confirmExitQuiz;
+        window.viewFullSummary = viewFullSummary;
+        window.renderModules = renderModules;
+        window.showDashboard = showDashboard;
+
+        console.log('🚗 YouthDrive Solutions – Final version with Home button on dashboard.');
+    </script>
+
+</body>
+</html>
