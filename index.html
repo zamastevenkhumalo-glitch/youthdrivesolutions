@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouthDrive Solutions | Driving School &amp; Licensing Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:#FFFFFF;color:#222;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+:root{
+  --lime:#7FBF3F;
+  --lime-dark:#5FA030;
+  --lime-soft:#F2FBE9;
+  --lime-tint:#E8F5DB;
+  --cream:#FBFDF8;
+  --grey:#6b7280;
+  --dark:#1f2937;
+  --border:#E8EDE8;
+  --red:#c52828;
+  --gold:#d4a02b;
+}
+
+/* ==== RED ROADSIDE STRIP ==== */
+.strip-red{background:var(--red);color:#fff;text-align:center;padding:10px 16px;font-weight:600;font-size:0.86rem}
+.strip-red a{color:#fff;text-decoration:none}
+
+/* ==== LIGHT HEADER ==== */
+.header{background:#fff;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.06);border-bottom:2px solid var(--lime-soft)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-bar{width:8px;height:42px;background:var(--lime);border-radius:4px}
+.logo-text{line-height:1;display:flex;flex-direction:column}
+.logo-l1{font-size:1.4rem;font-weight:900;letter-spacing:-0.5px;display:flex;align-items:baseline}
+.logo-l1 .y{color:var(--lime)}
+.logo-l1 .d{color:#8a9174;margin-left:2px}
+.logo-l2{color:var(--lime);font-size:0.58rem;font-weight:600;letter-spacing:6px;margin-top:4px}
+.burger{font-size:1.7rem;color:var(--dark);padding:6px}
+.burger:hover{color:var(--lime)}
+
+/* ==== MOBILE MENU ==== */
+.mm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1500;opacity:0;pointer-events:none;transition:.3s}
+.mm-overlay.open{opacity:1;pointer-events:auto}
+.mm{position:fixed;top:0;right:-100%;width:280px;height:100vh;background:#fff;box-shadow:-4px 0 30px rgba(0,0,0,0.15);z-index:2000;transition:.35s;padding:70px 24px 30px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.mm.open{right:0}
+.mm-x{position:absolute;top:16px;right:16px;font-size:1.5rem;color:#111;background:none;border:none;cursor:pointer}
+.mm a{color:#111;font-weight:600;font-size:0.98rem;padding:12px 0;border-bottom:1px solid #f0f0f0;transition:.2s;display:block}
+.mm a:hover{color:var(--lime);padding-left:6px}
+.mm .mm-cta{background:var(--lime);color:#fff;text-align:center;padding:14px;border-radius:30px;margin-top:12px;font-weight:700;border-bottom:none}
+
+/* ==== HERO SLIDER ==== */
+.hero{position:relative;height:92vh;min-height:600px;overflow:hidden;background:#eef6e6}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.slide.active{opacity:1}
+.slide::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.5)}
+.slide-c{position:relative;z-index:2;max-width:900px;color:#fff;padding:0 20px}
+.slide-c h1{font-size:clamp(1.9rem,6.5vw,3.5rem);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-1px;text-shadow:2px 2px 14px rgba(0,0,0,0.55)}
+.slide-c h1 .lime{color:var(--lime)}
+.slide-c p{font-size:clamp(0.95rem,2.3vw,1.15rem);color:#f0f0f0;max-width:660px;margin:0 auto 30px;text-shadow:1px 1px 8px rgba(0,0,0,0.5);line-height:1.7}
+.slide-btns{display:flex;flex-direction:column;gap:12px;align-items:center;max-width:270px;margin:0 auto}
+.btn{padding:15px 30px;border-radius:40px;font-size:0.92rem;font-weight:700;transition:.25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.4px;cursor:pointer;border:none;width:100%;text-align:center}
+.btn-lime{background:var(--lime);color:#fff;box-shadow:0 6px 20px rgba(127,191,63,0.4)}
+.btn-lime:hover{background:var(--lime-dark);transform:translateY(-2px)}
+.btn-white{background:#fff;color:var(--dark);border:2px solid #fff}
+.btn-white:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+.btn-outline{background:transparent;color:#fff;border:2px solid #fff}
+.btn-outline:hover{background:#fff;color:var(--dark)}
+.dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.45);border:none;padding:0;cursor:pointer;transition:.25s}
+.dot.on{background:var(--lime);width:26px;border-radius:5px}
+
+/* ==== SECTION BASE ==== */
+.sec{padding:70px 5%;max-width:1300px;margin:0 auto}
+.sec-title{text-align:center;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;color:var(--dark);margin-bottom:10px;letter-spacing:-0.3px}
+.sec-title .lime{color:var(--lime)}
+.div{width:60px;height:4px;background:var(--lime);border-radius:4px;margin:0 auto 20px}
+.sec-sub{text-align:center;color:var(--grey);font-size:0.98rem;max-width:660px;margin:0 auto 40px}
+
+/* ==== GET STARTED RADIO LIST ==== */
+.get-start{background:var(--lime-soft);padding:70px 5%}
+.gs-wrap{max-width:800px;margin:0 auto}
+.radio-list{background:#fff;border-radius:18px;overflow:hidden;border:2px solid var(--border);box-shadow:0 8px 24px rgba(127,191,63,0.08)}
+.radio-row{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid #f4f9ee;cursor:pointer;transition:.2s}
+.radio-row:last-child{border-bottom:none}
+.radio-row:hover{background:var(--lime-soft)}
+.radio-row input{width:20px;height:20px;accent-color:var(--lime);flex-shrink:0;cursor:pointer}
+.radio-row label{font-size:0.98rem;color:#222;font-weight:500;cursor:pointer;flex:1}
+
+/* ==== BOOK FORM ==== */
+.book{background:#fff;padding:70px 5%}
+.book-box{max-width:820px;margin:0 auto;background:#fff;padding:36px 28px;border-radius:22px;box-shadow:0 16px 44px rgba(0,0,0,0.06);border:2px solid var(--border)}
+.book-h{text-align:center;font-size:clamp(1.35rem,3.6vw,1.9rem);font-weight:900;color:var(--dark);margin-bottom:24px}
+.book-h .lime{color:var(--lime)}
+.step{font-size:1.1rem;font-weight:800;color:var(--dark);margin:20px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--lime)}
+.step:first-child{margin-top:0}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:0.78rem;font-weight:700;color:#333;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px}
+.field input,.field select,.field textarea{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:0.95rem;font-family:inherit;color:#222;background:#fff;transition:.2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--lime);background:var(--cream)}
+.price-show{background:var(--lime-soft);padding:16px 18px;border-radius:14px;margin:14px 0 18px;border-left:5px solid var(--lime);display:none}
+.price-show.on{display:block}
+.price-show h4{font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:4px}
+.price-show .pr{font-size:1.5rem;font-weight:900;color:var(--lime);margin-bottom:6px}
+.price-show p{font-size:0.84rem;color:var(--grey);line-height:1.5}
+.pay-opts{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.pay-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border:2px solid var(--border);border-radius:14px;cursor:pointer;transition:.2s;background:#fff}
+.pay-row:hover{border-color:var(--lime);background:var(--cream)}
+.pay-row input{width:18px;height:18px;accent-color:var(--lime);flex-shrink:0}
+.pay-row span{font-size:0.9rem;color:#222}
+.pay-row span strong{color:#111}
+.submit-btn{width:100%;padding:18px;background:var(--lime);color:#fff;border-radius:40px;font-size:1rem;font-weight:800;margin-top:16px;transition:.25s;letter-spacing:0.5px;text-transform:uppercase;border:none;cursor:pointer}
+.submit-btn:hover{background:var(--lime-dark);transform:translateY(-2px);box-shadow:0 10px 26px rgba(127,191,63,0.35)}
+.note{text-align:center;font-size:0.78rem;color:var(--grey);margin-top:12px}
+
+/* ==== PRICING ==== */
+.pricing{background:var(--cream);padding:70px 5%}
+.p-inner{max-width:1300px;margin:0 auto}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
+.tab{padding:10px 20px;border-radius:40px;border:2px solid var(--border);background:#fff;color:#333;font-weight:600;font-size:0.83rem;cursor:pointer;transition:.2s;font-family:inherit}
+.tab:hover{border-color:var(--lime)}
+.tab.on{background:var(--lime);color:#fff;border-color:var(--lime)}
+.panel{display:none;background:#fff;border-radius:20px;padding:24px 18px;border:2px solid var(--border);overflow-x:auto}
+.panel.on{display:block}
+.panel h3{font-size:1.1rem;font-weight:800;color:var(--dark);margin-bottom:6px}
+.panel p.lead{color:var(--grey);font-size:0.87rem;margin-bottom:18px;line-height:1.6}
+.ptab{width:100%;border-collapse:collapse;font-size:0.85rem;min-width:580px}
+.ptab th{background:var(--lime-soft);color:var(--dark);text-align:left;padding:12px 14px;font-weight:800;font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px}
+.ptab th:first-child{border-radius:10px 0 0 0}
+.ptab th:last-child{border-radius:0 10px 0 0}
+.ptab td{padding:12px 14px;border-bottom:1px solid var(--border);color:#222;background:#fff;vertical-align:top;line-height:1.5}
+.ptab tr:last-child td{border-bottom:none}
+.ptab .cost{color:var(--lime);font-weight:800;white-space:nowrap}
+.pay-cta{margin-top:20px;text-align:center}
+.pay-cta .btn{display:inline-flex;width:auto;padding:14px 32px}
+
+/* ==== WHAT WE OFFER ==== */
+.offer{background:var(--lime-soft);padding:70px 5%}
+.offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;max-width:1200px;margin:0 auto}
+.off-card{background:#fff;border:2px solid var(--border);border-radius:18px;padding:24px 20px;transition:.25s}
+.off-card:hover{transform:translateY(-4px);border-color:var(--lime);box-shadow:0 14px 36px rgba(127,191,63,0.12)}
+.off-card .ic{font-size:2rem;margin-bottom:12px;display:block}
+.off-card h3{font-size:1rem;font-weight:800;color:#111;margin-bottom:8px;line-height:1.3}
+.off-card p{font-size:0.86rem;color:var(--grey);line-height:1.6;margin-bottom:12px}
+.off-card a{color:var(--lime);font-weight:700;font-size:0.83rem;text-transform:uppercase;letter-spacing:0.4px}
+.info-dot{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--lime);color:#fff;font-size:0.6rem;font-weight:800;margin-left:5px}
+
+/* ==== GALLERY ==== */
+.gallery{background:#fff;padding:70px 0;overflow:hidden}
+.gallery .sec-title,.gallery .sec-sub,.gallery .div{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 5%}
+.gslider{overflow:hidden;margin-top:36px}
+.gtrack{display:flex;gap:16px;animation:scrollL 60s linear infinite;width:max-content}
+.gitem{width:260px;height:200px;border-radius:16px;overflow:hidden;flex-shrink:0;border:3px dotted var(--lime);background:#fff}
+.gitem img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.gitem:hover img{transform:scale(1.08)}
+@keyframes scrollL{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ==== CARS / TRUCKS ==== */
+.vehicles{background:var(--cream);padding:70px 0;overflow:hidden}
+.vehicles .sec-title,.vehicles .sec-sub,.vehicles .div{max-width:1200px;margin-left:auto;margin-right:auto;padding:0 5%}
+.cslider{overflow:hidden;margin-top:40px}
+.ctrack{display:flex;gap:18px;animation:scrollL 45s linear infinite;width:max-content}
+.ccard{width:285px;background:#fff;border-radius:20px;overflow:hidden;border:2px solid var(--border);box-shadow:0 8px 22px rgba(0,0,0,0.05);flex-shrink:0;transition:.3s}
+.ccard:hover{transform:translateY(-5px);border-color:var(--lime);box-shadow:0 18px 42px rgba(127,191,63,0.18)}
+.cimg{height:170px;overflow:hidden;background:var(--lime-soft)}
+.cimg img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.ccard:hover .cimg img{transform:scale(1.06)}
+.cbody{padding:16px 18px 20px}
+.cbody h4{font-size:1rem;font-weight:800;color:#111;margin-bottom:4px}
+.cbody .desc{font-size:0.8rem;color:var(--grey);margin-bottom:10px}
+.cbody .price{font-size:1.25rem;font-weight:900;color:var(--lime);margin-bottom:12px}
+.cbody .enq{display:inline-block;padding:9px 20px;background:var(--lime);color:#fff;border-radius:30px;font-size:0.78rem;font-weight:700;letter-spacing:0.4px;transition:.2s}
+.cbody .enq:hover{background:var(--lime-dark)}
+
+/* ==== APP BANNER (light lime) ==== */
+.app-banner{background:var(--lime-soft);padding:70px 5%;text-align:center;border-top:2px solid var(--lime-tint);border-bottom:2px solid var(--lime-tint)}
+.app-banner .pill{display:inline-block;background:var(--lime);color:#fff;padding:6px 20px;border-radius:30px;font-size:0.72rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.app-banner h2{font-size:clamp(1.5rem,4.2vw,2.2rem);font-weight:900;color:var(--dark);margin-bottom:14px;letter-spacing:-0.3px}
+.app-banner h2 .lime{color:var(--lime)}
+.app-banner p{color:#4a5a3a;max-width:620px;margin:0 auto 24px;font-size:0.96rem;line-height:1.7}
+.app-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.app-btns .btn{width:auto;padding:14px 32px}
+
+/* ==== CONTACT ==== */
+.contact{background:var(--lime-soft);padding:70px 5%}
+.contact .sec-title{color:var(--dark)}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;max-width:1100px;margin:0 auto}
+.ct-card{background:#fff;border:2px solid var(--border);border-radius:18px;padding:24px 20px;text-align:center;transition:.25s}
+.ct-card:hover{border-color:var(--lime);box-shadow:0 12px 30px rgba(127,191,63,0.12)}
+.ct-card .ic{font-size:1.9rem;color:var(--lime);margin-bottom:12px;display:block}
+.ct-card h4{font-size:0.9rem;font-weight:800;color:#111;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+.ct-card p{color:#4a5a3a;font-size:0.88rem;line-height:1.7}
+.ct-card a{color:var(--lime);font-weight:600}
+
+/* ==== FOOTER ==== */
+.footer{background:#fff;color:#666;text-align:center;padding:26px 5%;font-size:0.82rem;line-height:1.7;border-top:2px solid var(--lime-soft)}
+.footer .lime{color:var(--lime);font-weight:700}
+
+/* ==== FABS ==== */
+.fab-stack{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:998}
+.fab{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;box-shadow:0 8px 22px rgba(0,0,0,0.2);transition:.25s;cursor:pointer}
+.fab:hover{transform:scale(1.1)}
+.fab-wa{background:#25D366}
+.fab-call{background:var(--lime)}
+.ask-pill{position:fixed;bottom:88px;right:20px;background:var(--lime);color:#fff;padding:11px 20px;border-radius:30px;font-weight:700;font-size:0.84rem;box-shadow:0 6px 18px rgba(127,191,63,0.45);z-index:999;cursor:pointer;border:none;transition:.25s;font-family:inherit}
+.ask-pill:hover{background:var(--lime-dark);transform:scale(1.05)}
+
+/* ==== CHAT ==== */
+.chat{position:fixed;bottom:20px;right:20px;width:340px;max-width:92%;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.25);z-index:1001;display:none;flex-direction:column}
+.chat.open{display:flex}
+.chat-h{background:var(--lime);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:800}
+.chat-h .who{display:flex;align-items:center;gap:10px}
+.chat-h .av{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--lime);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.chat-h .x{background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer}
+.chat-b{padding:16px;height:290px;overflow-y:auto;background:var(--lime-soft);display:flex;flex-direction:column;gap:10px;font-size:0.9rem}
+.msg{max-width:82%;padding:11px 14px;border-radius:16px;line-height:1.5}
+.msg-bot{background:#fff;color:#222;border:1px solid var(--border);border-bottom-left-radius:4px}
+.msg-user{background:var(--lime);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-q{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;background:var(--lime-soft);border-top:1px solid var(--border)}
+.chat-q button{padding:7px 12px;border-radius:20px;border:2px solid var(--lime);background:#fff;color:var(--lime);font-weight:600;font-size:0.74rem;cursor:pointer;font-family:inherit}
+.chat-q button:hover{background:var(--lime);color:#fff}
+.chat-f{display:flex;border-top:1px solid var(--border);background:#fff}
+.chat-f input{flex:1;padding:13px;border:none;outline:none;font-size:0.88rem;font-family:inherit}
+.chat-f button{background:var(--lime);color:#fff;font-weight:700;padding:0 18px;cursor:pointer;border:none;font-family:inherit}
+
+/* ==== RESPONSIVE ==== */
+@media(max-width:700px){
+.strip-red{font-size:0.8rem;padding:8px 12px}
+.header{padding:12px 5%}
+.logo-l1{font-size:1.15rem}
+.logo-l2{font-size:0.5rem;letter-spacing:5px}
+.sec,.get-start,.book,.pricing,.offer,.contact{padding:55px 5%}
+.book-box{padding:24px 18px}
+.slide-c h1{font-size:1.5rem}
+.gitem{width:200px;height:150px}
+.ccard{width:245px}
+.chat{width:calc(100% - 24px);right:12px;bottom:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== RED ROADSIDE STRIP ===== -->
+<div class="strip-red">
+  🚨 24/7 Roadside Assistance — <a href="tel:+27631904941">063 190 4941</a>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-bar"></div>
+    <div class="logo-text">
+      <div class="logo-l1"><span class="y">YOUTH</span><span class="d">DRIVE</span></div>
+      <div class="logo-l2">SOLUTIONS</div>
+    </div>
+  </div>
+  <button class="burger" onclick="openMenu()" aria-label="Menu">☰</button>
+</header>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mm-overlay" id="mmOverlay" onclick="closeMenu()"></div>
+<div class="mm" id="mm">
+  <button class="mm-x" onclick="closeMenu()">✕</button>
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#start" onclick="closeMenu()">Get Started</a>
+  <a href="#book" onclick="closeMenu()">Book &amp; Pay</a>
+  <a href="#lesson" onclick="closeMenu()">Book a Lesson</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#offer" onclick="closeMenu()">What We Offer</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#cars" onclick="closeMenu()">Cars for Sale</a>
+  <a href="#trucks" onclick="closeMenu()">Trucks for Sale</a>
+  <a href="#app" onclick="closeMenu()">Tutorial App</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="app.html" class="mm-cta">🚀 Launch App</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="slide active" style="background-image:url('fleet1.jpg')">
+    <div class="slide-c">
+      <h1>Find a <span class="lime">way forward</span></h1>
+      <p>From learner's licences to professional driver's permits, change of ownership, Q4U registrations, roadworthy assistance and 24/7 roadside support.</p>
+      <div class="slide-btns">
+        <a href="#start" class="btn btn-lime">Get Started →</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('fleet2.jpg')">
+    <div class="slide-c">
+      <h1>Learner's <span class="lime">Licence Training</span></h1>
+      <p>Master the K53 theory with 270 real questions in our free app — Rules, Signs and Vehicle Control.</p>
+      <div class="slide-btns">
+        <a href="#start" class="btn btn-lime">Get Started →</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('fleet3.jpg')">
+    <div class="slide-c">
+      <h1>Code 8 (EB) <span class="lime">Driver Training</span></h1>
+      <p>Practical lessons with registered instructors in dual-control vehicles. Road-ready in weeks.</p>
+      <div class="slide-btns">
+        <a href="#start" class="btn btn-lime">Get Started →</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('fleet4.jpg')">
+    <div class="slide-c">
+      <h1>Code 10 &amp; Code 14 <span class="lime">Truck Training</span></h1>
+      <p>Heavy vehicle training for professional truck drivers. Industry-recognised certification.</p>
+      <div class="slide-btns">
+        <a href="#start" class="btn btn-lime">Get Started →</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('fleet5.jpg')">
+    <div class="slide-c">
+      <h1>Queue For You <span class="lime">Registrations</span></h1>
+      <p>Skip the queue — we handle change of ownership, registrations and all licensing paperwork.</p>
+      <div class="slide-btns">
+        <a href="#start" class="btn btn-lime">Get Started →</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('fleet6.jpg')">
+    <div class="slide-c">
+      <h1>Roadworthy &amp; <span class="lime">Engine Clearance</span></h1>
+      <p>Fast, reliable roadworthy testing, engine clearance and traffic registration certificates.</p>
+      <div class="slide-btns">
+        <a href="#start" class="btn btn-lime">Get Started →</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('fleet7.jpg')">
+    <div class="slide-c">
+      <h1>Buy a Car <span class="lime">or Truck</span></h1>
+      <p>Low-cost, quality vehicles for students and urban businesspeople. Trade-ins accepted.</p>
+      <div class="slide-btns">
+        <a href="#cars" class="btn btn-lime">View Cars</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('fleet8.jpg')">
+    <div class="slide-c">
+      <h1>Auto Parts <span class="lime">&amp; Tyres</span></h1>
+      <p>Genuine parts, quick fitting and a mobile workshop. Order online or visit our Brixton branch.</p>
+      <div class="slide-btns">
+        <a href="#start" class="btn btn-lime">Get Started →</a>
+        <a href="tel:+27631904941" class="btn btn-white">📞 Call Now</a>
+        <button class="btn btn-outline" onclick="openChat()">💬 Ask Mr Lime</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dots" id="dots"></div>
+</section>
+
+<!-- ===== GET STARTED ===== -->
+<section class="get-start" id="start">
+  <div class="gs-wrap">
+    <div class="sec-title">Get <span class="lime">Started</span></div>
+    <div class="div"></div>
+    <p class="sec-sub">Choose a service to begin. Everything is clickable.</p>
+    <div class="radio-list">
+      <div class="radio-row" onclick="pickService('learner-booking')"><input type="radio" name="gs" id="gs1"><label for="gs1">Learner's / Driver Training</label></div>
+      <div class="radio-row" onclick="pickService('card-issue')"><input type="radio" name="gs" id="gs2"><label for="gs2">Q4U Registration</label></div>
+      <div class="radio-row" onclick="pickService('prdp')"><input type="radio" name="gs" id="gs3"><label for="gs3">PrDP Assistance</label></div>
+      <div class="radio-row" onclick="pickService('duplicate')"><input type="radio" name="gs" id="gs4"><label for="gs4">Change of Ownership</label></div>
+      <div class="radio-row" onclick="pickService('renewal')"><input type="radio" name="gs" id="gs5"><label for="gs5">Licence Renewal</label></div>
+      <div class="radio-row" onclick="pickService('code-c1')"><input type="radio" name="gs" id="gs6"><label for="gs6">Fleet Management</label></div>
+      <div class="radio-row" onclick="pickService('code-ec1')"><input type="radio" name="gs" id="gs7"><label for="gs7">Engine Clearance</label></div>
+      <div class="radio-row" onclick="pickService('code-c1')"><input type="radio" name="gs" id="gs8"><label for="gs8">Traffic Registration Clearance</label></div>
+      <div class="radio-row" onclick="pickService('card-issue')"><input type="radio" name="gs" id="gs9"><label for="gs9">Roadworthy Assistance</label></div>
+      <div class="radio-row" onclick="pickService('duplicate')"><input type="radio" name="gs" id="gs10"><label for="gs10">Tyres &amp; Parts</label></div>
+      <div class="radio-row" onclick="pickService('duplicate')"><input type="radio" name="gs" id="gs11"><label for="gs11">Roadside</label></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOOK & PAY ===== -->
+<section class="book" id="book">
+  <div class="book-box">
+    <div class="book-h">Get Started — <span class="lime">Book &amp; Pay Online</span></div>
+
+    <form id="bookForm" onsubmit="submitBook(event)">
+
+      <div class="step">1. Select Service</div>
+      <div class="field">
+        <select id="serviceType" required onchange="updatePrice()">
+          <option value="">-- Choose Service --</option>
+          <option value="learner-booking">Learner's Licence Booking &amp; Test - R75 to R150</option>
+          <option value="learner-issue">Learner's Licence Issue Fee - R60 to R90</option>
+          <option value="code8">Driving Licence Test Code B (Code 8) - R156 to R180</option>
+          <option value="card-issue">Driving Licence Card Issue - R228 to R300</option>
+          <option value="renewal">Driving Licence Renewal - R140 to R300</option>
+          <option value="temp-licence">Temporary Driving Licence - R80 to R100</option>
+          <option value="prdp">Professional Driving Permit (PrDP) - R100 to R220</option>
+          <option value="duplicate">Duplicate Licence Card (Lost/Stolen) - R250 to R300</option>
+          <option value="code-a1">Code A1 - Light Motorcycle - Enquire</option>
+          <option value="code-a">Code A - Heavy Motorcycle - Enquire</option>
+          <option value="code-c1">Code C1 - Medium Heavy Vehicle - Enquire</option>
+          <option value="code-c">Code C - Heavy Motor Vehicle - Enquire</option>
+          <option value="code-ec1">Code EC1 - Heavy Vehicle + Trailer - Enquire</option>
+        </select>
+      </div>
+
+      <div class="price-show" id="priceBox">
+        <h4>Estimated Fee</h4>
+        <div class="pr" id="priceDisplay"></div>
+        <p id="requirements"></p>
+      </div>
+
+      <div class="step">2. Your Details</div>
+      <div class="field"><input type="text" id="fullName" placeholder="Full Name as per ID" required></div>
+      <div class="field"><input type="text" id="idNumber" placeholder="ID Number" required></div>
+      <div class="field"><input type="tel" id="phone" placeholder="Cell Number" required></div>
+      <div class="field"><input type="email" id="email" placeholder="Email Address"></div>
+      <div class="field">
+        <select id="province" required>
+          <option value="">Select Province</option>
+          <option>Gauteng</option>
+          <option>KwaZulu-Natal</option>
+          <option>Western Cape</option>
+          <option>Eastern Cape</option>
+          <option>Limpopo</option>
+          <option>Mpumalanga</option>
+          <option>North West</option>
+          <option>Free State</option>
+          <option>Northern Cape</option>
+        </select>
+      </div>
+      <div class="field"><input type="text" id="address" placeholder="Physical Address" required></div>
+      <div class="step">3. Preferred Booking Date</div>
+      <div class="field"><input type="date" id="bookDate" required></div>
+      <div class="field"><textarea id="notes" rows="3" placeholder="Any special notes?"></textarea></div>
+
+      <div class="step">4. Payment Option</div>
+      <div class="pay-opts">
+        <label class="pay-row"><input type="radio" name="payment" value="Pay Online Now" required><span><strong>Pay Online Now</strong> — PayFast / Yoco</span></label>
+        <label class="pay-row"><input type="radio" name="payment" value="Pay at DLTC"><span><strong>Pay at DLTC</strong> — We book, you pay at testing centre</span></label>
+        <label class="pay-row"><input type="radio" name="payment" value="E-Wallet / EFT"><span><strong>E-Wallet / EFT</strong> — We'll send details on WhatsApp</span></label>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Booking Request</button>
+      <p class="note">By submitting you agree we may contact you on WhatsApp. Final fees confirmed at DLTC.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== BOOK A LESSON ===== -->
+<section class="get-start" id="lesson">
+  <div class="book-box">
+    <div class="book-h">Book Your <span class="lime">Driving Lesson</span></div>
+
+    <form id="lessonForm" onsubmit="submitLesson(event)">
+      <div class="step">Your Details</div>
+      <div class="field"><input type="text" id="lsName" placeholder="Your Name *" required></div>
+      <div class="field"><input type="email" id="lsEmail" placeholder="Your Email"></div>
+      <div class="field"><input type="tel" id="lsPhone" placeholder="Phone Number *" required></div>
+      <div class="field">
+        <select id="lsExp" required>
+          <option value="">Your Experience</option>
+          <option>Beginner</option>
+          <option>Some Experience</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+      </div>
+      <div class="field">
+        <select id="lsVeh" required>
+          <option value="">Vehicle Type</option>
+          <option>Code 8 (EB) — Car</option>
+          <option>Code 10 (C1) — Medium Truck</option>
+          <option>Code 14 (EC) — Heavy Truck</option>
+          <option>Learner's Licence Only</option>
+        </select>
+      </div>
+      <div class="field"><input type="date" id="lsDate" required></div>
+      <div class="field"><input type="time" id="lsTime" required></div>
+      <button type="submit" class="submit-btn">📅 Book Now</button>
+      <p class="note">You'll be redirected to WhatsApp to confirm your booking.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing" id="pricing">
+  <div class="p-inner">
+    <div class="sec-title">Online <span class="lime">Payment</span> &amp; Pricing</div>
+    <div class="div"></div>
+    <p class="sec-sub">All government fees and YouthDrive service fees. Choose a category below.</p>
+
+    <div class="tabs">
+      <button class="tab on" onclick="showTab(event,'tab1')">🚗 Driver's Licence</button>
+      <button class="tab" onclick="showTab(event,'tab2')">🚙 Vehicle Services</button>
+      <button class="tab" onclick="showTab(event,'tab3')">📄 Documents</button>
+      <button class="tab" onclick="showTab(event,'tab4')">📝 Forms &amp; Notes</button>
+    </div>
+
+    <div class="panel on" id="tab1">
+      <h3>Driver's Licence &amp; Learner's Licence Fees</h3>
+      <p class="lead">Fees are government-set and differ slightly by province. YouthDrive service fee may be added where we book or handle paperwork for you.</p>
+      <table class="ptab">
+        <thead><tr><th>Service</th><th>Estimated Cost</th><th>Documents Required</th></tr></thead>
+        <tbody>
+          <tr><td>Learner's Licence Booking &amp; Test</td><td class="cost">R95 – R320</td><td>ID book/card, proof of address, photos, booking fee, LL1 form</td></tr>
+          <tr><td>Learner's Licence Issue Fee</td><td class="cost">R50 – R120</td><td>Booking receipt, ID</td></tr>
+          <tr><td>Driving Licence Test (Code 8)</td><td class="cost">R156 – R300</td><td>Learner's licence, ID, proof of address, photos, DL1 form</td></tr>
+          <tr><td>Driving Licence Card Issue</td><td class="cost">R250 – R350</td><td>Passed test results, fingerprints, payment receipt</td></tr>
+          <tr><td>Temporary Driving Licence</td><td class="cost">R80 – R120</td><td>ID, existing licence/receipt</td></tr>
+          <tr><td>Renewal of Driving Licence Card</td><td class="cost">R250 – R350</td><td>ID, old licence card, proof of address, eye test</td></tr>
+          <tr><td>Replacement of Lost/Stolen Licence</td><td class="cost">R250 – R500</td><td>Affidavit, ID, proof of address</td></tr>
+          <tr><td>Professional Driving Permit (PrDP)</td><td class="cost">R120 – R350</td><td>ID, licence, medical &amp; police clearance</td></tr>
+          <tr><td>Conversion of Foreign Licence</td><td class="cost">R500+</td><td>Passport, permit/visa, foreign licence, translations where applicable</td></tr>
+        </tbody>
+      </table>
+      <div class="pay-cta"><a href="#book" class="btn btn-lime">Pay &amp; Book Now</a></div>
+    </div>
+    <div class="panel" id="tab2">
+      <h3>Vehicle Registration &amp; Licensing Fees</h3>
+      <p class="lead">Vehicle licence fees vary widely depending on province, weight, vehicle type and any outstanding penalties.</p>
+      <table class="ptab">
+        <thead><tr><th>Service</th><th>Estimated Cost</th><th>Documents Required</th></tr></thead>
+        <tbody>
+          <tr><td>Vehicle Registration (New Vehicle)</td><td class="cost">R300 – R1,500</td><td>ID, proof of address, invoice, NaTIS documents, roadworthy</td></tr>
+          <tr><td>Change of Ownership</td><td class="cost">R150 – R500</td><td>ID, proof of address, NCO form, registration certificate</td></tr>
+          <tr><td>Vehicle Licence Renewal</td><td class="cost">By weight &amp; province</td><td>ID copy, proof of address, licence renewal notice</td></tr>
+          <tr><td>Duplicate Registration Certificate</td><td class="cost">R150 – R300</td><td>Affidavit, ID</td></tr>
+          <tr><td>Traffic Register Number (TRN)</td><td class="cost">R150 – R300</td><td>Passport/permit/company docs</td></tr>
+          <tr><td>Roadworthy Certificate</td><td class="cost">R500 – R1,200</td><td>Vehicle, ID, registration papers</td></tr>
+          <tr><td>Personalised Number Plates</td><td class="cost">R1,000 – R15,000</td><td>ID, registration papers</td></tr>
+          <tr><td>Deregistration of Vehicle</td><td class="cost">Small admin fee</td><td>ID, registration papers</td></tr>
+        </tbody>
+      </table>
+      <div class="pay-cta"><a href="#book" class="btn btn-lime">Pay &amp; Book Now</a></div>
+    </div>
+
+    <div class="panel" id="tab3">
+      <h3>Common Documents Required at Most DLTCs</h3>
+      <p class="lead">Almost every DLTC requires the following. Bring originals plus certified copies.</p>
+      <table class="ptab">
+        <thead><tr><th>Document</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>South African ID / Passport</td><td>Original + certified copy</td></tr>
+          <tr><td>Proof of Residential Address</td><td>Utility bill or affidavit if bill not in your name</td></tr>
+          <tr><td>Passport / ID Photos</td><td>2 identical colour photos</td></tr>
+          <tr><td>Completed Application Forms</td><td>LL1, DL1, NCO, etc.</td></tr>
+          <tr><td>Existing Licence or Vehicle Papers</td><td>Where applicable</td></tr>
+          <tr><td>Booking / Payment Receipt</td><td>Proof of payment</td></tr>
+          <tr><td>Ward Councillor Confirmation Letter</td><td>Required if living in an informal settlement</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel" id="tab4">
+      <h3>Forms, Codes &amp; Important Notes</h3>
+      <table class="ptab">
+        <thead><tr><th>Form Code</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>LL1</td><td>Learner's licence application</td></tr>
+          <tr><td>DL1</td><td>Driving licence application / renewal</td></tr>
+          <tr><td>NCP</td><td>Change of address / particulars</td></tr>
+          <tr><td>RLV</td><td>Vehicle registration / licensing</td></tr>
+          <tr><td>NCO</td><td>Notification of change of ownership</td></tr>
+          <tr><td>MC</td><td>Medical certificate (65+ or PrDP)</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:18px;font-size:0.85rem;color:var(--grey);line-height:1.7"><strong>Please note:</strong> Fees differ between municipalities and provinces. Some DLTCs only accept card payments. Booking systems and available slots vary. Gauteng encourages online bookings through NaTIS. Many services require FICA-compliant proof of address.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT WE OFFER ===== -->
+<section class="offer" id="offer">
+  <div class="sec-title">What We <span class="lime">Offer</span></div>
+  <div class="div"></div>
+  <p class="sec-sub">Everything a driver needs — under one roof, in Brixton, Johannesburg.</p>
+
+  <div class="offer-grid">
+    <div class="off-card"><span class="ic">📘</span><h3>Learner's Licence</h3><p>K53 theory preparation with our free app and classroom support.</p><a href="#book">Book Now →</a></div>
+    <div class="off-card"><span class="ic">🚗</span><h3>Driver Training</h3><p>Code 8, Code 10 and Code 14 training with registered instructors.</p><a href="#book">Get Started →</a></div>
+    <div class="off-card"><span class="ic">🎓</span><h3>Professional Driver's Permits</h3><p>PrDP applications for taxi, bus and truck drivers.</p><a href="#book">Apply →</a></div>
+    <div class="off-card"><span class="ic">📁</span><h3>Queue For You Registrations</h3><p>We stand in the queue so you don't have to.</p><a href="#book">Get Registered →</a></div>
+    <div class="off-card"><span class="ic">🔄</span><h3>Change of Ownership <span class="info-dot">i</span></h3><p>Hassle-free vehicle ownership transfer. We handle all paperwork.</p><a href="#book">Start Transfer →</a></div>
+    <div class="off-card"><span class="ic">♻️</span><h3>Licence Renewal Assistance</h3><p>We manage your driver's and vehicle licence renewals — no queues.</p><a href="#book">Renew Now →</a></div>
+    <div class="off-card"><span class="ic">⚙️</span><h3>Engine Clearance</h3><p>Get your engine change legally certified for roadworthy registration.</p><a href="#book">Book Clearance →</a></div>
+    <div class="off-card"><span class="ic">🛡️</span><h3>Traffic Registration Clearance</h3><p>Clearance certificates for registration, permits and cross-border travel.</p><a href="#book">Get Clearance →</a></div>
+    <div class="off-card"><span class="ic">✅</span><h3>Roadworthy Assistance</h3><p>Prepare, test and certify your vehicle's roadworthiness. Fast and reliable.</p><a href="#book">Request Roadworthy →</a></div>
+    <div class="off-card"><span class="ic">🔧</span><h3>Vehicles, Tyres &amp; Auto Parts</h3><p>Genuine parts, quick fitting, mobile workshop. Order online.</p><a href="#cars">Shop Now →</a></div>
+  </div>
+</section>
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="gallery">
+  <div class="sec-title">Trusted by <span class="lime">Students in Johannesburg</span></div>
+  <div class="div"></div>
+  <p class="sec-sub">Real moments from our training grounds, branded fleet and student graduations.</p>
+
+  <div class="gslider">
+    <div class="gtrack">
+      <div class="gitem"><img src="gallery1.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery2.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery3.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery4.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery5.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery6.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery7.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery8.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery9.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery10.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery11.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery12.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery13.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery14.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery15.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery1.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery2.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery3.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery4.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery5.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery6.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery7.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery8.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery9.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery10.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery11.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery12.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery13.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery14.jpg" alt=""></div>
+      <div class="gitem"><img src="gallery15.jpg" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CARS ON SALE ===== -->
+<section class="vehicles" id="cars">
+  <div class="sec-title">Cars <span class="lime">On Sale</span></div>
+  <div class="div"></div>
+  <p class="sec-sub">Low-cost, quality vehicles for students and young professionals. Trade-ins welcome.</p>
+
+  <div class="cslider">
+    <div class="ctrack">
+      <div class="ccard"><div class="cimg"><img src="car1.jpg" alt="Toyota Corolla Quest"></div><div class="cbody"><h4>Toyota Corolla Quest</h4><p class="desc">Reliable · Fuel-efficient · 2018</p><div class="price">R89 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Toyota%20Corolla%20Quest">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car2.jpg" alt="VW Polo Vivo"></div><div class="cbody"><h4>VW Polo Vivo</h4><p class="desc">Student friendly · 2020</p><div class="price">R74 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20VW%20Polo%20Vivo">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car3.jpg" alt="Hyundai i10"></div><div class="cbody"><h4>Hyundai i10</h4><p class="desc">Affordable · Great first car · 2019</p><div class="price">R69 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Hyundai%20i10">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car4.jpg" alt="Toyota Etios"></div><div class="cbody"><h4>Toyota Etios</h4><p class="desc">Compact · Economical · 2017</p><div class="price">R79 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Toyota%20Etios">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car5.jpg" alt="Renault Kwid"></div><div class="cbody"><h4>Renault Kwid</h4><p class="desc">Stylish · Light on fuel · 2021</p><div class="price">R84 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Renault%20Kwid">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car6.jpg" alt="Kia Picanto"></div><div class="cbody"><h4>Kia Picanto</h4><p class="desc">Safe · Reliable · 2020</p><div class="price">R94 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Kia%20Picanto">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car1.jpg" alt=""></div><div class="cbody"><h4>Toyota Corolla Quest</h4><p class="desc">Reliable · Fuel-efficient · 2018</p><div class="price">R89 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Toyota%20Corolla%20Quest">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car2.jpg" alt=""></div><div class="cbody"><h4>VW Polo Vivo</h4><p class="desc">Student friendly · 2020</p><div class="price">R74 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20VW%20Polo%20Vivo">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car3.jpg" alt=""></div><div class="cbody"><h4>Hyundai i10</h4><p class="desc">Affordable · 2019</p><div class="price">R69 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Hyundai%20i10">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car4.jpg" alt=""></div><div class="cbody"><h4>Toyota Etios</h4><p class="desc">Compact · 2017</p><div class="price">R79 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Toyota%20Etios">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car5.jpg" alt=""></div><div class="cbody"><h4>Renault Kwid</h4><p class="desc">Stylish · 2021</p><div class="price">R84 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Renault%20Kwid">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="car6.jpg" alt=""></div><div class="cbody"><h4>Kia Picanto</h4><p class="desc">Safe · 2020</p><div class="price">R94 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Kia%20Picanto">Enquire →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUCKS ===== -->
+<section class="vehicles" id="trucks">
+  <div class="sec-title">Urban Business <span class="lime">Trucks</span></div>
+  <div class="div"></div>
+  <p class="sec-sub">Reliable trucks for delivery, logistics and small business owners.</p>
+
+  <div class="cslider">
+    <div class="ctrack">
+      <div class="ccard"><div class="cimg"><img src="truck1.jpg" alt="Isuzu NPR"></div><div class="cbody"><h4>Isuzu NPR</h4><p class="desc">1.5–2 ton · Diesel · 2019</p><div class="price">R189 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Isuzu%20NPR">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck2.jpg" alt="Tata Ultra"></div><div class="cbody"><h4>Tata Ultra</h4><p class="desc">Heavy duty · 2020</p><div class="price">R229 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Tata%20Ultra">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck3.jpg" alt="Hino Dutro"></div><div class="cbody"><h4>Hino Dutro</h4><p class="desc">Reliable · 2018</p><div class="price">R249 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Hino%20Dutro">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck4.jpg" alt="Isuzu FTR"></div><div class="cbody"><h4>Isuzu FTR</h4><p class="desc">Medium truck · 2021</p><div class="price">R279 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Isuzu%20FTR">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck5.jpg" alt="FAW 8.140"></div><div class="cbody"><h4>FAW 8.140</h4><p class="desc">Light truck · 2019</p><div class="price">R199 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20FAW%208.140">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck6.jpg" alt="JAC X200"></div><div class="cbody"><h4>JAC X200</h4><p class="desc">Fleet favourite · 2020</p><div class="price">R219 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20JAC%20X200">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck1.jpg" alt=""></div><div class="cbody"><h4>Isuzu NPR</h4><p class="desc">1.5–2 ton · 2019</p><div class="price">R189 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Isuzu%20NPR">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck2.jpg" alt=""></div><div class="cbody"><h4>Tata Ultra</h4><p class="desc">Heavy duty · 2020</p><div class="price">R229 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Tata%20Ultra">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck3.jpg" alt=""></div><div class="cbody"><h4>Hino Dutro</h4><p class="desc">Reliable · 2018</p><div class="price">R249 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Hino%20Dutro">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck4.jpg" alt=""></div><div class="cbody"><h4>Isuzu FTR</h4><p class="desc">Medium truck · 2021</p><div class="price">R279 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20Isuzu%20FTR">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck5.jpg" alt=""></div><div class="cbody"><h4>FAW 8.140</h4><p class="desc">Light truck · 2019</p><div class="price">R199 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20FAW%208.140">Enquire →</a></div></div>
+      <div class="ccard"><div class="cimg"><img src="truck6.jpg" alt=""></div><div class="cbody"><h4>JAC X200</h4><p class="desc">Fleet favourite · 2020</p><div class="price">R219 999</div><a class="enq" href="https://wa.me/27631904941?text=Interested%20in%20JAC%20X200">Enquire →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APP BANNER ===== -->
+<section class="app-banner" id="app">
+  <span class="pill">Free Forever</span>
+  <h2>Get Our <span class="lime">Tutorial App</span></h2>
+  <p>270 real K53 questions, real road sign SVGs, vehicle control icons and a completion certificate. Works offline — no login required.</p>
+  <div class="app-btns">
+    <a href="app.html" class="btn btn-lime">🚀 Open the App</a>
+    <a href="app.html" class="btn btn-white" style="background:#fff;color:var(--dark);border:2px solid var(--lime)">⬇️ Download</a>
+  </div>
+</section>
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="sec-title">Get In <span class="lime">Touch</span></div>
+  <div class="div"></div>
+  <p class="sec-sub">Ready to start your journey? Reach out — we're here to help.</p>
+
+  <div class="contact-grid">
+    <div class="ct-card"><span class="ic">📞</span><h4>Phone / WhatsApp</h4><p><a href="tel:+27631904941">063 190 4941</a></p></div>
+    <div class="ct-card"><span class="ic">📍</span><h4>Address</h4><p>78 Carolina Street<br>Brixton, Johannesburg<br>Gauteng, 2198</p></div>
+    <div class="ct-card"><span class="ic">📧</span><h4>Email</h4><p><a href="mailto:info@youthdrivesolutions.co.za">info@youthdrivesolutions.co.za</a></p></div>
+    <div class="ct-card"><span class="ic">🌐</span><h4>Online</h4><p>www.youthdrivesolutions.co.za</p></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  © 2026 <span class="lime">YouthDrive Solutions</span>. All Rights Reserved. | Reg. No. 2021/661124/07<br>
+  78 Carolina Street, Brixton, Johannesburg, Gauteng, 2198 · 063 190 4941
+</div>
+
+<!-- ===== FLOATING BUTTONS ===== -->
+<button class="ask-pill" onclick="openChat()">💬 Ask Mr Lime</button>
+<div class="fab-stack">
+  <a href="https://wa.me/27631904941?text=Hi%20YouthDrive%2C%20I%27m%20interested%20in%20training" class="fab fab-wa" target="_blank">💬</a>
+  <a href="tel:+27631904941" class="fab fab-call">📞</a>
+</div>
+
+<!-- ===== CHAT ===== -->
+<div class="chat" id="chatWin">
+  <div class="chat-h">
+    <div class="who"><div class="av">🍋</div><span>Mr Lime</span></div>
+    <button class="x" onclick="closeChat()">✕</button>
+  </div>
+  <div class="chat-b" id="chatBody">
+    <div class="msg msg-bot">👋 Hi! I'm Mr Lime — YouthDrive's assistant. How can I help you today?</div>
+  </div>
+  <div class="chat-q">
+    <button onclick="quick('Learner Licence')">Learner's Licence</button>
+    <button onclick="quick('Driver Training')">Driver Training</button>
+    <button onclick="quick('Book a lesson')">Book a Lesson</button>
+    <button onclick="quick('Buy a car')">Buy a Car</button>
+    <button onclick="quick('Roadside assistance')">Roadside Help</button>
+    <button onclick="quick('Contact')">Contact Info</button>
+  </div>
+  <div class="chat-f">
+    <input id="chatInput" placeholder="Type your question…" onkeypress="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()">Send</button>
+  </div>
+</div>
+
+<script>
+/* SLIDER */
+var slides = document.querySelectorAll('.slide');
+var dotsBox = document.getElementById('dots');
+var cur = 0, timer = null;
+
+(function buildDots(){
+  for (var i = 0; i < slides.length; i++){
+    var b = document.createElement('button');
+    b.className = 'dot' + (i === 0 ? ' on' : '');
+    b.type = 'button';
+    (function(idx){
+      b.onclick = function(){ cur = idx; upd(); restart(); };
+    })(i);
+    dotsBox.appendChild(b);
+  }
+})();
+function upd(){
+  for (var i = 0; i < slides.length; i++) slides[i].classList.remove('active');
+  slides[cur].classList.add('active');
+  var ds = dotsBox.querySelectorAll('.dot');
+  for (var j = 0; j < ds.length; j++) ds[j].classList.remove('on');
+  if (ds[cur]) ds[cur].classList.add('on');
+}
+function auto(){ timer = setInterval(function(){ cur = (cur + 1) % slides.length; upd(); }, 5000); }
+function restart(){ if (timer) clearInterval(timer); auto(); }
+auto();
+
+/* MENU */
+function openMenu(){
+  document.getElementById('mm').classList.add('open');
+  document.getElementById('mmOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu(){
+  document.getElementById('mm').classList.remove('open');
+  document.getElementById('mmOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* TABS */
+function showTab(e, id){
+  var t = document.querySelectorAll('.tab');
+  var p = document.querySelectorAll('.panel');
+  for (var i = 0; i < t.length; i++) t[i].classList.remove('on');
+  for (var j = 0; j < p.length; j++) p[j].classList.remove('on');
+  e.currentTarget.classList.add('on');
+  document.getElementById(id).classList.add('on');
+}
+
+/* PRESELECT FROM RADIO LIST */
+function pickService(key){
+  var sel = document.getElementById('serviceType');
+  sel.value = key;
+  updatePrice();
+  document.getElementById('book').scrollIntoView({behavior:'smooth'});
+}
+
+/* PRICES */
+var P = {
+  'learner-booking': { p: 'R75 – R150', r: 'Required: ID book/card, 2 ID photos, proof of address, booking fee.' },
+  'learner-issue': { p: 'R60 – R90', r: 'Required: Booking receipt + ID. Paid after passing test.' },
+  'code8': { p: 'R156 – R180', r: "Required: Learner's licence, ID, photos, proof of address." },
+  'card-issue': { p: 'R228 – R300', r: 'Required: Passed test confirmation, fingerprints. Card in 4–6 weeks.' },
+  'renewal': { p: 'R140 – R300', r: 'Required: ID, old licence, photos, proof of address. Eye test required.' },
+  'temp-licence': { p: 'R80 – R100', r: 'Required: Certified ID copy, proof of address. Valid 6 months.' },
+  'prdp': { p: 'R100 – R220', r: 'Required: ID, licence, medical & police clearance.' },
+  'duplicate': { p: 'R250 – R300', r: 'Required: Affidavit, ID, photos, proof of address.' },
+  'code-a1': { p: 'Enquire for Quote', r: 'Light motorcycle up to 125cc. Age 16+.' },
+  'code-a': { p: 'Enquire for Quote', r: 'Heavy motorcycle over 125cc. Age 18+.' },
+  'code-c1': { p: 'Enquire for Quote', r: 'Medium heavy vehicle 3,500–16,000 kg. Age 18+.' },
+  'code-c': { p: 'Enquire for Quote', r: 'Heavy motor vehicle over 16,000 kg.' },
+  'code-ec1': { p: 'Enquire for Quote', r: 'Code C1 + heavy trailer. Age 18+.' }
+};
+
+function updatePrice(){
+  var s = document.getElementById('serviceType');
+  var b = document.getElementById('priceBox');
+  if (s.value && P[s.value]){
+    b.classList.add('on');
+    document.getElementById('priceDisplay').textContent = P[s.value].p;
+    document.getElementById('requirements').textContent = P[s.value].r;
+  } else {
+    b.classList.remove('on');
+  }
+}
+  /* BOOK SUBMIT */
+function submitBook(e){
+  e.preventDefault();
+  var s = document.getElementById('serviceType');
+  if (!s.value){ alert('Please select a service.'); return; }
+  var svc = s.options[s.selectedIndex].text;
+  var nm = document.getElementById('fullName').value.trim();
+  var idn = document.getElementById('idNumber').value.trim();
+  var ph = document.getElementById('phone').value.trim();
+  var em = document.getElementById('email').value.trim();
+  var pv = document.getElementById('province').value;
+  var ad = document.getElementById('address').value.trim();
+  var dt = document.getElementById('bookDate').value;
+  var nt = document.getElementById('notes').value.trim();
+  var pEl = document.querySelector('input[name="payment"]:checked');
+  var pay = pEl ? pEl.value : 'Not selected';
+  if (!nm || !idn || !ph || !pv || !ad || !dt || !pay){ alert('Please fill in all required fields.'); return; }
+  var msg = '*NEW YOUTHDRIVE BOOKING*' + '\n\n' +
+    '*Service:* ' + svc + '\n' +
+    '*Name:* ' + nm + '\n' +
+    '*ID:* ' + idn + '\n' +
+    '*Phone:* ' + ph + '\n' +
+    (em ? '*Email:* ' + em + '\n' : '') +
+    '*Province:* ' + pv + '\n' +
+    '*Address:* ' + ad + '\n' +
+    '*Preferred Date:* ' + dt + '\n' +
+    '*Payment:* ' + pay + '\n' +
+    '*Notes:* ' + (nt || 'None');
+  window.open('https://wa.me/27631904941?text=' + encodeURIComponent(msg), '_blank');
+  setTimeout(function(){ alert('✅ Booking sent! Please send your ID photo on WhatsApp.'); }, 400);
+  document.getElementById('bookForm').reset();
+  document.getElementById('priceBox').classList.remove('on');
+}
+
+/* LESSON SUBMIT */
+function submitLesson(e){
+  e.preventDefault();
+  var nm = document.getElementById('lsName').value.trim();
+  var em = document.getElementById('lsEmail').value.trim();
+  var ph = document.getElementById('lsPhone').value.trim();
+  var ex = document.getElementById('lsExp').value;
+  var vh = document.getElementById('lsVeh').value;
+  var dt = document.getElementById('lsDate').value;
+  var tm = document.getElementById('lsTime').value;
+  if (!nm || !ph || !ex || !vh || !dt || !tm){ alert('Please fill in all required fields.'); return; }
+  var msg = '*NEW LESSON BOOKING*\n\n' +
+    '*Name:* ' + nm + '\n' +
+    '*Phone:* ' + ph + '\n' +
+    (em ? '*Email:* ' + em + '\n' : '') +
+    '*Experience:* ' + ex + '\n' +
+    '*Vehicle:* ' + vh + '\n' +
+    '*Date:* ' + dt + '\n' +
+    '*Time:* ' + tm;
+  window.open('https://wa.me/27631904941?text=' + encodeURIComponent(msg), '_blank');
+  setTimeout(function(){ alert('✅ Lesson request sent! We will confirm on WhatsApp.'); }, 400);
+  document.getElementById('lessonForm').reset();
+}
+
+/* CHAT */
+function openChat(){ document.getElementById('chatWin').classList.add('open'); }
+function closeChat(){ document.getElementById('chatWin').classList.remove('open'); }
+
+var R = {
+  'learner': "🎓 Our Learner's Licence course prepares you for the K53 theory test. Try our free app (270 questions) or book classroom training.",
+  'driver training': "🚗 We offer Code 8 (EB), Code 10 (C1) and Code 14 (EC) driver training with registered instructors. From R156.",
+  'book': "📅 To book a driving lesson, scroll to the 'Book Your Driving Lesson' section or tap the WhatsApp button.",
+  'car': "🚙 We have low-cost cars for students — Toyota Corolla Quest, VW Polo Vivo, Hyundai i10. Starting from R69 999.",
+  'truck': "🚛 Urban business trucks from R189 999. Isuzu, Tata, Hino, FAW available.",
+  'roadside': "🚨 Our 24/7 roadside assistance line is 063 190 4941.",
+  'contact': "📞 063 190 4941\n📍 78 Carolina Street, Brixton, Johannesburg\n📧 info@youthdrivesolutions.co.za",
+  'prdp': "🎓 PrDP (Professional Driving Permit) — we assist with applications, medicals and clearances. R120–R350.",
+  'roadworthy': "✅ Roadworthy certificates — we prepare, test and certify your vehicle. R500–R1,200.",
+  'tyre': "🔧 Genuine tyres and auto parts — order online or visit our Brixton branch.",
+  'q4u': "📁 Q4U (Queue For You) — we stand in the queue on your behalf. Save hours.",
+  'renewal': "♻️ We handle driver's licence and vehicle licence renewals — no queues.",
+  'ownership': "🔄 Change of ownership — we handle all paperwork from start to finish."
+};
+  function quick(t){ addU(t); resp(t); }
+function sendChat(){
+  var i = document.getElementById('chatInput');
+  var t = i.value.trim();
+  if (!t) return;
+  addU(t); i.value = ''; resp(t);
+}
+function addU(t){
+  var b = document.getElementById('chatBody');
+  var d = document.createElement('div');
+  d.className = 'msg msg-user';
+  d.textContent = t;
+  b.appendChild(d);
+  b.scrollTop = b.scrollHeight;
+}
+function addB(t){
+  var b = document.getElementById('chatBody');
+  var d = document.createElement('div');
+  d.className = 'msg msg-bot';
+  d.innerHTML = t;
+  b.appendChild(d);
+  b.scrollTop = b.scrollHeight;
+}
+function resp(t){
+  var l = t.toLowerCase();
+  var r = null;
+  for (var k in R){ if (l.indexOf(k) !== -1){ r = R[k]; break; } }
+  setTimeout(function(){
+    if (r){ addB(r); }
+    else { addB("Thanks! For a fast reply, tap the WhatsApp button or call <strong>063 190 4941</strong>."); }
+  }, 450);
+}
+
+window.openMenu = openMenu;
+window.closeMenu = closeMenu;
+window.showTab = showTab;
+window.pickService = pickService;
+window.updatePrice = updatePrice;
+window.submitBook = submitBook;
+window.submitLesson = submitLesson;
+window.openChat = openChat;
+window.closeChat = closeChat;
+window.quick = quick;
+window.sendChat = sendChat;
+</script>
+</body>
+</html>
