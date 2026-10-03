@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mphekza Security Force — Your Safety Is Our Liability</title>
+<style>
+  /* ============ BASE ============ */
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,system-ui,sans-serif}
+  :root{
+    --maroon:#6b1414;
+    --maroon-dark:#4a0d0d;
+    --maroon-light:#8a1c1c;
+    --gold:#c9a227;
+    --gold-light:#e6c453;
+    --blue:#0a4f9e;
+    --blue-dark:#082e5c;
+    --cream:#faf6ef;
+    --ink:#1a1a1a;
+    --grey:#6b6b6b;
+  }
+  body{background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* ============ EMERGENCY CALL BAR ============ */
+  .emergency-bar{
+    background:var(--blue);color:#fff;text-align:center;
+    padding:10px 16px;font-size:.9rem;letter-spacing:1px;font-weight:700;
+    border-bottom:2px solid var(--blue-dark);
+    display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  }
+  .emergency-bar .pulse-dot{
+    width:10px;height:10px;border-radius:50%;background:#ff4d4d;
+    box-shadow:0 0 10px #ff4d4d;animation:emPulse 1.4s infinite;
+  }
+  @keyframes emPulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .emergency-bar a{
+    color:#fff;background:rgba(255,255,255,.15);
+    padding:6px 18px;border-radius:30px;text-decoration:none;
+    font-weight:900;letter-spacing:1px;border:1.5px solid #fff;transition:.2s;
+  }
+  .emergency-bar a:hover{background:#fff;color:var(--blue)}
+  @media(max-width:520px){
+    .emergency-bar{font-size:.75rem;padding:8px 10px;gap:6px}
+    .emergency-bar a{padding:5px 12px;font-size:.8rem}
+  }
+
+  /* ============ HEADER ============ */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:linear-gradient(180deg,var(--maroon-dark),var(--maroon));
+    border-bottom:3px solid var(--gold);
+    box-shadow:0 4px 20px rgba(0,0,0,.35);
+  }
+  .nav{
+    max-width:1200px;margin:0 auto;padding:12px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;color:#fff}
+  .brand .logo-img{
+    width:60px;height:60px;object-fit:contain;border-radius:50%;
+    background:#fff;padding:4px;border:2px solid var(--gold);
+    box-shadow:0 0 0 3px rgba(255,255,255,.15);
+  }
+  .brand .txt{display:flex;flex-direction:column;line-height:1}
+  .brand .txt .n1{font-weight:900;letter-spacing:2px;font-size:1rem}
+  .brand .txt .n2{font-size:.62rem;letter-spacing:3px;color:var(--gold-light);margin-top:3px}
+  nav ul{display:flex;gap:22px;list-style:none;color:#fff;font-size:.85rem;font-weight:600;letter-spacing:1px}
+  nav ul a{opacity:.85;transition:.2s;text-transform:uppercase}
+  nav ul a:hover{opacity:1;color:var(--gold-light)}
+  @media(max-width:820px){ nav ul{display:none} }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient(135deg,rgba(74,13,13,.92),rgba(107,20,20,.85)),
+      repeating-linear-gradient(45deg,rgba(201,162,39,.05) 0 20px,transparent 20px 40px);
+    color:#fff;padding:60px 20px 70px;overflow:hidden;text-align:center;
+  }
+  .hero::after{
+    content:"";position:absolute;bottom:-1px;left:0;right:0;height:40px;
+    background:var(--cream);
+    clip-path:polygon(0 100%,100% 0,100% 100%);
+  }
+  .hero-inner{max-width:1000px;margin:0 auto;position:relative;z-index:2}
+  .hero h1{
+    font-size:clamp(1.6rem,4vw,2.6rem);
+    letter-spacing:3px;font-weight:900;margin-bottom:8px;
+  }
+  .hero h1 .gold{color:var(--gold-light)}
+  .hero .tag{
+    font-size:clamp(.85rem,1.5vw,1.05rem);
+    letter-spacing:6px;color:var(--gold-light);font-weight:600;
+    margin-bottom:22px;text-transform:uppercase;
+  }
+  .hero p.lead{
+    max-width:640px;margin:0 auto 26px;
+    font-size:1rem;opacity:.9;color:#f5e9d2;
+  }
+  .cta{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--gold);color:var(--maroon-dark);
+    padding:14px 30px;border-radius:30px;font-weight:800;
+    letter-spacing:1px;font-size:.9rem;transition:.2s;
+    box-shadow:0 6px 22px rgba(201,162,39,.4);
+  }
+  .cta:hover{transform:translateY(-2px);background:var(--gold-light)}
+
+  /* ============ SECTION ============ */
+  section{padding:70px 20px}
+  .wrap{max-width:1150px;margin:0 auto}
+  .sec-title{text-align:center;margin-bottom:44px}
+  .sec-title h2{
+    font-size:clamp(1.4rem,3vw,2rem);
+    color:var(--maroon);letter-spacing:3px;
+    font-weight:900;text-transform:uppercase;
+    display:inline-block;position:relative;padding-bottom:14px;
+  }
+  .sec-title h2::after{
+    content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    width:70px;height:4px;border-radius:4px;
+    background:linear-gradient(90deg,var(--maroon),var(--gold),var(--maroon));
+  }
+  .sec-title p{color:var(--grey);font-size:.9rem;letter-spacing:2px;margin-top:10px}
+
+  /* ============ GALLERY (FIRST SECTION) ============ */
+  .gallery{background:linear-gradient(180deg,#fff,#f5ecdc);padding-top:60px}
+  .slider{
+    position:relative;max-width:960px;margin:0 auto;
+    border-radius:20px;overflow:hidden;
+    border:6px solid #fff;outline:3px solid var(--maroon);
+    box-shadow:0 20px 50px rgba(74,13,13,.25);
+    aspect-ratio:16/10;background:#000;
+  }
+  .slides{position:relative;width:100%;height:100%}
+  .slide{
+    position:absolute;inset:0;opacity:0;
+    transition:opacity .8s ease, transform 6s ease;
+    transform:scale(1.05);
+  }
+  .slide.active{opacity:1;transform:scale(1);z-index:2}
+  .slide img{width:100%;height:100%;object-fit:cover}
+  .slider .nav-btn{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:46px;height:46px;border-radius:50%;border:none;
+    background:rgba(74,13,13,.75);color:var(--gold-light);
+    font-size:1.4rem;cursor:pointer;z-index:5;transition:.2s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .slider .nav-btn:hover{background:var(--maroon);color:#fff}
+  .slider .prev{left:14px}
+  .slider .next{right:14px}
+  .dots{
+    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+    display:flex;gap:8px;z-index:5;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:50%;
+    background:rgba(255,255,255,.5);cursor:pointer;transition:.2s;
+    border:1px solid rgba(0,0,0,.3);
+  }
+  .dot.active{background:var(--gold);transform:scale(1.25)}
+  @media(max-width:520px){.slider .nav-btn{width:36px;height:36px;font-size:1rem}}
+
+  /* ============ ABOUT ============ */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  @media(max-width:820px){ .about-grid{grid-template-columns:1fr} }
+  .about-img{
+    border-radius:20px;overflow:hidden;
+    border:6px solid #fff;outline:3px solid var(--gold);
+    box-shadow:0 18px 40px rgba(0,0,0,.25);
+  }
+  .about-img img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;background:#6b1414}
+  .about-text h3{color:var(--maroon);font-size:1.35rem;margin-bottom:12px;letter-spacing:2px}
+  .about-text p{margin-bottom:14px;font-size:.98rem;color:#333}
+  .about-text .pin{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(201,162,39,.15);color:var(--maroon-dark);
+    padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:700;
+    letter-spacing:1px;margin-bottom:14px;border:1px solid var(--gold);
+  }
+
+  /* ============ VISION / MISSION ============ */
+  .vm-band{background:linear-gradient(135deg,var(--maroon-dark),var(--maroon));color:#fff}
+  .vm-band .sec-title h2{color:#fff}
+  .vm-band .sec-title p{color:var(--gold-light)}
+  .vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  @media(max-width:820px){ .vm-grid{grid-template-columns:1fr} }
+  .vm-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(201,162,39,.4);
+    border-left:5px solid var(--gold);
+    border-radius:16px;padding:28px;backdrop-filter:blur(4px);
+  }
+  .vm-card h4{color:var(--gold-light);letter-spacing:3px;font-size:.9rem;margin-bottom:10px}
+  .vm-card p{font-size:.95rem;opacity:.92;color:#f5e9d2}
+
+  /* ============ SERVICES ============ */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
+  }
+  .svc{
+    background:#fff;border-radius:16px;padding:22px 20px;
+    border-top:4px solid var(--maroon);
+    box-shadow:0 8px 22px rgba(74,13,13,.08);
+    transition:.25s;position:relative;overflow:hidden;
+  }
+  .svc::before{
+    content:"";position:absolute;top:0;left:0;width:100%;height:4px;
+    background:linear-gradient(90deg,var(--maroon),var(--gold));
+  }
+  .svc:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(74,13,13,.15)}
+  .svc .num{
+    display:inline-block;font-weight:900;font-size:1.4rem;
+    color:var(--gold);letter-spacing:1px;margin-bottom:6px;
+  }
+  .svc h5{color:var(--maroon);font-size:1rem;margin-bottom:6px;letter-spacing:.5px}
+  .svc p{font-size:.85rem;color:#555}
+
+  /* ============ POLICY ============ */
+  .policy{background:#fff}
+  .policy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .pol{
+    padding:24px;border-radius:16px;
+    background:linear-gradient(180deg,#fff,#faf6ef);
+    border:1px solid #eee;border-left:5px solid var(--gold);
+    box-shadow:0 6px 18px rgba(0,0,0,.05);
+  }
+  .pol h5{color:var(--maroon);margin-bottom:8px;letter-spacing:1px;font-size:.95rem}
+  .pol p{font-size:.88rem;color:#555}
+
+  /* ============ ASSETS ============ */
+  .assets-table{
+    width:100%;border-collapse:collapse;background:#fff;
+    border-radius:14px;overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.07);font-size:.85rem;
+  }
+  .assets-table th{
+    background:var(--maroon);color:#fff;
+    padding:12px 14px;text-align:left;
+    letter-spacing:1px;font-size:.75rem;text-transform:uppercase;
+  }
+  .assets-table td{padding:11px 14px;border-bottom:1px solid #eee;color:#333}
+  .assets-table tr:last-child td{border-bottom:none}
+  .assets-table tr:nth-child(even) td{background:#faf6ef}
+  .assets-table td:first-child{font-weight:700;color:var(--maroon)}
+
+  /* ============ CLIENT REFS ============ */
+  .refs{background:#faf6ef}
+  .refs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .ref{
+    background:#fff;border-radius:14px;padding:18px;
+    border-left:5px solid var(--maroon);
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+  }
+  .ref h6{color:var(--maroon);font-size:.9rem;margin-bottom:6px;letter-spacing:.5px}
+  .ref p{font-size:.8rem;color:#555;margin-bottom:6px}
+  .ref .contact{
+    display:flex;justify-content:space-between;font-size:.75rem;
+    color:#888;border-top:1px dashed #eee;padding-top:6px;margin-top:6px;
+  }
+  .ref .contact b{color:var(--maroon);font-weight:700}
+
+  /* ============ CONTACT ============ */
+  .contact{background:linear-gradient(135deg,var(--maroon-dark),var(--maroon));color:#fff}
+  .contact .sec-title h2{color:#fff}
+  .contact .sec-title p{color:var(--gold-light)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  @media(max-width:820px){ .contact-grid{grid-template-columns:1fr} }
+  .contact-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(201,162,39,.4);
+    border-radius:16px;padding:26px;
+  }
+  .contact-card h5{color:var(--gold-light);letter-spacing:2px;font-size:.9rem;margin-bottom:12px}
+  .contact-card .row{
+    display:flex;gap:10px;padding:10px 0;
+    border-bottom:1px dashed rgba(255,255,255,.15);
+  }
+  .contact-card .row:last-child{border-bottom:none}
+  .contact-card .row .k{min-width:110px;color:var(--gold-light);font-weight:700;font-size:.85rem}
+  .contact-card .row .v{color:#fff;font-size:.9rem;word-break:break-word}
+  .contact-card .row .v a{color:var(--gold-light);font-weight:600}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:#2b0808;color:#c9b394;
+    padding:30px 20px;text-align:center;font-size:.8rem;
+    border-top:3px solid var(--gold);
+  }
+  footer .ft-logo{color:#fff;font-weight:900;letter-spacing:3px;margin-bottom:6px}
+  footer .ft-logo span{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<!-- ============ EMERGENCY CALL BAR ============ -->
+<div class="emergency-bar">
+  <span class="pulse-dot"></span>
+  <span>24/7 EMERGENCY?</span>
+  <a href="tel:+27723145842">📞 CALL NOW — 072 314 5842</a>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="images/logo.png" alt="Mphekza Security Force" class="logo-img" onerror="this.style.display='none'">
+      <div class="txt">
+        <span class="n1">MPHEKZA</span>
+        <span class="n2">SECURITY FORCE</span>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#assets">Assets</a></li>
+        <li><a href="#refs">Clients</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>MPHEKZA <span class="gold">SECURITY FORCE</span></h1>
+    <div class="tag">Your Safety Is Our Liability</div>
+    <p class="lead">
+      Consultants and contractors for all security services — guarding, patrolling,
+      body guarding, reaction services and specialised security solutions.
+    </p>
+    <a class="cta" href="#contact">📞 Get In Touch</a>
+  </div>
+</section>
+
+<!-- ============ GALLERY — 8 SLIDING PICS (FIRST) ============ -->
+<section id="gallery" class="gallery">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Our Team &amp; Operations</h2>
+      <p>MPHEKZA SECURITY FORCE IN ACTION</p>
+    </div>
+    <div class="slider" id="slider">
+      <div class="slides" id="slides">
+        <div class="slide active"><img src="images/pic1.jpg" alt="Mphekza 1"></div>
+        <div class="slide"><img src="images/pic2.jpg" alt="Mphekza 2"></div>
+        <div class="slide"><img src="images/pic3.jpg" alt="Mphekza 3"></div>
+        <div class="slide"><img src="images/pic4.jpg" alt="Mphekza 4"></div>
+        <div class="slide"><img src="images/pic5.jpg" alt="Mphekza 5"></div>
+        <div class="slide"><img src="images/pic6.jpg" alt="Mphekza 6"></div>
+        <div class="slide"><img src="images/pic7.jpg" alt="Mphekza 7"></div>
+        <div class="slide"><img src="images/pic8.jpg" alt="Mphekza 8"></div>
+      </div>
+      <button class="nav-btn prev" id="prev">‹</button>
+      <button class="nav-btn next" id="next">›</button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>About Us</h2>
+      <p>ESTABLISHED 2014 • MPUMALANGA</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="images/pic1.jpg" alt="Mphekza Security Force team">
+      </div>
+      <div class="about-text">
+        <span class="pin">📍 Originally from eManzana (Badplaas), Mpumalanga</span>
+        <h3>Who We Are</h3>
+        <p>
+          <strong>Mphekza Security Force</strong> was founded in <strong>2014</strong>
+          by <strong>Vickers Vilakazi</strong>, a former security officer. It was
+          established as a superior in security services and other activities
+          associated with the company.
+        </p>
+        <p>
+          We are consultants and contractors for all security services. Mphekza
+          Security Force is the company that differentiates itself in being
+          unique by providing excellent client services.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION & MISSION ============ -->
+<section class="vm-band">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Vision &amp; Mission</h2>
+      <p>OUR PROMISE TO EVERY CLIENT</p>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-card">
+        <h4>◈ VISION</h4>
+        <p>
+          To be the leading and most trusted security services provider in
+          Mpumalanga and beyond — setting the standard for professionalism,
+          integrity and reliability in the industry.
+        </p>
+      </div>
+      <div class="vm-card">
+        <h4>◈ MISSION</h4>
+        <p>
+          To deliver superior security solutions through well-trained personnel,
+          modern technology and uncompromising service — ensuring the safety of
+          every person, asset and premises entrusted to us.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Our Services</h2>
+      <p>WHAT WE DO</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc"><span class="num">01</span><h5>Guarding &amp; Patrolling</h5><p>Commercial, industrial, mining or residential areas.</p></div>
+      <div class="svc"><span class="num">02</span><h5>Secure Transport</h5><p>Safeguarding assets in transit and providing secure transport.</p></div>
+      <div class="svc"><span class="num">03</span><h5>Body Guarding</h5><p>Close personal protection for individuals and VIPs.</p></div>
+      <div class="svc"><span class="num">04</span><h5>Security Advice</h5><p>Advisory on protection of persons, property and use of security equipment.</p></div>
+      <div class="svc"><span class="num">05</span><h5>Reaction Services</h5><p>Rapid response to alarms, incidents and emergencies.</p></div>
+      <div class="svc"><span class="num">06</span><h5>Event Security</h5><p>Safety and order at sporting, recreational and entertainment events.</p></div>
+      <div class="svc"><span class="num">07</span><h5>Private Investigation</h5><p>Professional investigative services for private and corporate clients.</p></div>
+      <div class="svc"><span class="num">08</span><h5>Security Equipment</h5><p>Installation, servicing and repair of security equipment.</p></div>
+      <div class="svc"><span class="num">09</span><h5>Special Events</h5><p>Dedicated security personnel for special events of any size.</p></div>
+      <div class="svc"><span class="num">10</span><h5>Car Watches</h5><p>Car watches and related activities in busy public areas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POLICY ============ -->
+<section class="policy">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Company Policy</h2>
+      <p>OUR COMMITMENTS</p>
+    </div>
+    <div class="policy-grid">
+      <div class="pol">
+        <h5>Human Resource Policy</h5>
+        <p>
+          Our staff are well trained, and we strive to keep them on a competent
+          level in security services to maintain outstanding service to our
+          clients in terms of the latest technology. Our primary resource is our
+          employees — we focus on training, developing and maintaining competent
+          people within our organisation. <em>Our service is our pride.</em>
+        </p>
+      </div>
+      <div class="pol">
+        <h5>Safety, Health &amp; Environmental Policy</h5>
+        <p>
+          Mphekza Security Force is committed to adhering to the Occupational
+          Health and Safety Act, the Mine Health and Safety Act where applicable,
+          and both the By-Laws and NEMA.
+        </p>
+      </div>
+      <div class="pol">
+        <h5>Employment Equity Policy</h5>
+        <p>
+          Mphekza Security Force is an equal opportunity employer and we adhere
+          to the Employment Equity Principles.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  /* ============ ASSETS ============ */
+  .assets-table{
+    width:100%;border-collapse:collapse;background:#fff;
+    border-radius:14px;overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.07);font-size:.85rem;
+  }
+  .assets-table th{
+    background:var(--maroon);color:#fff;
+    padding:12px 14px;text-align:left;
+    letter-spacing:1px;font-size:.75rem;text-transform:uppercase;
+  }
+  .assets-table td{padding:11px 14px;border-bottom:1px solid #eee;color:#333}
+  .assets-table tr:last-child td{border-bottom:none}
+  .assets-table tr:nth-child(even) td{background:#faf6ef}
+  .assets-table td:first-child{font-weight:700;color:var(--maroon)}
+
+  /* ============ CLIENT REFS ============ */
+  .refs{background:#faf6ef}
+  .refs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .ref{
+    background:#fff;border-radius:14px;padding:18px;
+    border-left:5px solid var(--maroon);
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+  }
+  .ref h6{color:var(--maroon);font-size:.9rem;margin-bottom:6px;letter-spacing:.5px}
+  .ref p{font-size:.8rem;color:#555;margin-bottom:6px}
+  .ref .contact{
+    display:flex;justify-content:space-between;font-size:.75rem;
+    color:#888;border-top:1px dashed #eee;padding-top:6px;margin-top:6px;
+  }
+  .ref .contact b{color:var(--maroon);font-weight:700}
+
+  /* ============ CONTACT ============ */
+  .contact{background:linear-gradient(135deg,var(--maroon-dark),var(--maroon));color:#fff}
+  .contact .sec-title h2{color:#fff}
+  .contact .sec-title p{color:var(--gold-light)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  @media(max-width:820px){ .contact-grid{grid-template-columns:1fr} }
+  .contact-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(201,162,39,.4);
+    border-radius:16px;padding:26px;
+  }
+  .contact-card h5{color:var(--gold-light);letter-spacing:2px;font-size:.9rem;margin-bottom:12px}
+  .contact-card .row{
+    display:flex;gap:10px;padding:10px 0;
+    border-bottom:1px dashed rgba(255,255,255,.15);
+  }
+  .contact-card .row:last-child{border-bottom:none}
+  .contact-card .row .k{min-width:110px;color:var(--gold-light);font-weight:700;font-size:.85rem}
+  .contact-card .row .v{color:#fff;font-size:.9rem;word-break:break-word}
+  .contact-card .row .v a{color:var(--gold-light);font-weight:600}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:#2b0808;color:#c9b394;
+    padding:30px 20px;text-align:center;font-size:.8rem;
+    border-top:3px solid var(--gold);
+  }
+  footer .ft-logo{color:#fff;font-weight:900;letter-spacing:3px;margin-bottom:6px}
+  footer .ft-logo span{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<!-- ============ EMERGENCY CALL BAR ============ -->
+<div class="emergency-bar">
+  <span class="pulse-dot"></span>
+  <span>24/7 EMERGENCY?</span>
+  <a href="tel:+27723145842">📞 CALL NOW — 072 314 5842</a>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="images/logo.png" alt="Mphekza Security Force" class="logo-img" onerror="this.style.display='none'">
+      <div class="txt">
+        <span class="n1">MPHEKZA</span>
+        <span class="n2">SECURITY FORCE</span>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#assets">Assets</a></li>
+        <li><a href="#refs">Clients</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>MPHEKZA <span class="gold">SECURITY FORCE</span></h1>
+    <div class="tag">Your Safety Is Our Liability</div>
+    <p class="lead">
+      Consultants and contractors for all security services — guarding, patrolling,
+      body guarding, reaction services and specialised security solutions.
+    </p>
+    <a class="cta" href="#contact">📞 Get In Touch</a>
+  </div>
+</section>
+
+<!-- ============ GALLERY — 8 SLIDING PICS (FIRST) ============ -->
+<section id="gallery" class="gallery">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Our Team &amp; Operations</h2>
+      <p>MPHEKZA SECURITY FORCE IN ACTION</p>
+    </div>
+    <div class="slider" id="slider">
+      <div class="slides" id="slides">
+        <div class="slide active"><img src="images/pic1.jpg" alt="Mphekza 1"></div>
+        <div class="slide"><img src="images/pic2.jpg" alt="Mphekza 2"></div>
+        <div class="slide"><img src="images/pic3.jpg" alt="Mphekza 3"></div>
+        <div class="slide"><img src="images/pic4.jpg" alt="Mphekza 4"></div>
+        <div class="slide"><img src="images/pic5.jpg" alt="Mphekza 5"></div>
+        <div class="slide"><img src="images/pic6.jpg" alt="Mphekza 6"></div>
+        <div class="slide"><img src="images/pic7.jpg" alt="Mphekza 7"></div>
+        <div class="slide"><img src="images/pic8.jpg" alt="Mphekza 8"></div>
+      </div>
+      <button class="nav-btn prev" id="prev">‹</button>
+      <button class="nav-btn next" id="next">›</button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+</section>
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>About Us</h2>
+      <p>ESTABLISHED 2014 • MPUMALANGA</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="images/pic1.jpg" alt="Mphekza Security Force team">
+      </div>
+      <div class="about-text">
+        <span class="pin">📍 Originally from eManzana (Badplaas), Mpumalanga</span>
+        <h3>Who We Are</h3>
+        <p>
+          <strong>Mphekza Security Force</strong> was founded in <strong>2014</strong>
+          by <strong>Vickers Vilakazi</strong>, a former security officer. It was
+          established as a superior in security services and other activities
+          associated with the company.
+        </p>
+        <p>
+          We are consultants and contractors for all security services. Mphekza
+          Security Force is the company that differentiates itself in being
+          unique by providing excellent client services.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION & MISSION ============ -->
+<section class="vm-band">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Vision &amp; Mission</h2>
+      <p>OUR PROMISE TO EVERY CLIENT</p>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-card">
+        <h4>◈ VISION</h4>
+        <p>
+          To be the leading and most trusted security services provider in
+          Mpumalanga and beyond — setting the standard for professionalism,
+          integrity and reliability in the industry.
+        </p>
+      </div>
+      <div class="vm-card">
+        <h4>◈ MISSION</h4>
+        <p>
+          To deliver superior security solutions through well-trained personnel,
+          modern technology and uncompromising service — ensuring the safety of
+          every person, asset and premises entrusted to us.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Our Services</h2>
+      <p>WHAT WE DO</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc"><span class="num">01</span><h5>Guarding &amp; Patrolling</h5><p>Commercial, industrial, mining or residential areas.</p></div>
+      <div class="svc"><span class="num">02</span><h5>Secure Transport</h5><p>Safeguarding assets in transit and providing secure transport.</p></div>
+      <div class="svc"><span class="num">03</span><h5>Body Guarding</h5><p>Close personal protection for individuals and VIPs.</p></div>
+      <div class="svc"><span class="num">04</span><h5>Security Advice</h5><p>Advisory on protection of persons, property and use of security equipment.</p></div>
+      <div class="svc"><span class="num">05</span><h5>Reaction Services</h5><p>Rapid response to alarms, incidents and emergencies.</p></div>
+      <div class="svc"><span class="num">06</span><h5>Event Security</h5><p>Safety and order at sporting, recreational and entertainment events.</p></div>
+      <div class="svc"><span class="num">07</span><h5>Private Investigation</h5><p>Professional investigative services for private and corporate clients.</p></div>
+      <div class="svc"><span class="num">08</span><h5>Security Equipment</h5><p>Installation, servicing and repair of security equipment.</p></div>
+      <div class="svc"><span class="num">09</span><h5>Special Events</h5><p>Dedicated security personnel for special events of any size.</p></div>
+      <div class="svc"><span class="num">10</span><h5>Car Watches</h5><p>Car watches and related activities in busy public areas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POLICY ============ -->
+<section class="policy">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Company Policy</h2>
+      <p>OUR COMMITMENTS</p>
+    </div>
+    <div class="policy-grid">
+      <div class="pol">
+        <h5>Human Resource Policy</h5>
+        <p>
+          Our staff are well trained, and we strive to keep them on a competent
+          level in security services to maintain outstanding service to our
+          clients in terms of the latest technology. Our primary resource is our
+          employees — we focus on training, developing and maintaining competent
+          people within our organisation. <em>Our service is our pride.</em>
+        </p>
+      </div>
+      <div class="pol">
+        <h5>Safety, Health &amp; Environmental Policy</h5>
+        <p>
+          Mphekza Security Force is committed to adhering to the Occupational
+          Health and Safety Act, the Mine Health and Safety Act where applicable,
+          and both the By-Laws and NEMA.
+        </p>
+      </div>
+      <div class="pol">
+        <h5>Employment Equity Policy</h5>
+        <p>
+          Mphekza Security Force is an equal opportunity employer and we adhere
+          to the Employment Equity Principles.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ ASSETS ============ -->
+<section id="assets">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Company Assets</h2>
+      <p>OUR REGISTERED EQUIPMENT</p>
+    </div>
+    <table class="assets-table">
+      <thead>
+        <tr><th>Utility</th><th>Description / Type</th><th>Registration / Serial No.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Vehicle</td><td>Chevrolet Sedan / Toyota Etios</td><td>LDC 424 MP / LCX 957 MP</td></tr>
+        <tr><td>Firearm</td><td>12 Gauge Pump Shotgun — Francolin Citadel</td><td>23DF/5407</td></tr>
+        <tr><td>Firearm</td><td>9mm G3 Pistol — Taurus</td><td>ADE 369191</td></tr>
+        <tr><td>Firearm</td><td>9mm G3 Pistol — Taurus</td><td>ADE 368837</td></tr>
+        <tr><td>Firearm</td><td>12 Gauge Pump Shotgun — Francolin Citadel</td><td>23DF/5406</td></tr>
+        <tr><td>Safe</td><td>4-Gun DD with Shelves — Magnum</td><td>2023</td></tr>
+        <tr><td>Office</td><td>Corner Office Desk, Cabin, Chair, Steel Filing Cabin</td><td>—</td></tr>
+        <tr><td>Electronics</td><td>Laptop — HP</td><td>5CD330535V</td></tr>
+        <tr><td>Electronics</td><td>Printer — HP</td><td>TH28F7R06N</td></tr>
+        <tr><td>Electronics</td><td>Laminator — Rexel</td><td>LH240*0507070253</td></tr>
+        <tr><td>Electronics</td><td>Paper Shredder — Fellowes</td><td>401970</td></tr>
+        <tr><td>Radios</td><td>Mobile Hand Radios ×10 — Baofeng</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ CLIENT REFERENCES ============ -->
+<section id="refs" class="refs">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Client References</h2>
+      <p>WHO WE WORK WITH</p>
+    </div>
+    <div class="refs-grid">
+      <div class="ref"><h6>Lucim (PTY) Ltd</h6><p>Construction at Barberton Mines</p><div class="contact"><span>Sandile Lukhele</span><b>072 409 6221</b></div></div>
+      <div class="ref"><h6>Mavovemvula Trading</h6><p>Primary School</p><div class="contact"><span>Thembi Mnisi</span><b>076 808 1124</b></div></div>
+      <div class="ref"><h6>Getsamaya (PTY) Ltd</h6><p>Construction at Barberton Mines</p><div class="contact"><span>Mbali Vilakazi</span><b>082 958 5022</b></div></div>
+      <div class="ref"><h6>Ndukunduku Trading</h6><p>Maintenance at SAPPIE</p><div class="contact"><span>Sabelo Gininda</span><b>072 035 1866</b></div></div>
+      <div class="ref"><h6>Lowveld Valve &amp; Industrial Supply</h6><p>Construction of UMJINDI branch office</p><div class="contact"><span>Thulani Thabethe</span><b>076 391 8492</b></div></div>
+      <div class="ref"><h6>ABEDCON Projects</h6><p>Supply valves and HTP pipes at Barberton</p><div class="contact"><span>Arno Lombard</span><b>072 865 3910</b></div></div>
+      <div class="ref"><h6>Mfacaza Trading</h6><p>Construction of Badplaas Landfill site</p><div class="contact"><span>Bongani Sibande</span><b>072 942 9211</b></div></div>
+      <div class="ref"><h6>Sunduza Primary School</h6><p>Supplying Haul Trucks &amp; Excavator at Nkomati Mine</p><div class="contact"><span>Wonder Maseko</span><b>082 631 2043</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>Get In Touch</h2>
+      <p>WE ARE READY TO SERVE YOU</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h5>◈ CONTACT DETAILS</h5>
+        <div class="row"><span class="k">Phone</span><span class="v">017 110 0397</span></div>
+        <div class="row"><span class="k">Mobile</span><span class="v">082 074 8535 / 072 314 5842</span></div>
+        <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:info@mphekzasecurityservices.com">info@mphekzasecurityservices.com</a></span></div>
+        <div class="row"><span class="k">Postal</span><span class="v">P.O. Box 700, Badplaas, 1190</span></div>
+      </div>
+      <div class="contact-card">
+        <h5>◈ BUSINESS REGISTRATION</h5>
+        <div class="row"><span class="k">Reg No.</span><span class="v">2015/020148/07</span></div>
+        <div class="row"><span class="k">Origin</span><span class="v">eManzana (Badplaas), Mpumalanga</span></div>
+        <div class="row"><span class="k">Founded</span><span class="v">2014 by Vickers Vilakazi</span></div>
+        <div class="row"><span class="k">Motto</span><span class="v">Your Safety Is Our Liability</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="ft-logo">MPHEKZA <span>SECURITY FORCE</span></div>
+  <p>Your Safety Is Our Liability</p>
+  <p style="margin-top:8px;opacity:.6">© 2026 Mphekza Security Force. All rights reserved.</p>
+</footer>
+
+<script>
+/* ============ GALLERY SLIDER — 8 PICS ============ */
+const slides = document.querySelectorAll('.slide');
+const dotsWrap = document.getElementById('dots');
+let current = 0;
+let autoTimer;
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsWrap.appendChild(d);
+});
+const dots = document.querySelectorAll('.dot');
+
+function goTo(i){
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = (i + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+function next(){ goTo(current + 1); }
+function prev(){ goTo(current - 1); }
+
+document.getElementById('next').onclick = () => { next(); resetAuto(); };
+document.getElementById('prev').onclick = () => { prev(); resetAuto(); };
+
+function resetAuto(){
+  clearInterval(autoTimer);
+  autoTimer = setInterval(next, 4000);
+}
+resetAuto();
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight') { next(); resetAuto(); }
+  if(e.key === 'ArrowLeft')  { prev(); resetAuto(); }
+});
+
+let startX = 0;
+const slider = document.getElementById('slider');
+slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+slider.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  if(dx > 50) { prev(); resetAuto(); }
+  if(dx < -50){ next(); resetAuto(); }
+});
+</script>
+
+</body>
+</html>
