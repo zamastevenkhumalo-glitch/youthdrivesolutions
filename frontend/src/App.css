@@ -1,0 +1,643 @@
+:root {
+  --forest: #062f26;
+  --forest-deep: #062920;
+  --lime: #a2f52e;
+  --muted: #67717c;
+  --soft-line: #e3ebdd;
+}
+
+.shell {
+  width: min(1680px, 88%);
+  margin-inline: auto;
+}
+
+/* HEADER — sits on top of the hero photo, as in the concept. */
+.site-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 30;
+}
+.header-inner {
+  min-height: 102px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 34px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  flex-shrink: 0;
+}
+.brand img {
+  width: clamp(300px, 32vw, 525px);
+  height: 88px;
+  margin-left: -20px;
+  object-fit: contain;
+  object-position: left center;
+  mix-blend-mode: multiply;
+}
+.main-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: clamp(25px, 2.6vw, 44px);
+}
+.main-nav > a {
+  color: #142c28;
+  white-space: nowrap;
+  font-size: clamp(12px, .92vw, 16px);
+  font-weight: 600;
+  transition: color .2s ease;
+}
+.main-nav > a:hover { color: #619f24; }
+.main-nav .nav-mobile-cta { display: none; }
+.menu-toggle { display: none; }
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 730px;
+  background: #fff;
+}
+.hero-inner {
+  position: relative;
+  min-height: 730px;
+  display: flex;
+  align-items: center;
+  padding-top: 89px;
+  padding-bottom: 170px;
+}
+.hero-copy {
+  position: relative;
+  z-index: 5;
+  max-width: 780px;
+  padding-top: 14px;
+}
+.eyebrow {
+  margin: 0 0 24px;
+  color: #788b91;
+  font-size: clamp(10px, .79vw, 12px);
+  font-weight: 800;
+  letter-spacing: .3em;
+}
+.hero h1 {
+  margin: 0;
+  color: #042b22;
+  font-size: clamp(56px, 5.2vw, 90px);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -.064em;
+}
+.lime-dot { color: #81c92d; }
+.hero-description {
+  margin: 25px 0 0;
+  max-width: 540px;
+  color: #5d6777;
+  font-size: clamp(16px, 1.35vw, 21px);
+  font-weight: 500;
+  line-height: 1.56;
+  letter-spacing: -.015em;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 29px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 58px;
+  padding: 16px 27px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  white-space: nowrap;
+}
+.button:hover { transform: translateY(-2px); }
+.button-primary {
+  color: #062b1d;
+  background: var(--lime);
+  box-shadow: 0 16px 30px rgba(135,205,45,.17);
+}
+.button-primary:hover { background: #b5ff56; }
+.button-glass {
+  color: #17312b;
+  border-color: rgba(255,255,255,.88);
+  background: rgba(255,255,255,.78);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 9px 30px rgba(38,60,49,.055);
+}
+.button-glass:hover { background: #fff; }
+.next-step-card {
+  position: absolute;
+  top: clamp(125px, 7.95vw, 156px);
+  right: 11.85%;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: clamp(318px, 20.6vw, 355px);
+  min-height: 104px;
+  padding: 16px 19px;
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(255,255,255,.95);
+  border-radius: 21px;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 15px 38px rgba(19,51,35,.15);
+  transition: transform .2s ease;
+}
+.next-step-card:hover { transform: translateY(-4px); }
+.next-step-icon {
+  width: 53px;
+  height: 53px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: #10441d;
+  border-radius: 14px;
+  background: #e3fac9;
+}
+.next-step-copy { display: flex; flex-direction: column; gap: 5px; }
+.next-step-copy small { color: #859092; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.next-step-copy strong { font-size: 13px; font-weight: 800; color: #152b29; }
+.next-step-arrow { margin-left: auto; color: #81918b; flex-shrink: 0; }
+
+/* 4 GLASS SERVICE CARDS OVERLAP THE HERO, MATCHING THE TEMPLATE */
+.services-strip {
+  position: relative;
+  z-index: 10;
+  margin-top: -154px;
+}
+.services-strip::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -25px 0 -18px;
+  background:
+    radial-gradient(ellipse at 84% 13%, rgba(126,185,58,.15), transparent 49%),
+    radial-gradient(ellipse at 59% 0%, rgba(145,181,110,.16), transparent 55%);
+  filter: blur(19px);
+  pointer-events: none;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.service-tile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 151px;
+  padding: 24px 20px;
+  background: rgba(255,255,255,.89);
+  border: 1px solid rgba(255,255,255,.94);
+  border-radius: 17px;
+  -webkit-backdrop-filter: blur(17px);
+  backdrop-filter: blur(17px);
+  box-shadow: 0 13px 28px rgba(11,46,30,.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  scroll-margin-top: 110px;
+}
+.service-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 37px rgba(11,46,30,.13);
+}
+.tile-icon {
+  width: 69px;
+  height: 69px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: #123b25;
+  border-radius: 50%;
+  background: #e2f5d3;
+}
+.tile-content { display: flex; flex-direction: column; min-width: 0; gap: 8px; }
+.tile-content strong {
+  color: #182b24;
+  font-size: clamp(14px, 1.18vw, 19px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.035em;
+}
+.tile-content > span { color: #6e7380; font-size: 13px; line-height: 1.55; }
+.tile-arrow {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 9px;
+  margin-left: auto;
+  color: #244535;
+  border: 1px solid #e4ede0;
+  background: rgba(244,251,241,.8);
+  border-radius: 50%;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+}
+
+/* LESSON SEARCH BANNER: visual prototype, not a real-time booking engine. */
+.booking-section { position: relative; padding: 32px 0 45px; }
+.booking-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(270px, .88fr) minmax(0, 1.6fr);
+  align-items: center;
+  gap: 30px;
+  min-height: 152px;
+  padding: 24px 34px;
+  overflow: hidden;
+  border: 1px solid #dcedce;
+  border-radius: 23px;
+  background:
+    radial-gradient(ellipse 60% 190% at 10% 0%, rgba(184,237,145,.51), transparent 78%),
+    linear-gradient(96deg, #e5f9d8 0%, #e9f8e1 40%, #edfbe5 100%);
+  box-shadow: 0 12px 35px rgba(77,148,66,.085);
+}
+.booking-panel::after {
+  content: '';
+  position: absolute;
+  right: -12%;
+  bottom: -170px;
+  height: 210px;
+  width: 64%;
+  border-radius: 50%;
+  border: 1px solid rgba(88,160,66,.16);
+  box-shadow: 0 0 0 20px rgba(102,175,69,.045), 0 0 0 40px rgba(102,175,69,.035);
+  pointer-events: none;
+}
+.booking-intro { display: flex; align-items: center; gap: 20px; position: relative; z-index: 1; }
+.booking-map-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  color: #0e3b21;
+  background: rgba(198,235,167,.8);
+}
+.booking-intro small { color: #607c67; font-size: 10px; letter-spacing: .23em; font-weight: 800; }
+.booking-intro h2 { margin: 8px 0 0; font-size: clamp(21px, 2.05vw, 32px); letter-spacing: -.065em; color: #0d3025; line-height: 1.15; }
+.booking-form {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: end;
+  gap: 12px;
+  padding: 13px;
+  background: rgba(255,255,255,.83);
+  border: 1px solid rgba(255,255,255,.95);
+  border-radius: 18px;
+}
+.booking-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.booking-field > span { color: #243831; font-size: 11px; font-weight: 800; }
+.booking-field select, .booking-field input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 12px;
+  color: #38433f;
+  border-radius: 8px;
+  border: 1px solid #e3e9e4;
+  background: rgba(255,255,255,.9);
+  font-size: 12px;
+  outline-offset: 2px;
+}
+.booking-field input::placeholder { color: #8e9595; }
+.booking-submit {
+  min-height: 43px;
+  height: 43px;
+  margin: 0;
+  padding: 0 20px;
+  border-radius: 999px;
+  color: #062a20;
+  background: var(--lime);
+  font-size: 12px;
+  box-shadow: none;
+}
+.booking-submit:hover { background: #b6ff5b; }
+.booking-notice { grid-column: 1 / -1; z-index: 2; margin: -2px 0 0; font-size: 12px; line-height: 1.5; color: #31573c; }
+
+.site-footer { background: #092f25; color: #dce7dc; }
+.footer-inner { display: flex; justify-content: space-between; gap: 20px; padding-block: 27px; font-size: 12px; }
+
+@media (max-width: 1320px) {
+  .shell { width: 91%; }
+  .main-nav { gap: 24px; }
+  .brand img { width: 255px; }
+  .hero h1 { font-size: clamp(53px, 5.4vw, 74px); }
+  .service-tile { gap: 12px; padding: 18px 14px; }
+  .tile-icon { width: 56px; height: 56px; }
+  .tile-content > span { font-size: 12px; }
+  .booking-panel { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 980px) {
+  .header-inner { min-height: 84px; }
+  .brand img { width: 240px; height: 64px; }
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #e2ebdf;
+    border-radius: 12px;
+    background: rgba(255,255,255,.9);
+    color: #163b29;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .main-nav {
+    transform: none;
+    display: none;
+    position: absolute;
+    left: 4.5%;
+    right: 4.5%;
+    top: 78px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 14px;
+    background: rgba(255,255,255,.98);
+    border: 1px solid #e5eedf;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(12,52,28,.13);
+  }
+  .main-nav.is-open { display: flex; }
+  .main-nav > a { display: block; padding: 12px 15px; font-size: 14px; }
+  .main-nav .nav-mobile-cta { display: block; margin-top: 5px; border-radius: 12px; text-align: center; background: var(--lime); }
+  .hero { min-height: 690px; }
+  .hero-inner { min-height: 690px; padding-bottom: 155px; }
+  .hero-copy { max-width: 660px; }
+  .hero h1 { font-size: clamp(48px, 7vw, 71px); }
+  .next-step-card { top: 117px; right: 5%; width: 290px; min-height: 75px; }
+  .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .services-strip { margin-top: -115px; }
+  .service-tile { min-height: 124px; padding: 19px; }
+  .booking-panel { margin-top: 6px; }
+}
+
+@media (max-width: 640px) {
+  .shell { width: calc(100% - 34px); }
+  .header-inner { min-height: 78px; }
+  .brand img { width: 213px; height: 60px; margin-left: 0; }
+  .main-nav { left: 17px; right: 17px; top: 73px; }
+  .hero { min-height: 681px; }
+  .hero-inner { min-height: 681px; align-items: flex-start; padding-top: 135px; padding-bottom: 0; }
+  .hero-copy { padding-top: 0; }
+  .eyebrow { margin-bottom: 17px; letter-spacing: .17em; font-size: 9px; }
+  .hero h1 { font-size: clamp(39px, 10.3vw, 59px); line-height: 1.11; }
+  .hero-description { margin-top: 18px; font-size: 15px; line-height: 1.6; max-width: 345px; }
+  .desktop-only { display: none; }
+  .hero-actions { margin-top: 24px; gap: 10px; }
+  .button { min-height: 49px; font-size: 12px; gap: 8px; padding: 12px 15px; }
+  .next-step-card { top: auto; right: 17px; bottom: 128px; width: 238px; padding: 10px; min-height: 65px; gap: 10px; border-radius: 14px; }
+  .next-step-icon { width: 42px; height: 42px; }
+  .next-step-copy strong { font-size: 11px; }
+  .next-step-copy small { font-size: 8px; }
+  .services-strip { margin-top: -87px; }
+  .services-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .service-tile { min-height: 153px; padding: 14px 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; border-radius: 15px; }
+  .tile-icon { width: 43px; height: 43px; }
+  .tile-icon svg { width: 23px; height: 23px; }
+  .tile-content { gap: 4px; }
+  .tile-content strong { font-size: 12px; }
+  .tile-content > span { font-size: 10px; line-height: 1.45; }
+  .tile-arrow { display: none; }
+  .booking-section { padding: 24px 0 35px; }
+  .booking-panel { gap: 19px; padding: 21px 17px; border-radius: 18px; }
+  .booking-intro { gap: 12px; }
+  .booking-map-icon { width: 55px; height: 55px; }
+  .booking-intro h2 { font-size: 23px; }
+  .booking-intro small { font-size: 9px; }
+  .booking-form { grid-template-columns: 1fr; padding: 14px; gap: 12px; }
+  .booking-field > span { font-size: 12px; }
+  .booking-field select, .booking-field input { height: 45px; font-size: 13px; }
+  .booking-submit { height: 48px; font-size: 13px; }
+  .footer-inner { flex-direction: column; gap: 8px; text-align: center; padding-block: 22px; }
+}
+
+
+/* PHASE 9 — fullscreen background slideshow. Add more image paths to the
+   list in HeroBackgroundSlideshow.jsx to grow from 2 to 10 slides. */
+main {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #f8fcf5;
+}
+.site-background-slideshow {
+  position: absolute;
+  z-index: 0;
+  top: -120px;
+  left: 0;
+  width: 100%;
+  height: 1255px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.background-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transition: opacity 900ms ease-in-out;
+  will-change: opacity;
+}
+.background-slide.is-active { opacity: 1; }
+/* PHASE 13 — Seamless background beneath the services and booking panel.
+   Preserve each slideshow image and its timing. The original image is drawn
+   crisply over the full-height 39px-blurred continuation, then gently feathered
+   into it BEFORE its natural bottom edge, removing the horizontal seam. */
+.background-slide {
+  /* The slideshow supplies background-image inline. Retain it for the pseudo
+     layers to inherit, but don't paint the unmasksed image on the parent. */
+  background-size: 0 0;
+}
+.background-slide::before,
+.background-slide::after {
+  content: '';
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  background-image: inherit;
+  background-repeat: no-repeat;
+}
+/* Continuous ambient background: always covers the lower section. */
+.background-slide::before {
+  z-index: 0;
+  inset: -45px;
+  background-size: cover;
+  background-position: center center;
+  filter: blur(39px);
+}
+/* Keep the top photograph sharp; feather only its bottom edge. */
+.background-slide::after {
+  z-index: 1;
+  inset: 0;
+  background-size: 100% auto;
+  background-position: center top;
+  -webkit-mask-image: linear-gradient(to bottom,
+    #000 0%,
+    #000 60%,
+    rgba(0,0,0,.98) 63%,
+    rgba(0,0,0,.85) 66%,
+    rgba(0,0,0,.52) 70%,
+    rgba(0,0,0,.14) 74%,
+    transparent 77%);
+  mask-image: linear-gradient(to bottom,
+    #000 0%,
+    #000 60%,
+    rgba(0,0,0,.98) 63%,
+    rgba(0,0,0,.85) 66%,
+    rgba(0,0,0,.52) 70%,
+    rgba(0,0,0,.14) 74%,
+    transparent 77%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .background-slide { transition: none; }
+}
+/* A concentrated left-side white glow protects the hero copy. Unlike the
+   previous linear overlay, it DOES NOT erase the road behind the cards. */
+main::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: 1220px;
+  background:
+    radial-gradient(ellipse 73% 40% at -4% 18%,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,.99) 36%,
+      rgba(255,255,255,.88) 61%,
+      rgba(255,255,255,.35) 82%,
+      transparent 100%),
+    linear-gradient(180deg,
+      transparent 0%,
+      transparent 78%,
+      rgba(250,253,248,.22) 91%,
+      #f8fcf5 100%);
+  pointer-events: none;
+}
+.hero {
+  z-index: 2;
+  isolation: auto;
+  overflow: visible;
+  min-height: 740px;
+  background: transparent;
+}
+.hero-inner { min-height: 740px; }
+.services-strip {
+  z-index: 3;
+  margin-top: -122px;
+}
+/* Ensure the background is visible around all four cards and also under them. */
+.services-strip::before { display: none; }
+.service-tile {
+  background: rgba(255,255,255,.93);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.booking-section { z-index: 3; }
+
+@media (min-width: 1500px) {
+  .hero h1 { font-size: clamp(64px, 5vw, 88px); }
+}
+@media (max-width: 980px) {
+  .site-background-slideshow {
+    top: -60px;
+    left: -15%;
+    width: 125%;
+    height: 1150px;
+  }
+  main::after {
+    height: 1120px;
+    background:
+      radial-gradient(ellipse 75% 52% at -5% 18%, #fff 0%, rgba(255,255,255,.97) 42%, rgba(255,255,255,.58) 74%, transparent 100%),
+      linear-gradient(180deg, transparent 76%, rgba(250,253,248,.20) 88%, #f8fcf5 100%);
+  }
+  .hero { min-height: 690px; }
+  .hero-inner { min-height: 690px; }
+  .services-strip { margin-top: -115px; }
+}
+@media (max-width: 640px) {
+  .site-background-slideshow {
+    top: 290px;
+    left: -50%;
+    width: 220%;
+    height: 616px;
+  }
+  .background-slide::before {
+    background-position: right center;
+  }
+  .background-slide::after {
+    background-size: cover;
+    background-position: right top;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+  }
+  main::after {
+    height: 1190px;
+    background:
+      linear-gradient(180deg,
+        #fff 0%,
+        #fff 22%,
+        rgba(255,255,255,.99) 33%,
+        rgba(255,255,255,.77) 43%,
+        rgba(255,255,255,.15) 57%,
+        transparent 73%,
+        rgba(248,252,245,.35) 88%,
+        #f8fcf5 100%);
+  }
+  .hero { min-height: 681px; }
+  .hero-inner { min-height: 681px; }
+  .services-strip { margin-top: -53px; }
+  .next-step-card { bottom: 100px; }
+}
+
+/* PHASE 8 — sticky navigation while retaining the same hero position. */
+.site-header {
+  position: sticky;
+  inset: auto;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  transition: background-color 220ms ease, box-shadow 220ms ease;
+}
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, .94);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 5px 22px rgba(7, 39, 28, .09);
+}
+/* The sticky header occupies normal layout space; overlap it with main so the
+   background remains behind the header exactly as in the approved concept. */
+main { margin-top: -102px; }
+
+@media (max-width: 980px) {
+  main { margin-top: -84px; }
+}
+@media (max-width: 640px) {
+  main { margin-top: -78px; }
+}
+

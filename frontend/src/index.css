@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --yd-header-height: 102px;
+  font-family: 'Manrope', 'Segoe UI', Arial, sans-serif;
+  color: #062b24;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+* { box-sizing: border-box; }
+/* One anchor offset equal to the visible sticky navbar height.
+   Browser anchor navigation aligns each section's TOP edge below it. */
+html { scroll-behavior: smooth; scroll-padding-top: var(--yd-header-height); }
+body { margin: 0; min-width: 320px; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; }
+button, a, select { -webkit-tap-highlight-color: transparent; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid #3f8c23; outline-offset: 3px; }
+::selection { color: #0b3028; background: #cefc82; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Match the sticky navigation height at tablet and mobile widths. */
+@media (max-width: 980px) { :root { --yd-header-height: 84px; } }
+@media (max-width: 640px) { :root { --yd-header-height: 78px; } }
